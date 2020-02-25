@@ -1,0 +1,24 @@
+*,head,body{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background-color: #282c34
+}
+
+img{
+	padding-top: 50;
+	display: block;
+	margin: 0 auto 0 auto;
+	max-width: 30%;
+    max-height: 30%;
+}
+
+p{
+	color: white;
+	font-size: 20;
+	text-align: center;
+	padding: 10;
+	justify-content: center;
+}

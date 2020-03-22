@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+.header {
+  background-color:purple;
+  display: flex;
+  padding: 0px;
+}
+
+.headerImg {
+  width: 150px;
+  height: 100px;
+  padding: 12px;
+}
+
+
+.navBar {
+  background-color: purple;
+}
+
+.Nav_Div {
+    display: flex;
+    align-items: center;
+}
+
+.sideBar {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  background-color: purple;
+  padding-top: 25px;
+
+  
+}
+
+.Nav_Element
+  {
+    float: left;
+  }
+
+
+
+.element_link {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.element_link:hover:not(.active) {
+    background-color: #ffaa3b;
+}
+
+.active {
+  background-color: aqua;
+}
+
+.sideBar2{
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding-top: 6px;
+}
+
+.formDiv{
+  padding: 50px 50px 0px 50px;
+  width: 50;
+}
+
+
+input[type=text], select {
+  width: 100%;
+  padding: 15px;
+  margin-top: 0px;
+  display: inline-block;
+  border: 1px solid purple;
+  border-radius: 10px;
+  box-sizing: border-box;
+  
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: purple;
+  color: white;
+  padding: 15px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #4CAF50;
+}
+
+
+
+.birthForm {
+  padding: 10 20 0 0;
+}
+
+.signformDiv{
+
+  width: 50px;
+}
+
+
+.login{
+
+  /* padding: 20px; */
+  width: 175px;
+  height: 0px;
+}
+
+.r{
+  padding: 10px 0px 0px 350px;
+  display: flex;
+
+
+}
+
+.loginButton {
+  padding: 15px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.loginButton2 {
+  background-color: blueviolet;
+  padding: 15px;
+  margin-top: 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+
+
+.signformDiv{
+  width: 550px;
+}
+
+
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  overflow-x: hidden;
+}
+
+
+
+.right {
+  right: 0;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  text-align: center;
+}
+
+.malik{
+  width: 300px;
+}
+
+

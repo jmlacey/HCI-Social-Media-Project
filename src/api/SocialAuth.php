@@ -58,7 +58,7 @@ if (isValidJSON($json_params)) {
         // forward to error page
     } elseif ($action == "register") {
         $conn = getDbConnection();
-        $email = $_POST["email_addr"];
+        $email = $decoded_params["email_addr"];
         $token = uniqid();
         $sql = "INSERT INTO users (email_addr, otp) VALUES (?,?)";
         $args = [$email, $token];
@@ -68,11 +68,48 @@ if (isValidJSON($json_params)) {
 
         mail($email, "otp", "Welcome to <appname> Your OTP is ".$token);
         $json["message"] = "Account created.  A confirmation email has been sent.";
+    } elseif ($action == "logout") {
+        $username = $decoded_params["username"];
+        $token = $decoded_params["session_token"];
+
+        $conn = getDbConnection();
+        $sql = "SELECT * FROM users WHERE email_addr = ?";
+        $args = [$username];
+        try {
+            $statement = $conn->prepare($sql);
+            $statement->setFetchMode(PDO::FETCH_ASSOC);
+            $statement->execute($args);
+            $result = $statement->fetchAll();
+            if (count($result) < 1) {
+                error_log("invalid username");
+                $json["message"] = "Invalid username or token!";
+            }
+        } catch (Exception $e) {
+            error_log("Error logging in : ".$e->getMessage());
+        }
+        foreach ($result as $row1) {
+            if ($row1['session_token'] == $token) {
+                // expire the session Token
+
+                $tokenSql = "UPDATE users SET session_token = '' WHERE user_id = ?";
+                $args = [$row1['user_id']];
+                $statement = $conn->prepare($tokenSql);
+                $statement->setFetchMode(PDO::FETCH_ASSOC);
+                $statement->execute($args);
+
+                // forward to main page
+                //$url = "testedit.html?userId=".$row1['user_id']."&token=".$token;
+                $json["user"] = $row1;
+            } else {
+                error_log("invalid password!");
+                $json["message"] = "Invalid username or token!";
+            }
+        }
     } elseif ($action == "setpassword") {
-        $email = $_POST["email_addr"];
-        $otp = $_POST["token"];
-        $password = $_POST["newpassword"];
-        $confirm = $_POST["confirmpassword"];
+        $email = $decoded_params["email_addr"];
+        $otp = $decoded_params["token"];
+        $password = $decoded_params["newpassword"];
+        $confirm = $decoded_params["confirmpassword"];
 
         $conn = getDbConnection();
         $sql = "SELECT * FROM users WHERE email_addr = ?";
@@ -99,7 +136,7 @@ if (isValidJSON($json_params)) {
             }
         }
     } elseif ($action == "forgotpassword") {
-        $email = $_POST["email_addr"];
+        $email = $decoded_params["email_addr"];
 
         $conn = getDbConnection();
         $token = uniqid();

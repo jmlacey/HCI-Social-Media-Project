@@ -7,16 +7,23 @@ import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 
+//My stuff
+import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
+
 class MainContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      section: "main",
+      section: "test",
       openModal: false
     };
   }
 
   render() {
+    if (this.state.section === "test") {
+      return <MyFriendList userid={sessionStorage.getItem("user")} />;
+    }
+
     if (this.state.section === "main") {
       return (
         <div>

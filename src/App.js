@@ -74,71 +74,19 @@ class App extends React.Component {
   }
 
   render() {
-    let post = require("./post.svg");
-    let friend = require("./friends.svg");
-    let setting = require("./settings.svg");
-    let help = require("./help.svg");
+
     let mainContent = React.createRef();
 
     return (
-      <div className="App">
+      
+      <div className="App">       
         <header className="App-header">
-          <div id="sidenav" className="sidenav">
-            <ul id="side-menu-items">
-              <li className="pm admin student">
-                <button
-                  className="link-button"
-                  onClick={e => setMenuOption("main", mainContent, e)}
-                >
-                  <img
-                    src={post}
-                    className="sidenav-icon"
-                    alt="Posts"
-                    title="Posts"
-                  />
-                </button>
-              </li>
-              <li className="pm admin">
-                <button
-                  className="link-button"
-                  onClick={e => setMenuOption("friends", mainContent, e)}
-                >
-                  <img
-                    src={friend}
-                    className="sidenav-icon"
-                    alt="Friends"
-                    title="Friends"
-                  />
-                </button>
-              </li>
-              <li className="pm admin">
-                <button
-                  className="link-button"
-                  onClick={e => setMenuOption("settings", mainContent, e)}
-                >
-                  <img
-                    src={setting}
-                    className="sidenav-icon"
-                    alt="Settings"
-                    title="Settings"
-                  />
-                </button>
-              </li>
-              <li className="pm admin">
-                <button
-                  className="link-button"
-                  onClick={e => toggleModal(this, e)}
-                >
-                  <img
-                    src={help}
-                    className="sidenav-icon"
-                    alt="Settings"
-                    title="Settings"
-                  />
-                </button>
-              </li>
-            </ul>
-          </div>
+
+        OUSMAN'S TOP BAR GOES HERE!!!
+        OUSMAN'S TOP BAR GOES HERE!!!
+        OUSMAN'S TOP BAR GOES HERE!!!
+        OUSMAN'S TOP BAR GOES HERE!!!
+
           <div className="maincontent" id="mainContent">
             <MainContent ref={mainContent} />
           </div>

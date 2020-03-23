@@ -52,7 +52,6 @@ export default class MyFriendList extends React.Component {
     } else {
       return (
         <div className="post">
-          hello
           
           <ul>
             {connections.map(connection => (

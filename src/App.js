@@ -11,7 +11,7 @@ import logo from "./Component/logo.png";
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
 import MyLogin from "./Component/Ousman_Components/Login.jsx";
-import MySign_Up from "./Component/Ousman_Components/Sign_Up.jsx";
+import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
 
 
 class MainContent extends React.Component {

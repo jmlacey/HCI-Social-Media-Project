@@ -30,7 +30,7 @@ class MainContent extends React.Component {
     }
 
     if (this.state.section === "friends") {
-      return <div>friends</div>;
+      return <MyFriendList userid={sessionStorage.getItem("user")} />;
     }
 
     if (this.state.section === "buddy") {
@@ -137,6 +137,8 @@ class App extends React.Component {
               </div>
             </nav>
           </div>
+
+
 
           <div className="maincontent" id="mainContent">
             <MainContent ref={mainContent} />

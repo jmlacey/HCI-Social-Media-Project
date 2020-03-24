@@ -5,9 +5,12 @@ class Edit extends Component {
   state = {};
   render() {
     return (
-      <div className="formDiv">
+      <div className="profileFormDiv">
         <Forms />
-        <button className="profileButton"> Finish </button>
+        <button className="profileButton" style={{ float: "right" }}>
+          {" "}
+          Finish{" "}
+        </button>
       </div>
     );
   }

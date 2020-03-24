@@ -5,9 +5,12 @@ class View extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div className="profileFormDiv">
         <Forms />
-        <button className="profileButton"> Done </button>
+        <button className="profileButton" style={{ float: "right" }}>
+          {" "}
+          Done{" "}
+        </button>
       </div>
     );
   }

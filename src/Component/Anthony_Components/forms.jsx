@@ -6,7 +6,7 @@ class Forms extends Component {
     return (
       <div>
         {/* firstname */}
-        <form>
+        <form className="leftCol">
           <label>
             First Name:
             <input
@@ -17,7 +17,7 @@ class Forms extends Component {
           </label>
         </form>
         {/* lastname */}
-        <form>
+        <form className="rightCol">
           <label>
             Last Name:
             <input
@@ -693,23 +693,23 @@ class Forms extends Component {
           </label>
         </form>
         {/* sleeptime */}
-        <form>
+        <form className="leftCol" align="center">
           <label>
             Sleep Time:
             <input
               type="time"
-              value={this.state.value}
+              defaultValue={"22:15:00"}
               onChange={this.handleChange}
             />
           </label>
         </form>
         {/* waketime */}
-        <form>
+        <form className="rightCol" align="center">
           <label>
             Wake Time:
             <input
               type="time"
-              value={this.state.value}
+              defaultValue={"06:30:00"}
               onChange={this.handleChange}
             />
           </label>
@@ -721,7 +721,6 @@ class Forms extends Component {
             <select value={this.state.value} onChange={this.handleChange}>
               <option value="male">Male</option>
               <option value="female">Female</option>
-              <option value="helicopter">Helicopter</option>
               <option value="other">Other</option>
             </select>
           </label>

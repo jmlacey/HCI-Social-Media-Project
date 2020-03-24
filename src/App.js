@@ -91,10 +91,9 @@ class App extends React.Component {
                         <nav className="navBar">
                             <div className="Nav_Div">
                                 <ul className="sideBar">
-                                    <li className="Nav_Element"><a className="element_link" href="/">Home</a></li>
-                                    <li className="Nav_Element"><a className="element_link" href="/">About</a></li>
-                                    <li className="Nav_Element"><a className="element_link" href="/">Portfolio</a></li>
-                                    <li className="Nav_Element"><a className="element_link" href="/">Contact</a></li>
+                                    <li className="Nav_Element"><button className="element_link" href="/" >Home</button></li>
+                                    <li className="Nav_Element"><button className="element_link" href="/">Friends</button></li>
+                                    <li className="Nav_Element"><button className="element_link" href="/">About</button></li>
                                 </ul>
                             </div>
                         </nav>

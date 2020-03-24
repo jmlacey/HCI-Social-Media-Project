@@ -44,10 +44,11 @@ body {
 
 .element_link {
   display: block;
-  color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  margin-right: 20px;
+  border-radius: 10px;
 }
 
 .element_link:hover:not(.active) {

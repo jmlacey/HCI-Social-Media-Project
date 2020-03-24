@@ -79,8 +79,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
+
+          
           OUSMAN'S TOP BAR GOES HERE!!! OUSMAN'S TOP BAR GOES HERE!!! OUSMAN'S
           TOP BAR GOES HERE!!! OUSMAN'S TOP BAR GOES HERE!!!
+          
+          
+          
           <div className="maincontent" id="mainContent">
             <MainContent ref={mainContent} />
           </div>

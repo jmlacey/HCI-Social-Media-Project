@@ -15,14 +15,33 @@ class MainContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      section: "test",
+      section: "signup",
       openModal: false
     };
   }
 
   render() {
+    if (this.state.section === "signup") {
+      return <div>signup</div>;
+    }
+
+    if (this.state.section === "login") {
+      return <div>login</div>;
+    }
+
+    if (this.state.section === "friends") {
+      return <div>friends</div>;
+    }
+
+    if (this.state.section === "buddy") {
+      return <div>buddy</div>;
+    }
+
+    if (this.state.section === "profile") {
+      return <div>profile</div>;
+    }
+
     if (this.state.section === "test") {
-      
       return <MyFriendList userid={sessionStorage.getItem("user")} />;
     }
 
@@ -34,7 +53,7 @@ class MainContent extends React.Component {
           <PostForm />
         </div>
       );
-    } else if (this.state.section === "friends") {
+    } else if (this.state.section === "friend") {
       return (
         <div>
           <p>Friends</p>
@@ -81,25 +100,44 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
+          <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
+            SLEEP.IO
+          </h1>
+          <img src={logo} alt="" className="headerImg" />
 
-          <h1 style={{ color: 'white', padding: 5, marginTop: 20 }}>SLEEP.IO</h1>
-                    <img src={logo} alt="" className = "headerImg"/>
+          <div className="container">
+            <nav className="navBar">
+              <div className="Nav_Div">
+                <ul className="sideBar">
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={e => setMenuOption("login", mainContent, e)}
+                    >
+                      Login
+                    </button>
+                  </li>
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={e => setMenuOption("friends", mainContent, e)}
+                    >
+                      Friends
+                    </button>
+                  </li>
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={e => setMenuOption("profile", mainContent, e)}
+                    >
+                      Profile
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
 
-
-                    <div className="container">
-
-                        <nav className="navBar">
-                            <div className="Nav_Div">
-                                <ul className="sideBar">
-                                    <li className="Nav_Element"><button className="element_link" href="/" >Home</button></li>
-                                    <li className="Nav_Element"><button className="element_link" href="/">Friends</button></li>
-                                    <li className="Nav_Element"><button className="element_link" href="/">About</button></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-          
-          
           <div className="maincontent" id="mainContent">
             <MainContent ref={mainContent} />
           </div>

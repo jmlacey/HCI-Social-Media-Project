@@ -84,7 +84,23 @@ class App extends React.Component {
           
           OUSMAN'S TOP BAR GOES HERE!!! OUSMAN'S TOP BAR GOES HERE!!! OUSMAN'S
           TOP BAR GOES HERE!!! OUSMAN'S TOP BAR GOES HERE!!!
-          
+          <h1 style={{ color: 'white', padding: 5, marginTop: 20 }}>SLEEP.IO</h1>
+                    <img src={logo} alt="" className = "headerImg"/>
+
+
+                    <div className="container">
+
+                        <nav className="navBar">
+                            <div className="Nav_Div">
+                                <ul className="sideBar">
+                                    <li className="Nav_Element"><a className="element_link" href="/">Home</a></li>
+                                    <li className="Nav_Element"><a className="element_link" href="/">About</a></li>
+                                    <li className="Nav_Element"><a className="element_link" href="/">Portfolio</a></li>
+                                    <li className="Nav_Element"><a className="element_link" href="/">Contact</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
           
           
           <div className="maincontent" id="mainContent">

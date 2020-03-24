@@ -21,6 +21,7 @@ class MainContent extends React.Component {
 
   render() {
     if (this.state.section === "test") {
+      
       return <MyFriendList userid={sessionStorage.getItem("user")} />;
     }
 

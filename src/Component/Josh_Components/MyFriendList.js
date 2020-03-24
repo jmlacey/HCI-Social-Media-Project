@@ -64,6 +64,7 @@ export default class MyFriendList extends React.Component {
               </div>
             ))}
           </ul>
+          
         </div>
       );
     }

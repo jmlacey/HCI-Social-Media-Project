@@ -1,8 +1,6 @@
 .friendImg{
-
   height: 80px; 
 }
-
 
 .App {
   text-align: center;
@@ -114,10 +112,10 @@
 
 .userlist {
   text-align: left;
-  background: blue;
-  border-radius: 20px;
-  padding:30px;
-  margin:10px;
+  background: #7B1FA2;
+  border-radius: 10px;
+  padding:20px;
+  margin:5px;
   width:60%;
   display: inline-flex;
 }

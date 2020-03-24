@@ -6,7 +6,7 @@ import LoginForm from "./Component/LoginForm.js";
 import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
-import logo from ".Component/logo.png";
+import logo from "./Component/logo.png";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";

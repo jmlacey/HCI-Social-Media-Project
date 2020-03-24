@@ -10,6 +10,9 @@ import logo from "./Component/logo.png";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
+import MyLogin from "./Component/Ousman_Components/Login.jsx";
+import MySign_Up from "./Component/Ousman_Components/Sign_Up.jsx";
+
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -22,11 +25,19 @@ class MainContent extends React.Component {
 
   render() {
     if (this.state.section === "signup") {
-      return <div>signup</div>;
+     return (
+     <div className="App">
+     <MySign_Up/>
+     </div>
+     );
     }
 
     if (this.state.section === "login") {
-      return <div>login</div>;
+      return (
+     <div className="App">
+     <MyLogin/>
+     </div>
+     );
     }
 
     if (this.state.section === "friends") {

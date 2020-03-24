@@ -5,9 +5,12 @@ class Create extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div className="profileFormDiv">
         <Forms />
-        <button className="profileButton"> Create </button>
+        <button className="profileButton" style={{ float: "right" }}>
+          {" "}
+          Save{" "}
+        </button>
       </div>
     );
   }

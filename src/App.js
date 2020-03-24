@@ -6,7 +6,7 @@ import LoginForm from "./Component/LoginForm.js";
 import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
-import logo from ".Component/logo.png";
+import logo from "./Component/logo.png";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
@@ -82,9 +82,6 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
 
-          
-          OUSMAN'S TOP BAR GOES HERE!!! OUSMAN'S TOP BAR GOES HERE!!! OUSMAN'S
-          TOP BAR GOES HERE!!! OUSMAN'S TOP BAR GOES HERE!!!
           <h1 style={{ color: 'white', padding: 5, marginTop: 20 }}>SLEEP.IO</h1>
                     <img src={logo} alt="" className = "headerImg"/>
 

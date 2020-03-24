@@ -74,19 +74,13 @@ class App extends React.Component {
   }
 
   render() {
-
     let mainContent = React.createRef();
 
     return (
-      
-      <div className="App">       
+      <div className="App">
         <header className="App-header">
-
-        OUSMAN'S TOP BAR GOES HERE!!!
-        OUSMAN'S TOP BAR GOES HERE!!!
-        OUSMAN'S TOP BAR GOES HERE!!!
-        OUSMAN'S TOP BAR GOES HERE!!!
-
+          OUSMAN'S TOP BAR GOES HERE!!! OUSMAN'S TOP BAR GOES HERE!!! OUSMAN'S
+          TOP BAR GOES HERE!!! OUSMAN'S TOP BAR GOES HERE!!!
           <div className="maincontent" id="mainContent">
             <MainContent ref={mainContent} />
           </div>
@@ -98,5 +92,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;

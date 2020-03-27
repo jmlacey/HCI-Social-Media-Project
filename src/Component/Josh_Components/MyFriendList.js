@@ -1,5 +1,5 @@
 import React from "react";
-import "C:/Work/Github/CollegeVS Repo/reactioneers-web/src/App.css";
+import "../../App.css";
 import friend from "./friend.png";
 
 export default class MyFriendList extends React.Component {
@@ -52,19 +52,14 @@ export default class MyFriendList extends React.Component {
     } else {
       return (
         <div className="post">
-          
           <ul>
             {connections.map(connection => (
-
-
               <div key={connection.connection_id} className="userlist">
                 <img className="friendImg" alt="friendIcon" src={friend} />
                 {connection.name} - {connection.connection_status}
-                
               </div>
             ))}
           </ul>
-          
         </div>
       );
     }

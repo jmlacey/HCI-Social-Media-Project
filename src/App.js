@@ -9,6 +9,7 @@ import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
 import logo2 from "./Component/logo2.svg";
 import View from "./Component/Anthony_Components/viewprofile.jsx";
+import Picture from "./Component/Anthony_Components/profilepicture";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
@@ -50,7 +51,12 @@ class MainContent extends React.Component {
     }
     //anthony's profile page...
     if (this.state.section === "profile") {
-      return <View />;
+      return (
+        <div>
+          {" "}
+          <Picture /> <View />
+        </div>
+      );
     }
 
     if (this.state.section === "test") {

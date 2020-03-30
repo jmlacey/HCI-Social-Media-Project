@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Avatar from "react-avatar";
-import pic from "../sleepicon.png";
+import pic from "./sleepicon.png";
 
 class Picture extends Component {
   state = {};

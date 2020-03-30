@@ -8,13 +8,12 @@ import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
 import logo2 from "./Component/logo2.svg";
-
+import View from "./Component/Anthony_Components/viewprofile.jsx";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
 import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
-
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -27,19 +26,19 @@ class MainContent extends React.Component {
 
   render() {
     if (this.state.section === "signup") {
-     return (
-     <div className="App">
-     <MySign_Up/>
-     </div>
-     );
+      return (
+        <div className="App">
+          <MySign_Up />
+        </div>
+      );
     }
 
     if (this.state.section === "login") {
       return (
-     <div className="App">
-     <MyLogin/>
-     </div>
-     );
+        <div className="App">
+          <MyLogin />
+        </div>
+      );
     }
 
     if (this.state.section === "friends") {
@@ -49,9 +48,9 @@ class MainContent extends React.Component {
     if (this.state.section === "buddy") {
       return <div>buddy</div>;
     }
-
+    //anthony's profile page...
     if (this.state.section === "profile") {
-      return <div>profile</div>;
+      return <View />;
     }
 
     if (this.state.section === "test") {
@@ -150,8 +149,6 @@ class App extends React.Component {
               </div>
             </nav>
           </div>
-
-
 
           <div className="maincontent" id="mainContent">
             <MainContent ref={mainContent} />

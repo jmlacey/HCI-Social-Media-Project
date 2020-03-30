@@ -9,41 +9,53 @@ import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
 import logo2 from "./Component/logo2.svg";
 
-
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
 import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
 
-
 class MainContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      section: "signup",
+      section: "friends",
       openModal: false
     };
   }
 
   render() {
+    let mainContent = React.createRef();
+
     if (this.state.section === "signup") {
-     return (
-     <div className="App">
-     <MySign_Up/>
-     </div>
-     );
+      return (
+        <div className="App">
+          <MySign_Up />
+        </div>
+      );
     }
 
     if (this.state.section === "login") {
       return (
-     <div className="App">
-     <MyLogin/>
-     </div>
-     );
+        <div className="App">
+          <MyLogin />
+        </div>
+      );
     }
 
     if (this.state.section === "friends") {
-      return <MyFriendList userid={sessionStorage.getItem("user")} />;
+      return (
+        <div>
+          <button
+            className="page_button"
+            onClick={e => setMenuOption("buddy", mainContent, e)}
+          >
+            Add a friend!
+          </button>
+
+          <p>My Friends!</p>
+          <MyFriendList userid={sessionStorage.getItem("user")} />
+        </div>
+      );
     }
 
     if (this.state.section === "buddy") {
@@ -150,8 +162,6 @@ class App extends React.Component {
               </div>
             </nav>
           </div>
-
-
 
           <div className="maincontent" id="mainContent">
             <MainContent ref={mainContent} />

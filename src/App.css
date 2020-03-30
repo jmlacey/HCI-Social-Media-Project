@@ -1,5 +1,20 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700");
 
+.page_button {
+  background-color: purple;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.page_button:hover:not(.active) {
+  background-color: #ffaa3b;
+}
+
+
 * {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;

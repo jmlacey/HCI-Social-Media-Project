@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import s3 from "../s3.png";
+import s3 from "./logo.png";
 
 class Header extends Component {
   state = {};

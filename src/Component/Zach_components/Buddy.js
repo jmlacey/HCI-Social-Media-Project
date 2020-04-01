@@ -40,7 +40,7 @@ export default class Buddy extends React.Component {
   }
 
   render() {
-    const { error, isLoaded, connections } = this.state;
+    const { error, isLoaded, timeConnections } = this.state;
     if (error) {
       return <div> Error: {error.message} </div>;
     } else if (!isLoaded) {
@@ -50,7 +50,7 @@ export default class Buddy extends React.Component {
         <div className="post">
           <ul>
             {timeConnections.map(connection => (
-              <button className="buddies" key={connection.connection_id}>
+              <button className="availableBuddies" key={connection.connection_id}>
                 {connection.name} - {connection.connection_status}
               </button>
             ))}

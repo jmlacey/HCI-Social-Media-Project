@@ -15,6 +15,7 @@ import Picture from "./Component/Anthony_Components/profilepicture";
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
 import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
+import Buddy from "./Component/Zach_components/Buddy.js";
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -47,7 +48,11 @@ class MainContent extends React.Component {
     }
 
     if (this.state.section === "buddy") {
-      return <div>buddy</div>;
+      return (
+      <div>
+        <Buddy />
+      </div>
+      );
     }
     //anthony's profile page...
     if (this.state.section === "profile") {
@@ -149,6 +154,14 @@ class App extends React.Component {
                       onClick={e => setMenuOption("profile", mainContent, e)}
                     >
                       Profile
+                    </button>
+                  </li>
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={e => setMenuOption("buddy", mainContent, e)}
+                    >
+                      Buddy
                     </button>
                   </li>
                 </ul>

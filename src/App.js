@@ -10,6 +10,7 @@ import logo from "./Component/logo.png";
 import logo2 from "./Component/logo2.svg";
 import View from "./Component/Anthony_Components/viewprofile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
+import Header from "./Component/header";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";

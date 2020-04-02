@@ -13,6 +13,7 @@ import logo2 from "./Component/logo2.svg";
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
 import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
+import AddFriendPage from "./Component/Josh_Components/AddFriendPage.js";
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -54,6 +55,14 @@ class MainContent extends React.Component {
 
           <p>My Friends!</p>
           <MyFriendList userid={sessionStorage.getItem("user")} />
+        </div>
+      );
+    }
+
+    if (this.state.section === "AddFriend") {
+      return (
+        <div className="AddFriendPage">
+          <AddFriendPage />
         </div>
       );
     }

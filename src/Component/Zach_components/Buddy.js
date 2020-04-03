@@ -1,5 +1,4 @@
 import React from "react"
-//import { render } from "@testing-library/react";
 
 export default class Buddy extends React.Component {
   constructor(props) {
@@ -26,7 +25,7 @@ export default class Buddy extends React.Component {
       .then(res => res.json())
       .then(
         result => {
-          if (result.Connections) {
+          if (result.connections) {
             this.setState({
               isLoaded: true,
               connections: result.connections
@@ -52,8 +51,8 @@ export default class Buddy extends React.Component {
       return (
         <div className="post">
           <ul>
-            {timeConnections.map(connection => (
-              <button className="availableBuddies" key={connection.connection_id}>
+            {connections.map(connection => (
+              <button key={connection.connection_id} className="availableBuddies">
                 {connection.name} - {connection.connection_status}
               </button>
             ))}

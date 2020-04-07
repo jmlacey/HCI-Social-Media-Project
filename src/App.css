@@ -44,19 +44,11 @@ body {
   padding: 0;
 }
 
-
-
-
-
-
-
-
 /*-----------------
 
 IDK about any of the shit beneath this :(
     
 ----------------*/
-
 
 .Nav_Element {
   float: left;
@@ -65,7 +57,7 @@ IDK about any of the shit beneath this :(
 .element_link {
   display: block;
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px;
   text-decoration: none;
   margin-right: 20px;
   border-radius: 10px;
@@ -236,24 +228,20 @@ input[type="submit"]:hover {
   width: 160px;
 }
 
-
-.friendImg{
-  height: 80px; 
+.friendImg {
+  height: 80px;
 }
 
 .App {
   text-align: center;
 }
 
-
-
-
 .App-logo {
   height: 40vmin;
 }
 
 .App-header {
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
   min-height: 100vh;
   display: flex;
   flex-direction: row;
@@ -263,8 +251,8 @@ input[type="submit"]:hover {
   color: white;
 }
 
-.settings{
-  width:100%;
+.settings {
+  width: 100%;
 }
 
 .link-button {
@@ -274,28 +262,27 @@ input[type="submit"]:hover {
   display: inline;
   margin: 0;
   padding: 0;
-  outline:none;
+  outline: none;
 }
 
 .link-button:hover,
 .link-button:focus,
 .link-button:active {
   text-decoration: none;
-  outline:none;
+  outline: none;
 }
 
 .no-suggestions {
   color: #999;
   padding: 0.5rem;
-
 }
 
 .autocomplete input {
-    width: calc(300px + 1rem);
+  width: calc(300px + 1rem);
 }
 
-.autocomplete{
-    min-height: 165px;
+.autocomplete {
+  min-height: 165px;
 }
 
 .suggestions {
@@ -308,9 +295,8 @@ input[type="submit"]:hover {
   padding-left: 0;
   width: calc(300px + 1rem);
 
-  display:inline-block;
-  position:relative;
-
+  display: inline-block;
+  position: relative;
 }
 
 .suggestions li {
@@ -329,9 +315,8 @@ input[type="submit"]:hover {
   border-bottom: 1px solid #999;
 }
 
-.profileform label{
-   display:block;
-
+.profileform label {
+  display: block;
 }
 
 .App-link {
@@ -342,51 +327,50 @@ input[type="submit"]:hover {
   text-align: left;
   background: blue;
   border-radius: 20px;
-  padding:30px;
-  margin:10px;
+  padding: 30px;
+  margin: 10px;
 
-  width:60%;
+  width: 60%;
   display: inline-flex;
 }
 
 .userlist {
   text-align: left;
-  background: #7B1FA2;
+  background: #7b1fa2;
   border-radius: 10px;
-  padding:20px;
-  margin:5px;
-  width:60%;
+  padding: 20px;
+  margin: 5px;
+  width: 60%;
   display: inline-flex;
 }
 
-.comments{
-    background:white;
-    width:90%;
-    display:block;
-    border-radius: 20px;
-    padding:10px;
-    margin:10px;
-    color:black;
+.comments {
+  background: white;
+  width: 90%;
+  display: block;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  color: black;
 }
 
 .commentlist {
   text-align: left;
   background: lightblue;
-  color:black;
+  color: black;
   border-radius: 20px;
-  padding:10px;
-  margin:10px;
+  padding: 10px;
+  margin: 10px;
   font-size: 12px;
-  width:90%;
-  display:block;
+  width: 90%;
+  display: block;
 }
 
-.hide{
-  display:none;
+.hide {
+  display: none;
 }
 
-
-.maincontent{
+.maincontent {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -394,40 +378,40 @@ input[type="submit"]:hover {
   flex-grow: 1;
 }
 
-.posts{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+.posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.postbody{
-  width:60%;
-  display:flex;
+.postbody {
+  width: 60%;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
 }
 
-.comment-block{
-  width:100%;
-  display:flex;
+.comment-block {
+  width: 100%;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
 }
 
-.sidenav{
+.sidenav {
   /* need to specify some position other than static, so height can apply.
      Fixed works since it will stay fixed to the side - 0 from both left and top. */
-  position:fixed;
-  left:0px;
-  top:0px;
-  height:100%;
-  width:100px;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100px;
 
   /* internally to this container, we want to use flex positioning of the menu elements */
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -435,49 +419,49 @@ input[type="submit"]:hover {
   background-color: blue;
 }
 
-.sidenav ul{
-   list-style-type: none;
-   padding:10px;
-   margin:0px;
-   margin-top: 40px;
+.sidenav ul {
+  list-style-type: none;
+  padding: 10px;
+  margin: 0px;
+  margin-top: 40px;
 }
 
-.sidenav-icon{
-  width:40px;
-  height:40px;
+.sidenav-icon {
+  width: 40px;
+  height: 40px;
 
-  margin-bottom:15px;
+  margin-bottom: 15px;
 }
 
-.comment-indicator{
-  text-align:right;
-  width:100%;
-  display:block;
-  float:right;
+.comment-indicator {
+  text-align: right;
+  width: 100%;
+  display: block;
+  float: right;
   margin-top: 10px;
 }
 
-.comment-icon{
-  width:40px;
-  height:40px;
-  float:right;
+.comment-icon {
+  width: 40px;
+  height: 40px;
+  float: right;
 }
 
-.comment-indicator-text{
+.comment-indicator-text {
   background-color: lightblue;
   color: black;
   border-radius: 10px;
   font-size: 16px;
   font-weight: bold;
-  width:120px;
-  padding:5px;
-  float:right;
-  margin-left:10px;
+  width: 120px;
+  padding: 5px;
+  float: right;
+  margin-left: 10px;
   text-align: center;
 }
 
-.hide{
-  display:none;
+.hide {
+  display: none;
 }
 
 /* The Modal (background) */
@@ -490,8 +474,8 @@ input[type="submit"]:hover {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */

@@ -7,9 +7,9 @@ import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
-import logo2 from "./Component/logo2.svg";
 import View from "./Component/Anthony_Components/viewprofile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
+import Feed from "./Component/Discussion.jsx";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
@@ -60,6 +60,15 @@ class MainContent extends React.Component {
         <div>
           {" "}
           <Picture /> <View userid={sessionStorage.getItem("user")} />
+        </div>
+      );
+    }
+
+    //made for feed
+    if (this.state.section === "Feed") {
+      return (
+        <div>
+          <Feed />
         </div>
       );
     }
@@ -137,6 +146,15 @@ class App extends React.Component {
                       onClick={(e) => setMenuOption("login", mainContent, e)}
                     >
                       Login
+                    </button>
+                  </li>
+
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={(e) => setMenuOption("Feed", mainContent, e)}
+                    >
+                      Feed
                     </button>
                   </li>
 

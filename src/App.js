@@ -133,7 +133,7 @@ class App extends React.Component {
       <div className="App">
 
         {/* left column */}
-        <div className="mainLeft">
+        <div className="leftCol">
           <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
             SLEEP.IO
           </h1>
@@ -191,52 +191,53 @@ class App extends React.Component {
               </div>
             </nav>
           </div>
+        </div>
 
-          {/* Middle column */}
-          <div className="center">
-            <div className="maincontent" id="mainContent">
-              <MainContent ref={mainContent} />
-            </div>
-          </div>
-
-
-          {/* Right Column */}
-          <div className="mainRight">
-            <nav className="r">
-              <div className="login" style={{ paddingRight: 5 }}>
-                <label style={{ color: "white" }} for="username">
-                  Username
-              </label>
-                <input
-                  type="text"
-                  id="usename"
-                  placeholder="Your username"
-                  className="inputBox"
-                ></input>
-              </div>
-
-              <div className="login" style={{ paddingLeft: 5 }}>
-                <label for="password" style={{ color: "white" }}>
-                  Password
-              </label>
-                <input
-                  type="text"
-                  id="password"
-                  placeholder="Your password"
-                  className="inputBox"
-                ></input>
-              </div>
-
-              <div>
-                <input
-                  type="button"
-                  value="Login"
-                  className="loginButton2"
-                ></input>
-              </div>
-            </nav>
+        {/* Middle column */}
+        <div className="centerCol">
+          <div className="maincontent" id="mainContent">
+            <MainContent ref={mainContent} />
           </div>
         </div>
+
+
+        {/* Right Column */}
+        <div className="rightCol">
+          <nav className="r">
+            <div className="login" style={{ paddingRight: 5 }}>
+              <label style={{ color: "white" }} for="username">
+                Username
+              </label>
+              <input
+                type="text"
+                id="usename"
+                placeholder="Your username"
+                className="inputBox"
+              ></input>
+            </div>
+
+            <div className="login" style={{ paddingLeft: 5 }}>
+              <label for="password" style={{ color: "white" }}>
+                Password
+              </label>
+              <input
+                type="text"
+                id="password"
+                placeholder="Your password"
+                className="inputBox"
+              ></input>
+            </div>
+
+            <div>
+              <input
+                type="button"
+                value="Login"
+                className="loginButton2"
+              ></input>
+            </div>
+          </nav>
+        </div>
+
 
         <Modal
           show={this.state.openModal}

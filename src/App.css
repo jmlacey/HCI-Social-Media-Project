@@ -16,18 +16,32 @@ General Page
   padding: 0px;
 } */
 
-.mainLeft {
+
+.leftCol {
   background-color: purple;
-  width: 30%;
+  width: 25%;
   height: 100%;
   float: left;
 }
 
-.mainRight {
-  background-color: purple;
-  width: 30%;
+.centerCol {
+  width: 50%;
   height: 100%;
-  float: right;
+  float: left;
+}
+
+.rightCol {
+  background-color: purple;
+  width: 25%;
+  height: 100%;
+  float: left;
+}
+
+.App:after {
+  text-align: center;
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .headerImg {
@@ -35,6 +49,18 @@ General Page
   height: 100px;
   padding: 12px;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+/*-----------------
+
+Navigation
+    
+----------------*/
 
 .navBar {
   background-color: purple;
@@ -45,27 +71,15 @@ General Page
   align-items: center;
 }
 
+/* .Nav_Element {
+  float: left;
+} */
 .sideBar {
   list-style-type: none;
   margin: 0;
   overflow: hidden;
   background-color: purple;
   padding-top: 25px;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-/*-----------------
-
-IDK about any of the shit beneath this :(
-    
-----------------*/
-
-.Nav_Element {
-  float: left;
 }
 
 .element_link {
@@ -80,6 +94,18 @@ IDK about any of the shit beneath this :(
 .element_link:hover:not(.active) {
   background-color: #ffaa3b;
 }
+
+/*-----------------
+
+IDK about any of the shit beneath this :(
+    
+----------------*/
+
+
+
+
+
+
 
 .active {
   background-color: aqua;
@@ -226,15 +252,15 @@ input[type="submit"]:hover {
   left: 20%;
 }
 
-.leftCol {
+/* .leftCol {
   width: 49%;
   float: left;
-}
+} */
 
-.rightCol {
+/* .rightCol {
   width: 49%;
   float: right;
-}
+} */
 
 .timeInput {
   background-color: #7155d3;
@@ -246,9 +272,7 @@ input[type="submit"]:hover {
   height: 80px;
 }
 
-.App {
-  text-align: center;
-}
+
 
 .App-logo {
   height: 40vmin;

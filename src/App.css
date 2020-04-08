@@ -22,23 +22,24 @@ General Page
   width: 25%;
   height: 100%;
   float: left;
+  position: absolute;
 }
 
 .centerCol {
   width: 50%;
   height: 100%;
-  float: left;
+  /* float: left; */
 }
 
 .rightCol {
   background-color: purple;
   width: 25%;
   height: 100%;
-  float: left;
+  float: right;
 }
 
 .App:after {
-  text-align: center;
+  /* text-align: center; */
   content: "";
   display: table;
   clear: both;
@@ -55,6 +56,13 @@ body {
   padding: 0;
 }
 
+.maincontent {
+  display: absolute;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-grow: 1;
+}
 
 /*-----------------
 
@@ -74,6 +82,7 @@ Navigation
 /* .Nav_Element {
   float: left;
 } */
+
 .sideBar {
   list-style-type: none;
   margin: 0;
@@ -93,6 +102,55 @@ Navigation
 
 .element_link:hover:not(.active) {
   background-color: #ffaa3b;
+}
+
+
+/*-----------------
+
+Header Login Form
+    
+----------------*/
+.r {
+  padding: 10px 0px 0px 350px;
+  display: block;
+}
+
+.logSide {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.loginButton2 {
+  background-color: blueviolet;
+  padding: 15px;
+  margin-top: 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+/*-----------------
+
+Sign Up Page
+    
+----------------*/
+
+.split {
+  height: 100%;
+  width: 50%;
+  /* position: fixed; */
+  overflow-x: hidden;
+}
+
+.right {
+  right: 0;
+}
+
+.malik {
+  width: 300px;
 }
 
 /*-----------------
@@ -163,10 +221,7 @@ input[type="submit"]:hover {
   height: 0px;
 }
 
-.r {
-  padding: 10px 0px 0px 350px;
-  display: flex;
-}
+
 
 .loginButton {
   padding: 15px;
@@ -176,31 +231,13 @@ input[type="submit"]:hover {
   cursor: pointer;
 }
 
-.loginButton2 {
-  background-color: blueviolet;
-  padding: 15px;
-  margin-top: 20px;
-  margin-left: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  color: white;
-}
+
 
 .signformDiv {
   width: 550px;
 }
 
-.split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  overflow-x: hidden;
-}
 
-.right {
-  right: 0;
-}
 
 .centered {
   position: absolute;
@@ -210,9 +247,7 @@ input[type="submit"]:hover {
   text-align: center;
 }
 
-.malik {
-  width: 300px;
-}
+
 
 .profileButton {
   background-color: blueviolet;

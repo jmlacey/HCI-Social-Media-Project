@@ -204,37 +204,46 @@ class App extends React.Component {
         {/* Right Column */}
         <div className="rightCol">
           <nav className="r">
-            <div className="login" style={{ paddingRight: 5 }}>
-              <label style={{ color: "white" }} for="username">
-                Username
+            <ul className="logSide">
+              <li>
+                <div className="login" style={{ paddingRight: 5 }}>
+                  <label style={{ color: "white" }} for="username">
+                    Username
               </label>
-              <input
-                type="text"
-                id="usename"
-                placeholder="Your username"
-                className="inputBox"
-              ></input>
-            </div>
+                  <input
+                    type="text"
+                    id="usename"
+                    placeholder="Your username"
+                    className="inputBox"
+                  ></input>
+                </div>
+              </li>
 
-            <div className="login" style={{ paddingLeft: 5 }}>
-              <label for="password" style={{ color: "white" }}>
-                Password
+              <li>
+                <div className="login" style={{ paddingLeft: 5 }}>
+                  <label for="password" style={{ color: "white" }}>
+                    Password
               </label>
-              <input
-                type="text"
-                id="password"
-                placeholder="Your password"
-                className="inputBox"
-              ></input>
-            </div>
+                  <input
+                    type="text"
+                    id="password"
+                    placeholder="Your password"
+                    className="inputBox"
+                  ></input>
+                </div>
+              </li>
 
-            <div>
-              <input
-                type="button"
-                value="Login"
-                className="loginButton2"
-              ></input>
-            </div>
+              <li>
+                <div>
+                  <input
+                    type="button"
+                    value="Login"
+                    className="loginButton2"
+                  ></input>
+                </div>
+              </li>
+
+            </ul>
           </nav>
         </div>
 

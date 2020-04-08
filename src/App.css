@@ -10,10 +10,24 @@ General Page
   font-family: "Roboto", sans-serif;
 }
 
-.header {
+/* .header {
   background-color: purple;
   display: flex;
   padding: 0px;
+} */
+
+.mainLeft {
+  background-color: purple;
+  width: 30%;
+  height: 100%;
+  float: left;
+}
+
+.mainRight {
+  background-color: purple;
+  width: 30%;
+  height: 100%;
+  float: right;
 }
 
 .headerImg {

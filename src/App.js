@@ -131,7 +131,9 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <header className="header">
+
+        {/* left column */}
+        <div className="mainLeft">
           <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
             SLEEP.IO
           </h1>
@@ -184,48 +186,56 @@ class App extends React.Component {
                       Buddy
                     </button>
                   </li>
+
                 </ul>
               </div>
             </nav>
           </div>
 
-          <nav className="r">
-            <div className="login" style={{ paddingRight: 5 }}>
-              <label style={{ color: "white" }} for="username">
-                Username
+          {/* Middle column */}
+          <div className="center">
+            <div className="maincontent" id="mainContent">
+              <MainContent ref={mainContent} />
+            </div>
+          </div>
+
+
+          {/* Right Column */}
+          <div className="mainRight">
+            <nav className="r">
+              <div className="login" style={{ paddingRight: 5 }}>
+                <label style={{ color: "white" }} for="username">
+                  Username
               </label>
-              <input
-                type="text"
-                id="usename"
-                placeholder="Your username"
-                className="inputBox"
-              ></input>
-            </div>
+                <input
+                  type="text"
+                  id="usename"
+                  placeholder="Your username"
+                  className="inputBox"
+                ></input>
+              </div>
 
-            <div className="login" style={{ paddingLeft: 5 }}>
-              <label for="password" style={{ color: "white" }}>
-                Password
+              <div className="login" style={{ paddingLeft: 5 }}>
+                <label for="password" style={{ color: "white" }}>
+                  Password
               </label>
-              <input
-                type="text"
-                id="password"
-                placeholder="Your password"
-                className="inputBox"
-              ></input>
-            </div>
+                <input
+                  type="text"
+                  id="password"
+                  placeholder="Your password"
+                  className="inputBox"
+                ></input>
+              </div>
 
-            <div>
-              <input
-                type="button"
-                value="Login"
-                className="loginButton2"
-              ></input>
-            </div>
-          </nav>
-        </header>
-
-        <div className="maincontent" id="mainContent">
-          <MainContent ref={mainContent} />
+              <div>
+                <input
+                  type="button"
+                  value="Login"
+                  className="loginButton2"
+                ></input>
+              </div>
+            </nav>
+          </div>
         </div>
 
         <Modal

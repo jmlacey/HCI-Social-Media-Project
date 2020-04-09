@@ -16,6 +16,7 @@ import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
 import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
+import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -44,7 +45,12 @@ class MainContent extends React.Component {
     }
 
     if (this.state.section === "friends") {
-      return <MyFriendList userid={sessionStorage.getItem("user")} />;
+      return (
+        <div>
+          <NewFriendButton />
+          <MyFriendList userid={sessionStorage.getItem("user")} />
+        </div>
+      );
     }
 
     if (this.state.section === "buddy") {

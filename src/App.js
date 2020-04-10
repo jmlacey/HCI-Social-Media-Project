@@ -7,51 +7,76 @@ import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
-import logo2 from "./Component/logo2.svg";
-
+import View from "./Component/Anthony_Components/viewprofile.jsx";
+import Picture from "./Component/Anthony_Components/profilepicture";
+import Feed from "./Component/Discussion.jsx";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
 import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
-
+import Buddy from "./Component/Zach_components/Buddy.js";
+import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
 
 class MainContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       section: "signup",
-      openModal: false
+      openModal: false,
     };
   }
 
   render() {
     if (this.state.section === "signup") {
-     return (
-     <div className="App">
-     <MySign_Up/>
-     </div>
-     );
+      return (
+        <div className="App">
+          <MySign_Up />
+        </div>
+      );
     }
 
     if (this.state.section === "login") {
       return (
-     <div className="App">
-     <MyLogin/>
-     </div>
-     );
+        <div className="App">
+          <MyLogin />
+        </div>
+      );
     }
 
     if (this.state.section === "friends") {
-      return <MyFriendList userid={sessionStorage.getItem("user")} />;
+      return (
+        <div>
+          <NewFriendButton />
+          <MyFriendList userid={sessionStorage.getItem("user")} />
+        </div>
+      );
     }
 
     if (this.state.section === "buddy") {
-      return <div>buddy</div>;
+      return (
+        <div>
+          <Buddy />
+        </div>
+      );
+    }
+    //anthony's profile page...
+    if (this.state.section === "profile") {
+      return (
+        <div>
+          {" "}
+          <Picture /> <View userid={sessionStorage.getItem("user")} />
+        </div>
+      );
     }
 
-    if (this.state.section === "profile") {
-      return <div>profile</div>;
+    //made for feed
+    if (this.state.section === "Feed") {
+      return (
+        <div>
+          <Feed />
+        </div>
+      );
     }
 
     if (this.state.section === "test") {
@@ -89,13 +114,13 @@ class MainContent extends React.Component {
 
 function setMenuOption(mode, maincontent, e) {
   maincontent.current.setState({
-    section: mode
+    section: mode,
   });
 }
 
 function toggleModal(app) {
   app.setState({
-    openModal: !app.state.openModal
+    openModal: !app.state.openModal,
   });
 }
 
@@ -103,7 +128,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      openModal: false
+      openModal: false,
     };
   }
 
@@ -112,12 +137,11 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <header className="App-header">
+        <header className="header">
           <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
             SLEEP.IO
           </h1>
           <img src={logo} alt="" className="headerImg" />
-
           <div className="container">
             <nav className="navBar">
               <div className="Nav_Div">
@@ -125,25 +149,45 @@ class App extends React.Component {
                   <li className="Nav_Element">
                     <button
                       className="element_link"
-                      onClick={e => setMenuOption("login", mainContent, e)}
+                      onClick={(e) => setMenuOption("login", mainContent, e)}
                     >
                       Login
                     </button>
                   </li>
+
                   <li className="Nav_Element">
                     <button
                       className="element_link"
-                      onClick={e => setMenuOption("friends", mainContent, e)}
+                      onClick={(e) => setMenuOption("Feed", mainContent, e)}
+                    >
+                      Feed
+                    </button>
+                  </li>
+
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={(e) => setMenuOption("friends", mainContent, e)}
                     >
                       Friends
                     </button>
                   </li>
+
                   <li className="Nav_Element">
                     <button
                       className="element_link"
-                      onClick={e => setMenuOption("profile", mainContent, e)}
+                      onClick={(e) => setMenuOption("profile", mainContent, e)}
                     >
                       Profile
+                    </button>
+                  </li>
+
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={(e) => setMenuOption("buddy", mainContent, e)}
+                    >
+                      Buddy
                     </button>
                   </li>
                 </ul>
@@ -151,13 +195,49 @@ class App extends React.Component {
             </nav>
           </div>
 
+          <nav className="r">
+            <div className="login" style={{ paddingRight: 5 }}>
+              <label style={{ color: "white" }} for="username">
+                Username
+              </label>
+              <input
+                type="text"
+                id="usename"
+                placeholder="Your username"
+                className="inputBox"
+              ></input>
+            </div>
 
+            <div className="login" style={{ paddingLeft: 5 }}>
+              <label for="password" style={{ color: "white" }}>
+                Password
+              </label>
+              <input
+                type="text"
+                id="password"
+                placeholder="Your password"
+                className="inputBox"
+              ></input>
+            </div>
 
-          <div className="maincontent" id="mainContent">
-            <MainContent ref={mainContent} />
-          </div>
+            <div>
+              <input
+                type="button"
+                value="Login"
+                className="loginButton2"
+              ></input>
+            </div>
+          </nav>
         </header>
-        <Modal show={this.state.openModal} onClose={e => toggleModal(this, e)}>
+
+        <div className="maincontent" id="mainContent">
+          <MainContent ref={mainContent} />
+        </div>
+
+        <Modal
+          show={this.state.openModal}
+          onClose={(e) => toggleModal(this, e)}
+        >
           This is a modal dialog!
         </Modal>
       </div>

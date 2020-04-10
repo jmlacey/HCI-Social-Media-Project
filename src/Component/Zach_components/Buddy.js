@@ -1,32 +1,34 @@
 import React from "react"
-import { render } from "@testing-library/react";
 
 export default class Buddy extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userid: props.userid,
-      timeConnections: []
+      connections: []
     }
   }
 
   state = {}
 
+  componentDidMount(){
+    this.loadBuddies();
+  }
+
   loadBuddies() {
-    fetch("http://stark.cse.buffalo.edu/hci/timeConnectionController.php", {
+    fetch("http://stark.cse.buffalo.edu/hci/connectioncontroller.php", {
       method: "post",
       body: JSON.stringify({
-        action: "getBuddies",
-        user_id: this.state.userid
+        action: "getConnections"
       })
     })
       .then(res => res.json())
       .then(
         result => {
-          if (result.timeConnections) {
+          if (result.connections) {
             this.setState({
               isLoaded: true,
-              timeConnections: result.timeConnections
+              connections: result.connections
             });
           }
         },
@@ -49,8 +51,8 @@ export default class Buddy extends React.Component {
       return (
         <div className="post">
           <ul>
-            {timeConnections.map(connection => (
-              <button className="buddies" key={connection.connection_id}>
+            {connections.map(connection => (
+              <button key={connection.connection_id} className="availableBuddies">
                 {connection.name} - {connection.connection_status}
               </button>
             ))}

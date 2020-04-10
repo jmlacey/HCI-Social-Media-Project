@@ -11,8 +11,8 @@ class Sign_up extends Component {
         return (
             <html>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-            <body>
-                <header className="header">
+                <body>
+                    {/* <header className="header">
                     <h1 style={{ color: 'white', padding: 5, marginTop: 20 }}>SLEEP.IO</h1>
                     <img src={logo} alt="" className = "headerImg" />
                     <nav className="r">
@@ -31,21 +31,16 @@ class Sign_up extends Component {
                     </nav>
 
 
-                </header>
+                </header> */}
 
-
-
-
-                <div class="split left">
-                    <div class="centered">
-                        <img src={logo2} alt="" className="malik"/>
+                    <div class="split left">
+                        <div class="centered">
+                            <img src={logo2} alt="" className="malik" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="split right">
-                    <div class="centered">
-                        <div>
-
+                    <div class="split right">
+                        <div class="centered">
                             <div className="signformDiv">
 
                                 <h1>CREATE AN ACCOUNT</h1>
@@ -75,14 +70,11 @@ class Sign_up extends Component {
 
                                     <input type="submit" value="SIGN UP"></input>
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </body>
+                </body>
             </html>
         );
     }

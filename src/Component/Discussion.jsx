@@ -48,19 +48,21 @@ class Feed extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.submitHandler}>
-          <label>
-            Post Something!
+        <div className="centered">
+          <form onSubmit={this.submitHandler}>
+            <label>
+              Post Something!
             <br />
-            <textarea rows="10" cols="70" onChange={this.myChangeHandler} />
-          </label>
-          <br />
+              <textarea rows="10" cols="70" onChange={this.myChangeHandler} />
+            </label>
+            <br />
 
-          <input type="submit" value="submit" />
-          <br />
-          {this.state.postmessage}
-        </form>
-        <PostingList ref={this.postListing} type="postlist" />
+            <input type="submit" value="submit" />
+            <br />
+            {this.state.postmessage}
+          </form>
+          <PostingList ref={this.postListing} type="postlist" />
+        </div>
       </div>
     );
   }

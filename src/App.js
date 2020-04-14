@@ -9,7 +9,7 @@ import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
 import View from "./Component/Anthony_Components/viewprofile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
-import Feed from "./Component/Discussion.jsx";
+import Discussion from "./Component/Discussion.jsx";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
@@ -70,11 +70,11 @@ class MainContent extends React.Component {
       );
     }
 
-    //made for feed
-    if (this.state.section === "Feed") {
+    //made for Discussion
+    if (this.state.section === "Discussion") {
       return (
-        <div>
-          <Feed />
+        <div className="discussionPage">
+          <Discussion />
         </div>
       );
     }
@@ -158,9 +158,9 @@ class App extends React.Component {
                   <li className="Nav_Element">
                     <button
                       className="element_link"
-                      onClick={(e) => setMenuOption("Feed", mainContent, e)}
+                      onClick={(e) => setMenuOption("Discussion", mainContent, e)}
                     >
-                      Feed
+                      Discussion
                     </button>
                   </li>
 

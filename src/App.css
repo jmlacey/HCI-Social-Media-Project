@@ -161,6 +161,40 @@ Login
 
 
 
+/*-----------------
+
+Discussison
+    
+----------------*/
+.discussionPage {
+width: 100%;
+justify-content: center;
+}
+
+.discussSubmit {
+  width: 500px;
+  background-color: purple;
+  color: white;
+  padding: 15px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.postlist {
+  text-align: left;
+  background: purple;
+  color: white;
+  border-radius: 20px;
+  padding: 30px;
+  margin: 10px;
+
+  width: 60%;
+  display: inline-flex;
+}
+
+
 
 /*-----------------
 
@@ -411,16 +445,7 @@ IDK about any of the shit beneath this :(
   color: #09d3ac;
 }
 
-.postlist {
-  text-align: left;
-  background: blue;
-  border-radius: 20px;
-  padding: 30px;
-  margin: 10px;
 
-  width: 60%;
-  display: inline-flex;
-}
 
 .userlist {
   text-align: left;

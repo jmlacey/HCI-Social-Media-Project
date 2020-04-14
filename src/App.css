@@ -44,12 +44,12 @@ body {
   padding: 0;
 }
 
+
 /*-----------------
 
-IDK about any of the shit beneath this :(
+Navigation bar
     
 ----------------*/
-
 .Nav_Element {
   float: left;
 }
@@ -77,6 +77,45 @@ IDK about any of the shit beneath this :(
   overflow: hidden;
   padding-top: 6px;
 }
+
+
+/*-----------------
+
+Buddy page
+    
+----------------*/
+.buddyPage {
+  width: 100%;
+  justify-content: center;
+}
+
+.buddyList {
+  /* width: 100%; */
+  list-style-type: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+  align-content: center;
+  
+}
+
+.buddyButtons {
+  display: block;
+  padding:10px;
+  margin-top: 10px;
+  background-color: purple;
+  color: white;
+}
+
+/*-----------------
+
+IDK about any of the shit beneath this :(
+    
+----------------*/
+
+
 
 .formDiv {
   padding: 50px 50px 0px 50px;

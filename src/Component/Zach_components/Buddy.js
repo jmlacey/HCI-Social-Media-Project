@@ -11,7 +11,7 @@ export default class Buddy extends React.Component {
 
   state = {}
 
-  componentDidMount(){
+  componentDidMount() {
     this.loadBuddies();
   }
 
@@ -49,15 +49,13 @@ export default class Buddy extends React.Component {
       return <div> Loading... </div>;
     } else {
       return (
-        <div className="post">
-          <ul>
+        <ul className="buddyList">
             {connections.map(connection => (
-              <button key={connection.connection_id} className="availableBuddies">
+              <button key={connection.connection_id} className="buddyButtons">
                 {connection.name} - {connection.connection_status}
               </button>
             ))}
-          </ul>
-        </div>
+        </ul>
       );
     }
   }

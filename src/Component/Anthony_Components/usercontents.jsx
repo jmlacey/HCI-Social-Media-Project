@@ -80,7 +80,7 @@ export default class User extends React.Component {
     event.preventDefault();
 
     //make the api call to the user controller
-    fetch("http://stark.cse.buffalo.edu/hci/usercontroller.php", {
+    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/uacontroller.php", {
       method: "post",
       body: JSON.stringify({
         action: "addOrEditUsers",
@@ -137,6 +137,10 @@ export default class User extends React.Component {
         <p>Username : {this.state.username}</p>
         <p>Firstname : {this.state.firstname}</p>
         <p>Lastname : {this.state.lastname}</p>
+        <p>Sleep Time: </p>
+        <p>Wake Time: </p>
+        <p>Time Zone: </p>
+
         {/* <p>Favorite Color : {this.state.favoritecolor.pref_value}</p> */}
       </div>
     );

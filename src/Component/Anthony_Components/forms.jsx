@@ -79,7 +79,7 @@ class Forms extends Component {
     event.preventDefault();
 
     //make the api call to the user controller
-    fetch("http://stark.cse.buffalo.edu/hci/usercontroller.php", {
+    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/uacontroller.php", {
       method: "post",
       body: JSON.stringify({
         action: "addOrEditUsers",

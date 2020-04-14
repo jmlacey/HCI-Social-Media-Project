@@ -151,37 +151,39 @@ class Sign_up extends Component {
   submitHandler = (event) => {
     //keep the form from actually submitting
     event.preventDefault();
-
+    //console.log(this.state.email);
     //make the api call to the authentication page
-    fetch("http://stark.cse.buffalo.edu/hci/SocialAuth.php", {
-      method: "post",
-      body: JSON.stringify({
-        action: "login",
-        username: this.state.username,
-        password: this.state.password,
-        email: this.state.email,
-        confirmPassword: this.state.confirmPassword,
-        session_token: sessionStorage.getItem("token"),
-      }),
-    })
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "register",
+          //username: this.state.username,
+          //password: this.state.password,
+          email_addr: this.state.email,
+          //confirmPassword: this.state.confirmPassword,
+          //session_token: sessionStorage.getItem("token"),
+        }),
+      }
+    )
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log(this.state);
           if (result.user) {
-            sessionStorage.setItem("token", result.user.session_token);
-            sessionStorage.setItem("user", result.user.user_id);
+            //sessionStorage.setItem("token", result.user.session_token);
+            //sessionStorage.setItem("user", result.user.user_id);
 
             this.setState({
-              sessiontoken: result.user.session_token,
-              alanmessage: result.user.session_token,
+              //sessiontoken: result.user.session_token,
+              //alanmessage: result.user.session_token,
             });
           } else {
-            sessionStorage.removeItem("token");
-            sessionStorage.removeItem("user");
+            //sessionStorage.removeItem("token");
+            //sessionStorage.removeItem("user");
             this.setState({
-              sessiontoken: "",
-              alanmessage: result.message,
+              //sessiontoken: "",
+              // alanmessage: result.message,
             });
           }
         },
@@ -207,7 +209,7 @@ class Sign_up extends Component {
           <div class="centered">
             <div className="signformDiv">
               <h1>CREATE AN ACCOUNT</h1>
-              <form onSubmit={this.props.signup}>
+              <form onSubmit={this.submitHandler}>
                 <label for="fname">Username</label>
                 <input
                   type="text"

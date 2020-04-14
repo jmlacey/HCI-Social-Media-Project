@@ -214,7 +214,7 @@ class Sign_up extends Component {
           <div class="centered">
             <div className="signformDiv">
               <h1>CREATE AN ACCOUNT</h1>
-              <form onSubmit={this.props.signup}>
+              <form onSubmit={this.submitHandler}>
                 <label for="fname">Username</label>
                 <input
                   type="text"

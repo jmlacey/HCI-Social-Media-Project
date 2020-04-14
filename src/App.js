@@ -37,7 +37,7 @@ class MainContent extends React.Component {
       profile: false,
       email: "",
       sessiontoken: "",
-      alanmessage: ""
+      alanmessage: "",
     };
   }
 
@@ -67,13 +67,7 @@ class MainContent extends React.Component {
       );
     }
 
-    if (this.state.section === "OTP") {
-      return (
-        <div className="App">
-          <OTP />
-        </div>
-      );
-    }
+
 
     if (this.state.section === "friends") {
       return (
@@ -152,58 +146,9 @@ class MainContent extends React.Component {
   }
 
   otpChange() {
-    alert("YES");
-
-    //console.log(this.state.email);
-    //make the api call to the authentication page
-    fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
-      {
-        method: "post",
-        body: JSON.stringify({
-          action: "register",
-          //username: this.state.username,
-          //password: this.state.password,
-          email_addr: this.state.email,
-          //confirmPassword: this.state.confirmPassword,
-          //session_token: sessionStorage.getItem("token"),
-        }),
-      }
-    )
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          if (result.user) {
-            alert("User already exists");
-            sessionStorage.setItem("token", result.user.session_token);
-            sessionStorage.setItem("user", result.user.user_id);
-
-            this.setState({
-              sessiontoken: result.user.session_token,
-              alanmessage: result.user.session_token,
-            });
-          } else {
-            alert(
-              "New account created! Check your email for a one time password."
-            );
-            sessionStorage.removeItem("token");
-            sessionStorage.removeItem("user");
-            this.setState({
-              sessiontoken: "",
-              alanmessage: result.message,
-            });
-          }
-        },
-        (error) => {
-          alert("error!");
-        }
-      );
-
-    
     this.setState({
-      section: "OTP",
+      section: "login",
     });
-    
   }
 }
 

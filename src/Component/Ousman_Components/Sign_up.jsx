@@ -171,19 +171,23 @@ class Sign_up extends Component {
       .then(
         (result) => {
           if (result.user) {
-            //sessionStorage.setItem("token", result.user.session_token);
-            //sessionStorage.setItem("user", result.user.user_id);
+            alert("User already exists");
+            sessionStorage.setItem("token", result.user.session_token);
+            sessionStorage.setItem("user", result.user.user_id);
 
             this.setState({
-              //sessiontoken: result.user.session_token,
-              //alanmessage: result.user.session_token,
+              sessiontoken: result.user.session_token,
+              alanmessage: result.user.session_token,
             });
           } else {
-            //sessionStorage.removeItem("token");
-            //sessionStorage.removeItem("user");
+            alert(
+              "New account created! Check your email for a one time password."
+            );
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("user");
             this.setState({
-              //sessiontoken: "",
-              // alanmessage: result.message,
+              sessiontoken: "",
+              alanmessage: result.message,
             });
           }
         },

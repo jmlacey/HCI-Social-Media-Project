@@ -6,6 +6,20 @@ import LoginForm from "./Component/LoginForm.js";
 import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
+<<<<<<< Updated upstream
+=======
+import logo from "./Component/logo.png";
+import View from "./Component/Anthony_Components/viewprofile.jsx";
+import Picture from "./Component/Anthony_Components/profilepicture";
+import Feed from "./Component/Discussion.jsx";
+
+//My stuff
+import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
+import MyLogin from "./Component/Ousman_Components/Login.jsx";
+import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
+import Buddy from "./Component/Zach_components/Buddy.js";
+import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
+>>>>>>> Stashed changes
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -17,6 +31,64 @@ class MainContent extends React.Component {
   }
 
   render() {
+<<<<<<< Updated upstream
+=======
+    if (this.state.section === "signup") {
+      return (
+        <div className="App">
+          <MySign_Up signup = {this.changeToLogin}/>
+        </div>
+      );
+    }
+
+    if (this.state.section === "login") {
+      return (
+        <div className="App">
+          <MyLogin />
+        </div>
+      );
+    }
+
+    if (this.state.section === "friends") {
+      return (
+        <div>
+          <NewFriendButton />
+          <MyFriendList userid={sessionStorage.getItem("user")} />
+        </div>
+      );
+    }
+
+    if (this.state.section === "buddy") {
+      return (
+        <div className="buddyPage">
+          <Buddy />
+        </div>
+      );
+    }
+    //anthony's profile page...
+    if (this.state.section === "profile") {
+      return (
+        <div>
+          {" "}
+          <Picture /> <View userid={sessionStorage.getItem("user")} />
+        </div>
+      );
+    }
+
+    //made for feed
+    if (this.state.section === "Feed") {
+      return (
+        <div>
+          <Feed />
+        </div>
+      );
+    }
+
+    if (this.state.section === "test") {
+      return <MyFriendList userid={sessionStorage.getItem("user")} />;
+    }
+
+>>>>>>> Stashed changes
     if (this.state.section === "main") {
       return (
         <div>

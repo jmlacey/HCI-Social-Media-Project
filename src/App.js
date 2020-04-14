@@ -10,6 +10,7 @@ import logo from "./Component/logo.png";
 import View from "./Component/Anthony_Components/viewprofile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
 import Discussion from "./Component/Discussion.jsx";
+import Edit from "./Component/Anthony_Components/editprofile.jsx";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
@@ -21,10 +22,26 @@ import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
 class MainContent extends React.Component {
   constructor(props) {
     super(props);
+
+    //necessary binding for state change
+    this.startEdit = this.startEdit.bind(this);
+    this.doneEdit = this.doneEdit.bind(this);
+
     this.state = {
       section: "signup",
       openModal: false,
+      allowEdit: false,
+      profile: false,
     };
+  }
+
+  //following 2 functions allow for state change between viewing and editing profile
+  startEdit() {
+    this.setState({ allowEdit: true, section: "allowEdit" });
+  }
+
+  doneEdit() {
+    this.setState({ profile: true, section: "profile" });
   }
 
   render() {
@@ -64,11 +81,20 @@ class MainContent extends React.Component {
     if (this.state.section === "profile") {
       return (
         <div>
-          {" "}
-          <Picture /> <View userid={sessionStorage.getItem("user")} />
+          <Picture /> <View action={this.startEdit} />
         </div>
       );
     }
+
+    if (this.state.section === "allowEdit") {
+      return (
+        <div>
+          {" "}
+          <Picture /> <Edit action={this.doneEdit} />
+        </div>
+      );
+    }
+    //end of anthony's profile page
 
     //made for Discussion
     if (this.state.section === "Discussion") {
@@ -134,7 +160,6 @@ class App extends React.Component {
 
   render() {
     let mainContent = React.createRef();
-
     return (
       <div className="App">
         <header className="header">
@@ -158,7 +183,9 @@ class App extends React.Component {
                   <li className="Nav_Element">
                     <button
                       className="element_link"
-                      onClick={(e) => setMenuOption("Discussion", mainContent, e)}
+                      onClick={(e) =>
+                        setMenuOption("Discussion", mainContent, e)
+                      }
                     >
                       Discussion
                     </button>

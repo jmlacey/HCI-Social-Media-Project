@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Forms from "./forms";
+import Edit from "./editprofile";
 
 class View extends Component {
   state = {};
@@ -10,7 +11,7 @@ class View extends Component {
     return (
       <div className="profileFormDiv">
         <Forms />
-        <button className="profileButton leftCol1" onClick={this.testAlert}>
+        <button className="profileButton leftCol1" onClick={this.props.action}>
           {" "}
           Edit{" "}
         </button>

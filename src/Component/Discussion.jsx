@@ -56,7 +56,7 @@ class Feed extends React.Component {
           </label>
           <br />
 
-          <input className="discussSubmit" value="Post" />
+          <input type="submit" value="Post" />
           <br />
           {this.state.postmessage}
         </form>

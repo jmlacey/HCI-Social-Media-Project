@@ -113,7 +113,7 @@ class Forms extends Component {
         artifacttype: "sleepTime",
         artifacttype: "wakeTime",
         artifacttype: "timeZone",
-        userid: sessionStorage.getItem(results.user.session_token),
+        userid: sessionStorage.getItem("user"),
       }),
     })
       .then((res) => res.json())
@@ -159,9 +159,7 @@ class Forms extends Component {
         <form onSubmit={this.submitHandler}>
           <label>
             Time Zone:
-            <select 
-              value={this.state.timeZone}>
-
+            <select value={this.state.timeZone}>
               <option
                 timeZoneId="1"
                 gmtAdjustment="GMT-12:00"
@@ -828,7 +826,7 @@ class Forms extends Component {
             Sleep Time:
             <input
               type="time"
-              value = {this.state.sleepTime}
+              value={this.state.sleepTime}
               onChange={(e) => this.fieldChangeHandler("sleepTime", e)}
             />
           </label>

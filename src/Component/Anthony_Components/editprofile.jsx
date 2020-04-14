@@ -3,6 +3,10 @@ import Forms from "./forms";
 
 class Edit extends Component {
   state = {};
+  successMessage() {
+    alert("Your profile has been saved");
+  }
+
   render() {
     return (
       <div className="profileFormDiv">

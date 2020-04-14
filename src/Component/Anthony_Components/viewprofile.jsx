@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Forms from "./forms";
-import Edit from "./editprofile";
+import User from "./usercontents";
 
 class View extends Component {
   state = {};
@@ -10,12 +10,11 @@ class View extends Component {
   render() {
     return (
       <div className="profileFormDiv">
-        <Forms />
-        <button className="profileButton leftCol1" onClick={this.props.action}>
+        <User />
+        <button className="profileButton rightCol1" onClick={this.props.action}>
           {" "}
           Edit{" "}
         </button>
-        <button className="profileButton rightCol1"> Done </button>
       </div>
     );
   }

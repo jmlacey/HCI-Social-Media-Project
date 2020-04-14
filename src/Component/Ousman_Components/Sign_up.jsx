@@ -121,6 +121,7 @@ class Sign_up extends Component {
       confirmPassword: "",
       alanmessage: "",
       session_token: "",
+      email: "",
     };
   }
 

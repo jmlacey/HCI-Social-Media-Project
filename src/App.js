@@ -18,6 +18,7 @@ import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
+import OTP from "./Component/Ousman_Components/OTP.jsx";
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -27,11 +28,16 @@ class MainContent extends React.Component {
     this.startEdit = this.startEdit.bind(this);
     this.doneEdit = this.doneEdit.bind(this);
 
+    this.otpChange = this.otpChange.bind(this);
+
     this.state = {
       section: "signup",
       openModal: false,
       allowEdit: false,
       profile: false,
+      email: "",
+      sessiontoken: "",
+      alanmessage: "",
     };
   }
 
@@ -48,7 +54,7 @@ class MainContent extends React.Component {
     if (this.state.section === "signup") {
       return (
         <div className="App">
-          <MySign_Up />
+          <MySign_Up signup={this.otpChange} />
         </div>
       );
     }
@@ -60,6 +66,8 @@ class MainContent extends React.Component {
         </div>
       );
     }
+
+
 
     if (this.state.section === "friends") {
       return (
@@ -135,6 +143,12 @@ class MainContent extends React.Component {
     } else {
       return <p>Unidentified Section!</p>;
     }
+  }
+
+  otpChange() {
+    this.setState({
+      section: "login",
+    });
   }
 }
 

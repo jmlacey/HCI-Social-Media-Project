@@ -3,115 +3,6 @@ import React, { Component } from "react";
 import logo2 from "../../logo2.svg";
 
 class Sign_up extends Component {
-  // constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //       username: "",
-  //       firstname: "",
-  //       lastname: "",
-  //       password: "",
-  //       email: "",
-  //       responseMessage: "",
-  //       redirect: false
-  //     };
-  //     this.fieldChangeHandler.bind(this);
-  //   }
-
-  //   fieldChangeHandler(field, e) {
-  //     console.log("field change");
-  //     this.setState({
-  //       [field]: e.target.value
-  //     });
-  //   }
-
-  //   componentDidMount() {
-  //     // make the api call to the user API to get the user with all of their attached preferences
-  //     fetch("http://stark.cse.buffalo.edu/hci/usercontroller.php", {
-  //       method: "post",
-  //       action: "addOrEditUserPrefs",
-  //       body: JSON.stringify({
-  //         action: "getCompleteUsers",
-  //         user_id: this.props.userid
-  //       })
-  //     })
-  //       .then(res => res.json())
-  //       .then(
-  //         result => {
-  //           if (result.users) {
-  //             console.log(result.users);
-
-  //             this.setState({
-  //               // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
-  //               // try and make the form component uncontrolled, which plays havoc with react
-  //               username: result.users[0].username || "",
-  //               firstname: result.users[0].first_name || "",
-  //               lastname: result.users[0].last_name || "",
-  //               password: result.users[0].password|| "",
-  //               email: result.users[0].email_Addr||"",
-  //               redirect: true
-
-  //             });
-  //           }
-  //         },
-  //         error => {
-  //           alert("error!");
-  //         }
-  //       );
-  //   }
-
-  //   submitHandler = event => {
-  //     //keep the form from actually submitting
-  //     event.preventDefault();
-
-  //     //make the api call to the user controller
-  //     fetch("http://stark.cse.buffalo.edu/hci/usercontroller.php", {
-  //       method: "post",
-  //       body: JSON.stringify({
-  //         action: "addOrEditUsers",
-  //         username: this.state.username,
-  //         firstname: this.state.firstname,
-  //         lastname: this.state.lastname,
-  //         password: this.state.password,
-  //         email: this.state.email,
-  //         user_id: sessionStorage.getItem("user"),
-  //         session_token: sessionStorage.getItem("token"),
-  //         mode: "ignorenull"
-  //       })
-  //     })
-  //       .then(res => res.json())
-  //       .then(
-  //         result => {
-  //           this.setState({
-  //             responseMessage: result.Status,
-  //           });
-  //         },
-  //         error => {
-  //           alert("error!");
-
-  //         }
-  //       );
-
-  // // make the api call to the user prefs controller
-  // fetch("http://stark.cse.buffalo.edu/hci/upcontroller.php", {
-  //   method: "post",
-  //   body: JSON.stringify({
-  //     action: "addOrEditUserPrefs",
-  //     user_id: sessionStorage.getItem("user"),
-  //     session_token: sessionStorage.getItem("token")
-  //   })
-  // })
-  //   .then(res => res.json())
-  //   .then(
-  //     result => {
-  //       this.setState({
-  //         responseMessage: result.Status
-  //       });
-  //     },
-  //     error => {
-  //       alert("error!");
-  //     }
-  //   );
-  // };
 
   constructor(props) {
     super(props);
@@ -121,12 +12,26 @@ class Sign_up extends Component {
       confirmPassword: "",
       alanmessage: "",
       session_token: "",
+      newPassword: "",
+      otp: "",
     };
   }
 
   myChangeHandler = (event) => {
     this.setState({
       username: event.target.value,
+    });
+  };
+
+  otpChangeHandler = (event) => {
+    this.setState({
+      otp: event.target.value,
+    });
+  };
+
+  passChangeHandler = (event) => {
+    this.setState({
+      newPassword: event.target.value,
     });
   };
 
@@ -256,9 +161,27 @@ class Sign_up extends Component {
 +                                    </div> */}
 
                 <input type="submit" value="SIGN UP"></input>
-                <p>Username is : {this.state.username}</p>
-                {/* <p>Firstname is : {this.state.firstname}</p> */}
-                {this.state.responseMessage}
+              </form>
+
+              <form onSubmit={this.submitHandler}>
+              <label>Enter OTP</label>
+              <input
+                type="text"
+                placeholder="Your OTP"
+                onChange={this.otpChangeHandler}
+                value={this.state.otp}
+              ></input>
+
+                <label>New Password</label>
+                <input
+                type="text"
+                placeholder="Your New Password"
+                onChange={this.passChangeHandler}
+                value={this.state.newPassword}
+              ></input>
+
+
+                <input type="submit" value="SIGN UP"></input>
               </form>
             </div>
           </div>

@@ -159,11 +159,11 @@ class Sign_up extends Component {
         method: "post",
         body: JSON.stringify({
           action: "register",
-          username: this.state.username,
-          password: this.state.password,
+          //username: this.state.username,
+          //password: this.state.password,
           email_addr: this.state.email,
-          confirmPassword: this.state.confirmPassword,
-          session_token: sessionStorage.getItem("token"),
+          //confirmPassword: this.state.confirmPassword,
+          //session_token: sessionStorage.getItem("token"),
         }),
       }
     )
@@ -171,20 +171,19 @@ class Sign_up extends Component {
       .then(
         (result) => {
           if (result.user) {
-            alert("whattttttttttt?")
-            sessionStorage.setItem("token", result.user.session_token);
-            sessionStorage.setItem("user", result.user.user_id);
+            //sessionStorage.setItem("token", result.user.session_token);
+            //sessionStorage.setItem("user", result.user.user_id);
 
             this.setState({
-              sessiontoken: result.user.session_token,
-              alanmessage: result.user.session_token,
+              //sessiontoken: result.user.session_token,
+              //alanmessage: result.user.session_token,
             });
           } else {
-            sessionStorage.removeItem("token");
-            sessionStorage.removeItem("user");
+            //sessionStorage.removeItem("token");
+            //sessionStorage.removeItem("user");
             this.setState({
-              sessiontoken: "",
-              alanmessage: result.message,
+              //sessiontoken: "",
+              // alanmessage: result.message,
             });
           }
         },

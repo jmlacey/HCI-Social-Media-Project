@@ -11,11 +11,10 @@ class View extends Component {
     return (
       <div className="profileFormDiv">
         <User />
-        <button className="profileButton leftCol1" onClick={this.props.action}>
+        <button className="profileButton rightCol1" onClick={this.props.action}>
           {" "}
           Edit{" "}
         </button>
-        <button className="profileButton rightCol1"> Done </button>
       </div>
     );
   }

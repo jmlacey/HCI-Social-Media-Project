@@ -13,7 +13,7 @@ class Edit extends Component {
         <Forms />
         <button className="profileButton rightCol1" onClick={this.props.action}>
           {" "}
-          Finish{" "}
+          Save{" "}
         </button>
       </div>
     );

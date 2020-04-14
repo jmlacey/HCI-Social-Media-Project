@@ -137,8 +137,8 @@ export default class User extends React.Component {
         <p>Username : {this.state.username}</p>
         <p>Firstname : {this.state.firstname}</p>
         <p>Lastname : {this.state.lastname}</p>
-        <p>Sleep Time: </p>
-        <p>Wake Time: </p>
+        <p>Sleep Time: {this.state.sleepTime} </p>
+        <p>Wake Time: {this.state.wakeTime} </p>
         <p>Time Zone: </p>
 
         {/* <p>Favorite Color : {this.state.favoritecolor.pref_value}</p> */}

@@ -10,6 +10,17 @@ General Page
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+/*-----------------
+
+Header
+    
+----------------*/
 .header {
   background-color: purple;
   display: flex;
@@ -21,7 +32,11 @@ General Page
   height: 100px;
   padding: 12px;
 }
+/*-----------------
 
+Navigation bar
+    
+----------------*/
 .navBar {
   background-color: purple;
 }
@@ -38,17 +53,6 @@ General Page
   background-color: purple;
   padding-top: 25px;
 }
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-/*-----------------
-
-IDK about any of the shit beneath this :(
-    
-----------------*/
 
 .Nav_Element {
   float: left;
@@ -78,11 +82,134 @@ IDK about any of the shit beneath this :(
   padding-top: 6px;
 }
 
-.formDiv {
-  padding: 50px 50px 0px 50px;
-  width: 50;
+
+/*-----------------
+
+Header Login 
+    
+----------------*/
+.r {
+  padding: 10px 0px 0px 350px;
+  display: flex;
 }
 
+.login {
+  /* padding: 20px; */
+  width: 175px;
+  height: 0px;
+}
+
+.loginButton {
+  padding: 15px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.loginButton2 {
+  background-color: blueviolet;
+  padding: 15px;
+  margin-top: 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+
+/*-----------------
+
+Sign Up Page
+    
+----------------*/
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  overflow-x: hidden;
+}
+
+.right {
+  right: 0;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  text-align: center;
+}
+
+.malik {
+  width: 300px;
+}
+
+.signformDiv {
+  width: 550px;
+}
+
+
+/*-----------------
+
+Login
+    
+----------------*/
+
+
+
+
+
+/*-----------------
+
+Profile Page
+    
+----------------*/
+
+
+
+
+
+
+/*-----------------
+
+Buddy Page
+    
+----------------*/
+.buddyPage {
+  width: 100%;
+  justify-content: center;
+}
+
+.buddyList {
+  /* width: 100%; */
+  list-style-type: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+  align-content: center;
+  
+}
+
+.buddyButtons {
+  display: block;
+  padding:10px;
+  margin-top: 10px;
+  background-color: purple;
+  color: white;
+}
+
+
+
+/*-----------------
+
+General
+    
+----------------*/
 input[type="text"],
 select {
   width: 100%;
@@ -109,70 +236,31 @@ input[type="submit"]:hover {
   background-color: #4caf50;
 }
 
+
+/*-----------------
+
+IDK about any of the shit beneath this :(
+    
+----------------*/
+
+
+
+.formDiv {
+  padding: 50px 50px 0px 50px;
+  width: 50;
+}
+
+
+
 .birthForm {
   padding: 10 20 0 0;
 }
 
-.signformDiv {
-  width: 50px;
-}
 
-.login {
-  /* padding: 20px; */
-  width: 175px;
-  height: 0px;
-}
 
-.r {
-  padding: 10px 0px 0px 350px;
-  display: flex;
-}
 
-.loginButton {
-  padding: 15px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
 
-.loginButton2 {
-  background-color: blueviolet;
-  padding: 15px;
-  margin-top: 20px;
-  margin-left: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  color: white;
-}
 
-.signformDiv {
-  width: 550px;
-}
-
-.split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  overflow-x: hidden;
-}
-
-.right {
-  right: 0;
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
-  text-align: center;
-}
-
-.malik {
-  width: 300px;
-}
 
 .profileButton {
   background-color: blueviolet;

@@ -55,7 +55,7 @@ class MainContent extends React.Component {
 
     if (this.state.section === "buddy") {
       return (
-        <div>
+        <div className="buddyPage">
           <Buddy />
         </div>
       );

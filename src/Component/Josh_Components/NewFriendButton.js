@@ -6,7 +6,7 @@ export default class MyFriendList extends React.Component {
     super(props);
     this.state = {
       userName: "",
-      convertID: "",
+      connectionID: "",
       typingMessage: "",
       submitMessage: "",
 
@@ -20,6 +20,8 @@ export default class MyFriendList extends React.Component {
   }
 
   userNameToID = (event) => {
+alert("this is a test");
+alert("to pass the test, all of the 3 alerts must go off >:) I hope you survive.");
     fetch("http://stark.cse.buffalo.edu/hci/userController.php", {
       method: "POST",
       body: JSON.stringify({
@@ -28,11 +30,16 @@ export default class MyFriendList extends React.Component {
       }),
     })
       .then((response) => response.json())
-      .then((response) => {
-        this.setState({
-          converID: response.Users,
-        });
-      });
+      .then(
+        (response) => {
+          this.setState({
+            connectionID: response.Users[0],
+          });
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
   };
 
   addFriend() {
@@ -40,8 +47,9 @@ export default class MyFriendList extends React.Component {
       method: "POST",
       body: JSON.stringify({
         action: "addOrEditConnections",
-        userid: "id",
-        connectuserid: "id",
+        user_id: sessionStorage.getItem("user"),
+        session_token: sessionStorage.getItem("token"),
+        connectuserid: this.state.connectionID,
       }),
     })
       .then((response) => response.json())
@@ -53,6 +61,8 @@ export default class MyFriendList extends React.Component {
   }
 
   addFriendButton = (event) => {
+    this.userNameToID();
+
     this.addFriend();
 
     event.preventDefault();
@@ -62,7 +72,7 @@ export default class MyFriendList extends React.Component {
   changeInputState = (event) => {
     this.setState({ userName: event.target.value });
 
-    if (event.target.value == "") {
+    if (event.target.value === "") {
       this.setState({ typingMessage: "" });
     } else {
       this.setState({

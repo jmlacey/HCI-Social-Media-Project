@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import logo2 from "../../logo2.svg";
 
 class Sign_up extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -102,6 +101,22 @@ class Sign_up extends Component {
       );
   };
 
+  OTPSubmit() {
+    alert("Log in using your email and new password!");
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "setpassword",
+          email_addr: this.state.email,
+          token: this.state.otp,
+          newpassword: this.state.newPassword,
+        }),
+      }
+    );
+  }
+
   render() {
     return (
       <html>
@@ -119,13 +134,6 @@ class Sign_up extends Component {
             <div className="signformDiv">
               <h1>CREATE AN ACCOUNT</h1>
               <form onSubmit={this.submitHandler}>
-                <label for="fname">Username</label>
-                <input
-                  type="text"
-                  placeholder="Your Username"
-                  onChange={this.myChangeHandler}
-                  value={this.state.username}
-                ></input>
                 <label for="fname">Email</label>
                 <input
                   type="text"
@@ -134,20 +142,6 @@ class Sign_up extends Component {
                   value={this.state.email}
                 ></input>
 
-                <label>Password</label>
-                <input
-                  type="text"
-                  placeholder="Your password"
-                  onChange={this.passwordChangeHandler}
-                  value={this.state.password}
-                ></input>
-                <label>Confirm Password</label>
-                <input
-                  type="text"
-                  placeholder="Confirm password"
-                  onChange={this.cPasswordChangeHandler}
-                  value={this.state.confirmPassword}
-                ></input>
                 {/* <label for="gender">Gender</label>
                                     <select >
                                         <option value="male">Male</option>
@@ -160,26 +154,25 @@ class Sign_up extends Component {
 
 +                                    </div> */}
 
-                <input type="submit" value="SIGN UP"></input>
+                <input type="submit" value="SEND ONE TIME PASSWORD"></input>
               </form>
 
-              <form onSubmit={this.submitHandler}>
-              <label>Enter OTP</label>
-              <input
-                type="text"
-                placeholder="Your OTP"
-                onChange={this.otpChangeHandler}
-                value={this.state.otp}
-              ></input>
+              <form onSubmit={this.OTPSubmit}>
+                <label>Enter OTP</label>
+                <input
+                  type="text"
+                  placeholder="Your OTP"
+                  onChange={this.otpChangeHandler}
+                  value={this.state.otp}
+                ></input>
 
                 <label>New Password</label>
                 <input
-                type="text"
-                placeholder="Your New Password"
-                onChange={this.passChangeHandler}
-                value={this.state.newPassword}
-              ></input>
-
+                  type="text"
+                  placeholder="Your New Password"
+                  onChange={this.passChangeHandler}
+                  value={this.state.newPassword}
+                ></input>
 
                 <input type="submit" value="SIGN UP"></input>
               </form>

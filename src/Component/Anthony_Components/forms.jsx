@@ -113,7 +113,7 @@ class Forms extends Component {
         artifacttype: "sleepTime",
         artifacttype: "wakeTime",
         artifacttype: "timeZone",
-        userid: results.userid
+        userid: sessionStorage.getItem(results.user.session_token),
       }),
     })
       .then((res) => res.json())

@@ -19,39 +19,50 @@ export default class MyFriendList extends React.Component {
     //this.addFriend();
   }
 
-  userNameToID = (event) => {
-alert("this is a test");
-alert("to pass the test, all of the 3 alerts must go off >:) I hope you survive.");
-    fetch("http://stark.cse.buffalo.edu/hci/userController.php", {
-      method: "POST",
-      body: JSON.stringify({
-        action: "getUsers",
-        username: event.target.value,
-      }),
-    })
+  userNameToID() {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          action: "getUsers",
+          username: this.state.userName,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then(
         (response) => {
           this.setState({
-            connectionID: response.Users[0],
+            connectionID: response.users.length > 0 ? response.users[0] : "",
           });
         },
         (error) => {
           alert("error!");
         }
       );
-  };
+
+    if (this.state.connectionID != "") {
+      alert("Adding the friend! Lets GOOOOO");
+      this.addFriend();
+    } else {
+      alert("Not a valid user!");
+    }
+  }
 
   addFriend() {
-    fetch("http://stark.cse.buffalo.edu/hci/connectioncontroller.php", {
-      method: "POST",
-      body: JSON.stringify({
-        action: "addOrEditConnections",
-        user_id: sessionStorage.getItem("user"),
-        session_token: sessionStorage.getItem("token"),
-        connectuserid: this.state.connectionID,
-      }),
-    })
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          action: "addOrEditConnections",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          connectuserid: this.state.connectionID,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((response) => {
         this.setState({
@@ -62,8 +73,6 @@ alert("to pass the test, all of the 3 alerts must go off >:) I hope you survive.
 
   addFriendButton = (event) => {
     this.userNameToID();
-
-    this.addFriend();
 
     event.preventDefault();
     alert("Added " + this.state.userName + " to your friends list! Hooray!");

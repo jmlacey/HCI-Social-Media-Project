@@ -18,6 +18,7 @@ import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
+import OTP from "./Component/Ousman_Components/OTP.jsx";
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -27,11 +28,16 @@ class MainContent extends React.Component {
     this.startEdit = this.startEdit.bind(this);
     this.doneEdit = this.doneEdit.bind(this);
 
+    this.otpChange = this.otpChange.bind(this);
+
     this.state = {
       section: "signup",
       openModal: false,
       allowEdit: false,
       profile: false,
+      email: "",
+      sessiontoken: "",
+      alanmessage: ""
     };
   }
 
@@ -48,7 +54,7 @@ class MainContent extends React.Component {
     if (this.state.section === "signup") {
       return (
         <div className="App">
-          <MySign_Up />
+          <MySign_Up signup={this.otpChange} />
         </div>
       );
     }
@@ -57,6 +63,14 @@ class MainContent extends React.Component {
       return (
         <div className="App">
           <MyLogin />
+        </div>
+      );
+    }
+
+    if (this.state.section === "OTP") {
+      return (
+        <div className="App">
+          <OTP />
         </div>
       );
     }
@@ -135,6 +149,61 @@ class MainContent extends React.Component {
     } else {
       return <p>Unidentified Section!</p>;
     }
+  }
+
+  otpChange() {
+    alert("YES");
+
+    //console.log(this.state.email);
+    //make the api call to the authentication page
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "register",
+          //username: this.state.username,
+          //password: this.state.password,
+          email_addr: this.state.email,
+          //confirmPassword: this.state.confirmPassword,
+          //session_token: sessionStorage.getItem("token"),
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          if (result.user) {
+            alert("User already exists");
+            sessionStorage.setItem("token", result.user.session_token);
+            sessionStorage.setItem("user", result.user.user_id);
+
+            this.setState({
+              sessiontoken: result.user.session_token,
+              alanmessage: result.user.session_token,
+            });
+          } else {
+            alert(
+              "New account created! Check your email for a one time password."
+            );
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("user");
+            this.setState({
+              sessiontoken: "",
+              alanmessage: result.message,
+            });
+          }
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+
+    
+    this.setState({
+      section: "OTP",
+    });
+    
   }
 }
 

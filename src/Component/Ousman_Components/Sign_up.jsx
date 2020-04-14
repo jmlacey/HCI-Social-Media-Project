@@ -121,6 +121,7 @@ class Sign_up extends Component {
       confirmPassword: "",
       alanmessage: "",
       session_token: "",
+      email: "",
     };
   }
 
@@ -213,7 +214,7 @@ class Sign_up extends Component {
           <div class="centered">
             <div className="signformDiv">
               <h1>CREATE AN ACCOUNT</h1>
-              <form onSubmit={this.submitHandler}>
+              <form onSubmit={this.props.signup}>
                 <label for="fname">Username</label>
                 <input
                   type="text"

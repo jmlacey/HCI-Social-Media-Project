@@ -185,8 +185,8 @@ justify-content: center;
   margin-top: 12px;
   border: none;
   border-radius: 10px;
-  cursor: pointer;
   text-align: center;
+  cursor: pointer;
 }
 
 .postlist {
@@ -267,7 +267,7 @@ select {
 }
 
 input[type="submit"] {
-  width: 100%;
+  width: 500px;
   background-color: purple;
   color: white;
   padding: 15px;

@@ -16,7 +16,7 @@ export default class Buddy extends React.Component {
   }
 
   loadBuddies() {
-    fetch("http://stark.cse.buffalo.edu/hci/connectioncontroller.php", {
+    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/connectioncontroller.php", {
       method: "post",
       body: JSON.stringify({
         action: "getConnections"

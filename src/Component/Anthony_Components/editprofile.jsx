@@ -7,11 +7,7 @@ class Edit extends Component {
     return (
       <div className="profileFormDiv">
         <Forms />
-        <button
-          className="profileButton"
-          style={{ float: "right" }}
-          onClick={this.props.action}
-        >
+        <button className="profileButton rightCol1" onClick={this.props.action}>
           {" "}
           Finish{" "}
         </button>

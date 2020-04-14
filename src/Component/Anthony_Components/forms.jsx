@@ -104,15 +104,16 @@ class Forms extends Component {
       );
 
     //make the api call to the user prefs controller
-    fetch("http://stark.cse.buffalo.edu/hci/upcontroller.php", {
+    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/uacontroller.php", {
       method: "post",
       body: JSON.stringify({
-        action: "addOrEditUserPrefs",
-        prefname: "FavoriteColor",
-        prefvalue: this.state.favoritecolor.pref_value,
-        prefid: this.state.favoritecolor.pref_id,
+        action: "addOrEditUserArtifacts",
         user_id: sessionStorage.getItem("user"),
         session_token: sessionStorage.getItem("token"),
+        artifacttype: "sleepTime",
+        artifacttype: "wakeTime",
+        artifacttype: "timeZone",
+        userid: results.userid
       }),
     })
       .then((res) => res.json())
@@ -155,10 +156,12 @@ class Forms extends Component {
           </label>
         </form>
         {/* timezones */}
-        <form>
+        <form onSubmit={this.submitHandler}>
           <label>
             Time Zone:
-            <select>
+            <select 
+              value={this.state.timeZone}>
+
               <option
                 timeZoneId="1"
                 gmtAdjustment="GMT-12:00"
@@ -825,8 +828,8 @@ class Forms extends Component {
             Sleep Time:
             <input
               type="time"
-              defaultValue={"22:15:00"}
-              onChange={this.handleChange}
+              value = {this.state.sleepTime}
+              onChange={(e) => this.fieldChangeHandler("sleepTime", e)}
             />
           </label>
         </form>
@@ -836,8 +839,8 @@ class Forms extends Component {
             Wake Time:
             <input
               type="time"
-              defaultValue={"06:30:00"}
-              onChange={this.handleChange}
+              value={this.state.wakeTime}
+              onChange={(e) => this.fieldChangeHandler("wakeTime", e)}
             />
           </label>
         </form>

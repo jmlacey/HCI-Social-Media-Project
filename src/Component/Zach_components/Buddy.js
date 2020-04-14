@@ -20,6 +20,10 @@ export default class Buddy extends React.Component {
       method: "post",
       body: JSON.stringify({
         action: "getConnections"
+        // action: "getUserArtifacts",    Will implement once profile is working
+        // artifacttype: "sleepTime",
+        // artifacttype: "wakeTime",
+        // artifacttype: "timeZone",
       })
     })
       .then(res => res.json())

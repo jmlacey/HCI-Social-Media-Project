@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 function Image() {
   const uploadedImage = React.useRef(null);
@@ -20,6 +20,7 @@ function Image() {
   return (
     <div className="avatarButton" onClick={() => imageUploader.current.click()}>
       <img
+      alt="profileimage"
         ref={uploadedImage}
         style={{
           width: "200px",
@@ -31,6 +32,7 @@ function Image() {
         <input
           type="file"
           accept="image/*"
+          
           onChange={handleImageUpload}
           ref={imageUploader}
           style={{

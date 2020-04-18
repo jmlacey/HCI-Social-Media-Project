@@ -8,12 +8,16 @@ class Sign_up extends Component {
     this.state = {
       username: "",
       password: "",
+      userId: "",
       confirmPassword: "",
-      alanmessage: "",
-      session_token: "",
       newPassword: "",
       otp: "",
+
+      //idk
+      alanmessage: "",
+      session_token: "",
     };
+    this.OTPSubmit = this.OTPSubmit.bind(this);
   }
 
   myChangeHandler = (event) => {
@@ -31,6 +35,12 @@ class Sign_up extends Component {
   passChangeHandler = (event) => {
     this.setState({
       newPassword: event.target.value,
+    });
+  };
+
+  confirmChangeHandler = (event) => {
+    this.setState({
+      confirmPassword: event.target.value,
     });
   };
 
@@ -94,6 +104,9 @@ class Sign_up extends Component {
           alert(
             "New account created! Check your email for a one time password."
           );
+          this.setState({
+            userId: result.userId,
+          });
         },
         (error) => {
           alert("error!");
@@ -102,7 +115,6 @@ class Sign_up extends Component {
   };
 
   OTPSubmit() {
-    alert("Log in using your email and new password!");
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
       {
@@ -112,14 +124,25 @@ class Sign_up extends Component {
           email_addr: this.state.email,
           token: this.state.otp,
           newpassword: this.state.newPassword,
+          confirmpassword: this.state.confirmPassword,
         }),
       }
-    );
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result.message);
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+    alert("Log in using your email and new password!");
   }
 
   render() {
     return (
-      <html>
+      <div>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
@@ -162,12 +185,25 @@ class Sign_up extends Component {
                   value={this.state.newPassword}
                 ></input>
 
+                <label>Confirm New Password</label>
+                <input
+                  type="text"
+                  placeholder="Confirm New Password"
+                  onChange={this.confirmChangeHandler}
+                  value={this.state.confirmPassword}
+                ></input>
+
                 <input type="submit" value="SIGN UP"></input>
+
+                <p>Email is : {this.state.email}</p>
+                <p>otp is : {this.state.otp}</p>
+                <p>password is : {this.state.newPassword}</p>
+                <p>confirm password is : {this.state.confirmPassword}</p>
               </form>
             </div>
           </div>
         </div>
-      </html>
+      </div>
     );
   }
 }

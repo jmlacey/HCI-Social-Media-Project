@@ -42,7 +42,7 @@ export default class MyFriendList extends React.Component {
         }
       );
 
-    if (this.state.connectionID != "") {
+    if (this.state.connectionID !== "") {
       alert("Adding the friend! Lets GOOOOO");
       this.addFriend();
     } else {

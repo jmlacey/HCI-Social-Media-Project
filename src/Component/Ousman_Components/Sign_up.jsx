@@ -52,48 +52,48 @@ class Sign_up extends Component {
     });
   };
 
-  submitHandler = (event) => {
-    //keep the form from actually submitting
-    event.preventDefault();
-    //console.log(this.state.email);
-    //make the api call to the authentication page
+  checkIfEmailExists() {
     fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
       {
         method: "post",
         body: JSON.stringify({
-          action: "register",
-          //username: this.state.username,
-          //password: this.state.password,
-          email_addr: this.state.email,
-          //confirmPassword: this.state.confirmPassword,
-          //session_token: sessionStorage.getItem("token"),
+          //API FIELDS
         }),
       }
     )
       .then((res) => res.json())
       .then(
         (result) => {
-          if (result.user) {
-            alert("User already exists");
-            sessionStorage.setItem("token", result.user.session_token);
-            sessionStorage.setItem("user", result.user.user_id);
+          //DO WHATEVER YOU WANT WITH THE JSON HERE
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+  }
 
-            this.setState({
-              sessiontoken: result.user.session_token,
-              alanmessage: result.user.session_token,
-            });
-          } else {
-            alert(
-              "New account created! Check your email for a one time password."
-            );
-            sessionStorage.removeItem("token");
-            sessionStorage.removeItem("user");
-            this.setState({
-              sessiontoken: "",
-              alanmessage: result.message,
-            });
-          }
+  submitHandler = (event) => {
+    event.preventDefault();
+
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          //API FIELDS
+          action: "register",
+          email_addr: this.state.email,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          //DO WHATEVER YOU WANT WITH THE JSON HERE
+          alert(
+            "New account created! Check your email for a one time password."
+          );
         },
         (error) => {
           alert("error!");
@@ -141,18 +141,6 @@ class Sign_up extends Component {
                   onChange={this.emailChangeHandler}
                   value={this.state.email}
                 ></input>
-
-                {/* <label for="gender">Gender</label>
-                                    <select >
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
-                                    </select> */}
-
-                {/* <div className="birthForm">
-
-
-+                                    </div> */}
 
                 <input type="submit" value="SEND ONE TIME PASSWORD"></input>
               </form>

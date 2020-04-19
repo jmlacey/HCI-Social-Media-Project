@@ -15,10 +15,9 @@ import Edit from "./Component/Anthony_Components/editprofile.jsx";
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
 import MyLogin from "./Component/Ousman_Components/Login.jsx";
-import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
+import SignUp from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
-import OTP from "./Component/Ousman_Components/OTP.jsx";
 
 
 class MainContent extends React.Component {
@@ -28,8 +27,6 @@ class MainContent extends React.Component {
     //necessary binding for state change
     this.startEdit = this.startEdit.bind(this);
     this.doneEdit = this.doneEdit.bind(this);
-
-    this.otpChange = this.otpChange.bind(this);
 
     this.state = {
       section: "signup",
@@ -55,11 +52,7 @@ class MainContent extends React.Component {
     if (this.state.section === "signup") {
       return (
         <div className="App">
-          <MySign_Up signup = {this.changeToLogin}/>
-    if (this.state.section === "signup") {
-      return (
-        <div className="App">
-          <MySign_Up signup={this.otpChange} />
+          <SignUp />
         </div>
       );
     }
@@ -71,7 +64,6 @@ class MainContent extends React.Component {
         </div>
       );
     }
-
 
     if (this.state.section === "friends") {
       return (
@@ -146,12 +138,6 @@ class MainContent extends React.Component {
     } else {
       return <p>Unidentified Section!</p>;
     }
-  }
-
-  otpChange() {
-    this.setState({
-      section: "login",
-    });
   }
 }
 

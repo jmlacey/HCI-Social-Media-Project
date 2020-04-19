@@ -263,3 +263,62 @@ body {
     height: 85%;
     background-color: #E0E0E0;
 }
+
+
+/*-----------------
+
+    Buttons
+    
+----------------*/
+button {
+    border: none;
+    box-shadow: none;
+    margin: 15px;
+    border-radius: .25em;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14pt;
+    color: white;
+    cursor: pointer;
+    background-color: #7b1fa2;
+    padding: 5px;
+}
+
+.successButton {
+    background-color: green;
+}
+
+.alertButton {
+    background-color: red;
+}
+
+.normButton:hover {
+    background-color: #653a96;
+}
+
+
+/*-----------------
+
+    Text Forms
+    
+----------------*/
+form {
+    font-size: 14pt;
+    font-family: 'Open Sans', sans-serif;
+    margin: 15px;
+}
+
+input[type=text].successForm {
+    border-color: #6fce72;
+    box-shadow: 0 0 6px rgba(111, 206, 114, 0.2);
+  }
+  input[type=text].alertForm {
+    border-color: #e4655f;
+    box-shadow: 0 0 6px rgba(228, 101, 95, 0.2);
+  }
+
+  select {
+    position: relative;
+    margin-left: 15px;
+    padding: 5px;
+    cursor: pointer;
+  }

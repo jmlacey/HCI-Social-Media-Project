@@ -1,29 +1,26 @@
-import React from "react"
+import React from "react";
+import "../../App.css";
+import friend from "./friend.png";
 
-export default class Buddy extends React.Component {
+export default class MyFriendList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userid: props.userid,
       connections: []
-    }
+    };
   }
-
-  state = {}
 
   componentDidMount() {
-    this.loadBuddies();
+    this.loadFriends();
   }
 
-  loadBuddies() {
-    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/connectioncontroller.php", {
+  loadFriends() {
+    fetch("http://stark.cse.buffalo.edu/hci/connectioncontroller.php", {
       method: "post",
       body: JSON.stringify({
-        action: "getConnections"
-        // action: "getUserArtifacts",    Will implement once profile is working
-        // artifacttype: "sleepTime",
-        // artifacttype: "wakeTime",
-        // artifacttype: "timeZone",
+        action: "getConnections",
+        user_id: this.state.userid
       })
     })
       .then(res => res.json())
@@ -46,6 +43,7 @@ export default class Buddy extends React.Component {
   }
 
   render() {
+    //this.loadPosts();
     const { error, isLoaded, connections } = this.state;
     if (error) {
       return <div> Error: {error.message} </div>;
@@ -53,13 +51,16 @@ export default class Buddy extends React.Component {
       return <div> Loading... </div>;
     } else {
       return (
-        <ul className="buddyList">
+        <div className="post">
+          <ul>
             {connections.map(connection => (
-              <button key={connection.connection_id} className="buddyButtons">
+              <div key={connection.connection_id} className="userlist">
+                <img className="friendImg" alt="friendIcon" src={friend} />
                 {connection.name} - {connection.connection_status}
-              </button>
+              </div>
             ))}
-        </ul>
+          </ul>
+        </div>
       );
     }
   }

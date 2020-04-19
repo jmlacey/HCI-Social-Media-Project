@@ -6,12 +6,11 @@ import LoginForm from "./Component/LoginForm.js";
 import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
-<<<<<<< Updated upstream
-=======
 import logo from "./Component/logo.png";
 import View from "./Component/Anthony_Components/viewprofile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
-import Feed from "./Component/Discussion.jsx";
+import Discussion from "./Component/Discussion.jsx";
+import Edit from "./Component/Anthony_Components/editprofile.jsx";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
@@ -19,24 +18,48 @@ import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import MySign_Up from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
->>>>>>> Stashed changes
+import OTP from "./Component/Ousman_Components/OTP.jsx";
+
 
 class MainContent extends React.Component {
   constructor(props) {
     super(props);
+
+    //necessary binding for state change
+    this.startEdit = this.startEdit.bind(this);
+    this.doneEdit = this.doneEdit.bind(this);
+
+    this.otpChange = this.otpChange.bind(this);
+
     this.state = {
-      section: "main",
-      openModal: false
+      section: "signup",
+      openModal: false,
+      allowEdit: false,
+      profile: false,
+      email: "",
+      sessiontoken: "",
+      alanmessage: "",
     };
   }
 
+  //following 2 functions allow for state change between viewing and editing profile
+  startEdit() {
+    this.setState({ allowEdit: true, section: "allowEdit" });
+  }
+
+  doneEdit() {
+    this.setState({ profile: true, section: "profile" });
+  }
+
   render() {
-<<<<<<< Updated upstream
-=======
     if (this.state.section === "signup") {
       return (
         <div className="App">
           <MySign_Up signup = {this.changeToLogin}/>
+    if (this.state.section === "signup") {
+      return (
+        <div className="App">
+          <MySign_Up signup={this.otpChange} />
         </div>
       );
     }
@@ -48,6 +71,7 @@ class MainContent extends React.Component {
         </div>
       );
     }
+
 
     if (this.state.section === "friends") {
       return (
@@ -69,17 +93,26 @@ class MainContent extends React.Component {
     if (this.state.section === "profile") {
       return (
         <div>
-          {" "}
-          <Picture /> <View userid={sessionStorage.getItem("user")} />
+          <Picture /> <View action={this.startEdit} />
         </div>
       );
     }
 
-    //made for feed
-    if (this.state.section === "Feed") {
+    if (this.state.section === "allowEdit") {
       return (
         <div>
-          <Feed />
+          {" "}
+          <Picture /> <Edit action={this.doneEdit} />
+        </div>
+      );
+    }
+    //end of anthony's profile page
+
+    //made for Discussion
+    if (this.state.section === "Discussion") {
+      return (
+        <div className="discussionPage">
+          <Discussion />
         </div>
       );
     }
@@ -87,8 +120,6 @@ class MainContent extends React.Component {
     if (this.state.section === "test") {
       return <MyFriendList userid={sessionStorage.getItem("user")} />;
     }
-
->>>>>>> Stashed changes
     if (this.state.section === "main") {
       return (
         <div>
@@ -97,7 +128,7 @@ class MainContent extends React.Component {
           <PostForm />
         </div>
       );
-    } else if (this.state.section === "friends") {
+    } else if (this.state.section === "friend") {
       return (
         <div>
           <p>Friends</p>
@@ -116,17 +147,23 @@ class MainContent extends React.Component {
       return <p>Unidentified Section!</p>;
     }
   }
+
+  otpChange() {
+    this.setState({
+      section: "login",
+    });
+  }
 }
 
 function setMenuOption(mode, maincontent, e) {
   maincontent.current.setState({
-    section: mode
+    section: mode,
   });
 }
 
 function toggleModal(app) {
   app.setState({
-    openModal: !app.state.openModal
+    openModal: !app.state.openModal,
   });
 }
 
@@ -134,86 +171,121 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      openModal: false
+      openModal: false,
     };
   }
 
   render() {
-    let post = require("./post.svg");
-    let friend = require("./friends.svg");
-    let setting = require("./settings.svg");
-    let help = require("./help.svg");
     let mainContent = React.createRef();
-
     return (
       <div className="App">
-        <header className="App-header">
-          <div id="sidenav" className="sidenav">
-            <ul id="side-menu-items">
-              <li className="pm admin student">
-                <button
-                  className="link-button"
-                  onClick={e => setMenuOption("main", mainContent, e)}
-                >
-                  <img
-                    src={post}
-                    className="sidenav-icon"
-                    alt="Posts"
-                    title="Posts"
-                  />
-                </button>
-              </li>
-              <li className="pm admin">
-                <button
-                  className="link-button"
-                  onClick={e => setMenuOption("friends", mainContent, e)}
-                >
-                  <img
-                    src={friend}
-                    className="sidenav-icon"
-                    alt="Friends"
-                    title="Friends"
-                  />
-                </button>
-              </li>
-              <li className="pm admin">
-                <button
-                  className="link-button"
-                  onClick={e => setMenuOption("settings", mainContent, e)}
-                >
-                  <img
-                    src={setting}
-                    className="sidenav-icon"
-                    alt="Settings"
-                    title="Settings"
-                  />
-                </button>
-              </li>
-              <li className="pm admin">
-                <button
-                  className="link-button"
-                  onClick={e => toggleModal(this, e)}
-                >
-                  <img
-                    src={help}
-                    className="sidenav-icon"
-                    alt="Settings"
-                    title="Settings"
-                  />
-                </button>
-              </li>
-            </ul>
+        <header className="header">
+          <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
+            SLEEP.IO
+          </h1>
+          <img src={logo} alt="" className="headerImg" />
+          <div className="container">
+            <nav className="navBar">
+              <div className="Nav_Div">
+                <ul className="sideBar">
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={(e) => setMenuOption("login", mainContent, e)}
+                    >
+                      Login
+                    </button>
+                  </li>
+
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={(e) =>
+                        setMenuOption("Discussion", mainContent, e)
+                      }
+                    >
+                      Discussion
+                    </button>
+                  </li>
+
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={(e) => setMenuOption("friends", mainContent, e)}
+                    >
+                      Friends
+                    </button>
+                  </li>
+
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={(e) => setMenuOption("profile", mainContent, e)}
+                    >
+                      Profile
+                    </button>
+                  </li>
+
+                  <li className="Nav_Element">
+                    <button
+                      className="element_link"
+                      onClick={(e) => setMenuOption("buddy", mainContent, e)}
+                    >
+                      Buddy
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </nav>
           </div>
-          <div className="maincontent" id="mainContent">
-            <MainContent ref={mainContent} />
-          </div>
+
+          <nav className="r">
+            <div className="login" style={{ paddingRight: 5 }}>
+              <label style={{ color: "white" }} for="username">
+                Username
+              </label>
+              <input
+                type="text"
+                id="usename"
+                placeholder="Your username"
+                className="inputBox"
+              ></input>
+            </div>
+
+            <div className="login" style={{ paddingLeft: 5 }}>
+              <label for="password" style={{ color: "white" }}>
+                Password
+              </label>
+              <input
+                type="text"
+                id="password"
+                placeholder="Your password"
+                className="inputBox"
+              ></input>
+            </div>
+
+            <div>
+              <input
+                type="button"
+                value="Login"
+                className="loginButton2"
+              ></input>
+            </div>
+          </nav>
         </header>
-        <Modal show={this.state.openModal} onClose={e => toggleModal(this, e)}>
+
+        <div className="maincontent" id="mainContent">
+          <MainContent ref={mainContent} />
+        </div>
+
+        <Modal
+          show={this.state.openModal}
+          onClose={(e) => toggleModal(this, e)}
+        >
           This is a modal dialog!
         </Modal>
       </div>
     );
   }
 }
-
 export default App;

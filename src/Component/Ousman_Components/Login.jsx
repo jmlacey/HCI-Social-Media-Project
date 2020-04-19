@@ -1,58 +1,115 @@
-import React, { Component } from 'react';
-import logo from '../logo.png';
+import React, { Component } from "react";
+// import logo from '../logo.png';
 
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+      alanmessage: "",
+      sessiontoken: "",
+      // redirect: false
+    };
+  }
 
-class  Header extends Component {
-    state = {  }
-    render() { 
-        return ( 
-            <body>
-            <header className="header">
-                    <h1 style={{ color: 'white', padding: 5, marginTop: 20 }}>SLEEP.IO</h1>
-                    <img src={logo} alt="" className = "headerImg"/>
+  myChangeHandler = (event) => {
+    this.setState({
+      username: event.target.value,
+    });
+  };
 
+  passwordChangeHandler = (event) => {
+    this.setState({
+      password: event.target.value,
+    });
+  };
 
-                    <div className="container">
+  submitHandler = (event) => {
+    //keep the form from actually submitting
+    event.preventDefault();
 
-                        <nav className="navBar">
-                            <div className="Nav_Div">
-                                <ul className="sideBar">
-                                    <li className="Nav_Element"><a className="element_link" href="/">Home</a></li>
-                                    <li className="Nav_Element"><a className="element_link" href="/">About</a></li>
-                                    <li className="Nav_Element"><a className="element_link" href="/">Portfolio</a></li>
-                                    <li className="Nav_Element"><a className="element_link" href="/">Contact</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                </header>
+    //make the api call to the authentication page
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "login",
+          username: this.state.username,
+          password: this.state.password,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(this.state);
+          if (result.user) {
+            sessionStorage.setItem("token", result.user.session_token);
+            sessionStorage.setItem("user", result.user.user_id);
 
+            this.setState({
+              sessiontoken: result.user.session_token,
+              alanmessage: result.user.session_token,
+            });
+          } else {
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("user");
+            this.setState({
+              sessiontoken: "",
+              alanmessage: result.message,
+              redirect: true,
+            });
+          }
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+  };
 
-                <div className= "formDiv">
-                <form action="/action_page.php">
-                    <label for="fname">Username</label>
-                    <input type="text" id="fname" name="firstname" placeholder="Your username"></input>
-                        <label for="lname">Password</label>
-                        <input type="text" id="lname" name="lastname" placeholder="Your password"></input>
+  render() {
+    // if(this.state.redirect){
+    //   return (<Router><Redirect to={'signup'}/></Router>);
+    // }
 
-                            <input type="submit" value="Login"></input>
-                            <ul className="sideBar2">
-                            <li><a className= "loginButton" href="/">Forgot Password</a></li>
-                           <li><a className= "loginButton" href="/">Sign Up</a></li>
-                           </ul>
+    if (!sessionStorage.getItem("token")) {
+      return (
+        <div className="formDiv">
+          <div class="centered">
+            <form action="/action_page.php" onSubmit={this.submitHandler}>
+              <label for="fname">Username</label>
+              <input
+                type="text"
+                id="fname"
+                name="firstname"
+                placeholder="Your username"
+                onChange={this.myChangeHandler}
+              ></input>
+              <label for="lname">Password</label>
+              <input
+                type="text"
+                id="lname"
+                name="lastname"
+                placeholder="Your password"
+                onChange={this.passwordChangeHandler}
+              ></input>
 
-                </form>
-            </div>
-                </body>
-
-                
-
-
-
-
-
-         );
+              <input type="submit" value="Login"></input>
+            </form>
+          </div>
+        </div>
+      );
+    } else {
+      console.log("Returning welcome message");
+      if (this.state.username) {
+        return <p>Welcome, {this.state.username}</p>;
+      } else {
+        return <p>{this.state.alanmessage}</p>;
+      }
     }
+  }
 }
- 
+
 export default Header;

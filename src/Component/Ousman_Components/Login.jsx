@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import logo from '../logo.png';
 
 class Header extends Component {
   constructor(props) {
@@ -7,9 +6,7 @@ class Header extends Component {
     this.state = {
       username: "",
       password: "",
-      alanmessage: "",
       sessiontoken: "",
-      // redirect: false
     };
   }
 
@@ -70,21 +67,17 @@ class Header extends Component {
   };
 
   render() {
-    // if(this.state.redirect){
-    //   return (<Router><Redirect to={'signup'}/></Router>);
-    // }
-
     if (!sessionStorage.getItem("token")) {
       return (
         <div className="formDiv">
           <div class="centered">
             <form action="/action_page.php" onSubmit={this.submitHandler}>
-              <label for="fname">Username</label>
+              <label for="fname">Email</label>
               <input
                 type="text"
                 id="fname"
                 name="firstname"
-                placeholder="Your username"
+                placeholder="Your email"
                 onChange={this.myChangeHandler}
               ></input>
               <label for="lname">Password</label>
@@ -98,6 +91,9 @@ class Header extends Component {
 
               <input type="submit" value="Login"></input>
             </form>
+
+            <p>Username is : {this.state.username}</p>
+            <p>Password is : {this.state.password}</p>
           </div>
         </div>
       );

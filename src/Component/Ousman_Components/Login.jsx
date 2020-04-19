@@ -8,6 +8,8 @@ class Header extends Component {
       password: "",
       alanmessage: "",
       sessiontoken: "",
+      user_id: "",
+      userid: ""
     };
   }
 
@@ -46,7 +48,7 @@ class Header extends Component {
           if (result.user) {
             sessionStorage.setItem("token", result.user.session_token);
             sessionStorage.setItem("user", result.user.user_id);
-            sessionStorage.setItem("email", this.state.username);
+            sessionStorage.setItem("email", result.user.username);
 
             this.setState({
               sessiontoken: result.user.session_token,
@@ -97,6 +99,50 @@ class Header extends Component {
       );
   }
 
+
+
+  deleteAccount() {
+    // alert("Deleting Account : " + sessionStorage.getItem("userid"));
+
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          //API FIELDS
+          action: "deleteUsers",
+          username: sessionStorage.getItem("email"),
+          session_token: sessionStorage.getItem("token"),
+          user_id: sessionStorage.getItem("user"),
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+
+          if(result.user){
+          
+          //DO WHATEVER YOU WANT WITH THE JSON HERE
+          sessionStorage.removeItem("token");
+          sessionStorage.removeItem("user");
+          sessionStorage.removeItem("user_id");
+          this.setState({
+
+            session_token: "",
+            user_id: "",
+            user: ""
+
+          })
+        }
+
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+  }
+
   render() {
     if (!sessionStorage.getItem("token")) {
       return (
@@ -123,6 +169,9 @@ class Header extends Component {
               <input type="submit" value="Login"></input>
             </form>
 
+          
+           
+
             <p>Username is : {this.state.username}</p>
             <p>Password is : {this.state.password}</p>
           </div>
@@ -135,6 +184,12 @@ class Header extends Component {
             <form onSubmit={this.logout}>
               <input type="submit" value="Logout"></input>
             </form>
+
+            <form onSubmit ={this.deleteAccount}>
+                <input type="submit" value="Delete Account"></input>
+              </form>
+
+            
           </div>
         </div>
       );

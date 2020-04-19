@@ -6,7 +6,8 @@ class Header extends Component {
     this.state = {
       username: "",
       password: "",
-      sessiontoken: "",
+      alanmessage: "",
+      sessiontoken: ""
     };
   }
 
@@ -98,6 +99,7 @@ class Header extends Component {
         </div>
       );
     } else {
+      alert("Passed the token thing!");
       console.log("Returning welcome message");
       if (this.state.username) {
         return <p>Welcome, {this.state.username}</p>;

@@ -7,7 +7,7 @@ class Header extends Component {
       username: "",
       password: "",
       alanmessage: "",
-      sessiontoken: ""
+      sessiontoken: "",
     };
   }
 
@@ -46,6 +46,7 @@ class Header extends Component {
           if (result.user) {
             sessionStorage.setItem("token", result.user.session_token);
             sessionStorage.setItem("user", result.user.user_id);
+            sessionStorage.setItem("email", this.state.username);
 
             this.setState({
               sessiontoken: result.user.session_token,
@@ -54,6 +55,7 @@ class Header extends Component {
           } else {
             sessionStorage.removeItem("token");
             sessionStorage.removeItem("user");
+            sessionStorage.removeItem("email");
             this.setState({
               sessiontoken: "",
               alanmessage: result.message,
@@ -66,6 +68,34 @@ class Header extends Component {
         }
       );
   };
+
+  logout() {
+    alert("Logging out : " + sessionStorage.getItem("email"));
+
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          //API FIELDS
+          action: "logout",
+          username: sessionStorage.getItem("email"),
+          session_token: sessionStorage.getItem("token"),
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          //DO WHATEVER YOU WANT WITH THE JSON HERE
+          alert("Hooray! Logged out!");
+          sessionStorage.removeItem("token");
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+  }
 
   render() {
     if (!sessionStorage.getItem("token")) {
@@ -99,13 +129,26 @@ class Header extends Component {
         </div>
       );
     } else {
-      alert("Passed the token thing!");
+      return (
+        <div className="formDiv">
+          <div class="centered">
+            <form onSubmit={this.logout}>
+              <input type="submit" value="Logout"></input>
+            </form>
+          </div>
+        </div>
+      );
+
+      /*
+      alert("Hooray! You are logged in!");
       console.log("Returning welcome message");
       if (this.state.username) {
         return <p>Welcome, {this.state.username}</p>;
       } else {
         return <p>{this.state.alanmessage}</p>;
+        
       }
+      */
     }
   }
 }

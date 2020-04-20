@@ -36,16 +36,18 @@ export default class Edit extends React.Component {
     alert("Your profile has been saved");
   }
 
-
   componentDidMount() {
     //make the api call to the user API to get the user with all of their attached preferences
-    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php", {
-      method: "post",
-      body: JSON.stringify({
-        action: "getCompleteUsers",
-        user_id: this.props.userid,
-      }),
-    })
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "getCompleteUsers",
+          user_id: this.props.userid,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then(
         (result) => {
@@ -84,18 +86,21 @@ export default class Edit extends React.Component {
     event.preventDefault();
 
     //make the api call to the user controller
-    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php", {
-      method: "post",
-      body: JSON.stringify({
-        action: "addOrEditUsers",
-        username: this.state.username,
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        user_id: sessionStorage.getItem("user"),
-        session_token: sessionStorage.getItem("token"),
-        mode: "ignorenull",
-      }),
-    })
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUsers",
+          username: this.state.username,
+          firstname: this.state.firstname,
+          lastname: this.state.lastname,
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          mode: "ignorenull",
+        }),
+      }
+    )
       .then((res) => res.json())
       .then(
         (result) => {
@@ -860,9 +865,12 @@ export default class Edit extends React.Component {
         </form>
 
         <div>
-          <button className="profileButton rightCol1" onClick={this.props.action}>
+          <button
+            className="profileButton rightCol1"
+            onClick={this.props.action}
+          >
             {" "}
-          Save{" "}
+            Save{" "}
           </button>
         </div>
       </div>

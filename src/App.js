@@ -7,7 +7,7 @@ import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
-import View from "./Component/Anthony_Components/viewProfile.jsx";
+import View from "./Component/Anthony_Components/viewprofile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
 import Discussion from "./Component/Discussion.jsx";
 import Edit from "./Component/Anthony_Components/editProfile.jsx";
@@ -18,7 +18,7 @@ import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import SignUp from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
-
+import ProfilePage from "./Component/Josh_Components/UserProfile.js";
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -30,6 +30,7 @@ class MainContent extends React.Component {
 
     this.state = {
       section: "signup",
+      //section: "test",
       openModal: false,
       allowEdit: false,
       profile: false,
@@ -49,6 +50,14 @@ class MainContent extends React.Component {
   }
 
   render() {
+    if (this.state.section === "test") {
+      return (
+        <div className="App">
+          <ProfilePage />
+        </div>
+      );
+    }
+
     if (this.state.section === "signup") {
       return (
         <div className="App">
@@ -84,10 +93,14 @@ class MainContent extends React.Component {
     //anthony's profile page...
     if (this.state.section === "profile") {
       return (
+        /*
         <div className="profilePage">
-          <Picture /> 
+          <Picture />
           <View action={this.startEdit} />
         </div>
+        */
+
+        <ProfilePage />
       );
     }
 

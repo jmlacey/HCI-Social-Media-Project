@@ -7,10 +7,10 @@ import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
-import View from "./Component/Anthony_Components/viewprofile.jsx";
+import View from "./Component/Anthony_Components/viewProfile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
 import Discussion from "./Component/Discussion.jsx";
-import Edit from "./Component/Anthony_Components/editprofile.jsx";
+import Edit from "./Component/Anthony_Components/editProfile.jsx";
 
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
@@ -84,8 +84,9 @@ class MainContent extends React.Component {
     //anthony's profile page...
     if (this.state.section === "profile") {
       return (
-        <div>
-          <Picture /> <View action={this.startEdit} />
+        <div className="profilePage">
+          <Picture /> 
+          <View action={this.startEdit} />
         </div>
       );
     }
@@ -93,8 +94,8 @@ class MainContent extends React.Component {
     if (this.state.section === "allowEdit") {
       return (
         <div>
-          {" "}
-          <Picture /> <Edit action={this.doneEdit} />
+          <Picture />
+          <Edit action={this.doneEdit} />
         </div>
       );
     }

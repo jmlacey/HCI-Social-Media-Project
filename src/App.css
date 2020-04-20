@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700");
 
 /*-----------------
@@ -31,7 +32,6 @@ Header
   height: 100px;
   padding: 12px;
 }
-
 /*-----------------
 
 Navigation bar
@@ -341,6 +341,7 @@ IDK about any of the shit beneath this :(
 .friendImg {
   height: 80px;
 }
+
 
 .App {
   text-align: center;

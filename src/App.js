@@ -19,6 +19,7 @@ import SignUp from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
 
+
 class MainContent extends React.Component {
   constructor(props) {
     super(props);
@@ -111,7 +112,6 @@ class MainContent extends React.Component {
     if (this.state.section === "test") {
       return <MyFriendList userid={sessionStorage.getItem("user")} />;
     }
-
     if (this.state.section === "main") {
       return (
         <div>

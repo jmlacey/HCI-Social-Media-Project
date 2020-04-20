@@ -1,4 +1,5 @@
 import React from "react";
+import friend from "./friend.png";
 
 export default class Buddy extends React.Component {
   constructor(props) {
@@ -49,6 +50,17 @@ export default class Buddy extends React.Component {
   }
 
   render() {
+    
+    
+    
+    return (
+      <div><img className="friendImg" alt="friendIcon" src={friend} />
+      <p>Current Sleep Buddy: </p> 
+      <p>NOPE</p>
+      </div>
+    )
+    
+    /*
     const { error, isLoaded, connections } = this.state;
     if (error) {
       return <div> Error: {error.message} </div>;
@@ -56,14 +68,29 @@ export default class Buddy extends React.Component {
       return <div> Loading... </div>;
     } else {
       return (
+
+
+
+
         <ul className="buddyList">
+
+<div><img className="friendImg" alt="friendIcon" src={friend} /></div>
+
+
           {connections.map((connection) => (
             <button key={connection.connection_id} className="buddyButtons">
               {connection.name} - {connection.connection_status}
             </button>
+
+
+
+
+
+
           ))}
         </ul>
       );
     }
+    */
   }
 }

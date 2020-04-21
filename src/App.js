@@ -7,7 +7,7 @@ import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
-import View from "./Component/Anthony_Components/viewprofile.jsx";
+import View from "./Component/Anthony_Components/viewProfile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
 import Discussion from "./Component/Discussion.jsx";
 import Edit from "./Component/Anthony_Components/editProfile.jsx";

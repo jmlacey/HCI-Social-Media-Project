@@ -47,7 +47,7 @@ class UserProfile extends Component {
     alert("session_token is: " + sessionStorage.getItem("token"));
 
     fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php",
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
       {
         method: "post",
         body: JSON.stringify({

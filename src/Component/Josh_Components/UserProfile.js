@@ -54,8 +54,8 @@ class UserProfile extends Component {
           action: "addOrEditUsers",
           user_id: sessionStorage.getItem("user"),
           session_token: sessionStorage.getItem("token"),
-          username: this.state.userName,
           userid: sessionStorage.getItem("user"),
+          username: this.state.userName,
           firstname: this.state.firstName,
           lastname: this.state.lastName,
 

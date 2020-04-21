@@ -70,7 +70,7 @@ class UserProfile extends Component {
           console.log(result.message);
         },
         (error) => {
-          alert("FUCK!");
+          alert("CURSES! FOILED AGAIN!");
         }
       );
     //Make a giant fetch call to update userName, firstName, lastName.

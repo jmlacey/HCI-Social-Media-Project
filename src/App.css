@@ -193,6 +193,28 @@ Discussison
 Profile Page
     
 ----------------*/
+.profilePage {
+width: 100%;
+}
+
+.profileFormDiv {
+  padding: 5%;
+  width: 70%;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+}
+
+.profileButton {
+  background-color: blueviolet;
+  padding: 15px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+
 .leftCol {
   width: 49%;
   float: left;
@@ -294,15 +316,7 @@ IDK about any of the shit beneath this :(
   padding: 10 20 0 0;
 }
 
-.profileButton {
-  background-color: blueviolet;
-  padding: 15px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  color: white;
-}
+
 
 .avatar {
   vertical-align: middle;
@@ -324,13 +338,7 @@ IDK about any of the shit beneath this :(
   color: white;
 }
 
-.profileFormDiv {
-  padding: 5%;
-  width: 70%;
-  position: absolute;
-  top: 20%;
-  left: 20%;
-}
+
 
 .timeInput {
   background-color: #7155d3;

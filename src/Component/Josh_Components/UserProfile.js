@@ -7,12 +7,13 @@ class UserProfile extends Component {
       userName: "",
       firstName: "",
       lastName: "",
+      testArtifact: "",
     };
   }
 
   componentDidMount() {
     //Make a fetch call that grabs the three states and fills in the text boxes.
-    alert("WELCOME TO THE PROFILE PAGE");
+
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
       {
@@ -41,14 +42,8 @@ class UserProfile extends Component {
   }
 
   submitHandler = (event) => {
-    alert("OH BOI YOU HIT THE SUBMIT BUTTON");
-
     //prevents from from actually submitting
     event.preventDefault();
-
-    alert("user_id is: " + sessionStorage.getItem("user"));
-    alert("session_token is: " + sessionStorage.getItem("token"));
-
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
       {
@@ -68,15 +63,36 @@ class UserProfile extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          alert("check postman");
           console.log(result.message);
         },
         (error) => {
           alert("CURSES! FOILED AGAIN!");
         }
       );
-    //Make a giant fetch call to update userName, firstName, lastName.
-  };
+
+      fetch(
+        "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+        {
+          method: "post",
+          body: JSON.stringify({
+  
+            //API FIELDS
+            action: "addOrEditUserPrefs",
+            user_id: sessionStorage.getItem("user"),
+            userid: sessionStorage.getItem("user"),
+            session_token: sessionStorage.getItem("token"),
+            prefname: "testPref",
+            prefvalue: this.state.testArtifact, 
+            
+  
+          }),}).then((res) => res.json()).then((result) => {
+  
+  
+          //DO WHATEVER YOU WANT WITH THE JSON HERE
+  
+  
+        },(error) => {alert("error!");});
+      }
 
   userNameChangeHandler = (event) => {
     this.setState({
@@ -93,6 +109,12 @@ class UserProfile extends Component {
   lastNameChangeHandler = (event) => {
     this.setState({
       lastName: event.target.value,
+    });
+  };
+
+  artifactsChangeHandler = (event) => {
+    this.setState({
+      testArtifact: event.target.value,
     });
   };
 
@@ -122,6 +144,13 @@ class UserProfile extends Component {
             placeholder="Last Name"
             onChange={this.lastNameChangeHandler}
             value={this.state.lastName}
+          ></input>
+
+          <input
+            type="text"
+            placeholder="Enter anything. ANYTHING YOU WANT:"
+            onChange={this.artifactsChangeHandler}
+            value={this.state.testArtifact}
           ></input>
 
           <input type="submit" value="Save"></input>

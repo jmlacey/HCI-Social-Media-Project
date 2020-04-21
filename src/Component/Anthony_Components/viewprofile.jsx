@@ -35,7 +35,7 @@ export default class View extends React.Component {
   componentDidMount() {
     //make the api call to the user API to get the user with all of their attached preferences
     fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php",
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
       {
         method: "post",
         body: JSON.stringify({
@@ -83,7 +83,7 @@ export default class View extends React.Component {
 
     //make the api call to the user controller
     fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php",
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
       {
         method: "post",
         body: JSON.stringify({
@@ -110,7 +110,7 @@ export default class View extends React.Component {
       );
 
     //make the api call to the user prefs controller
-    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/uacontroller.php", {
+    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/api/uacontroller.php", {
       method: "post",
       body: JSON.stringify({
         action: "addOrEditUserArtifacts",

@@ -34,13 +34,16 @@ export default class View extends React.Component {
 
   componentDidMount() {
     //make the api call to the user API to get the user with all of their attached preferences
-    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php", {
-      method: "post",
-      body: JSON.stringify({
-        action: "getCompleteUsers",
-        user_id: this.props.userid,
-      }),
-    })
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "getCompleteUsers",
+          user_id: this.props.userid,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then(
         (result) => {
@@ -79,18 +82,21 @@ export default class View extends React.Component {
     event.preventDefault();
 
     //make the api call to the user controller
-    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php", {
-      method: "post",
-      body: JSON.stringify({
-        action: "addOrEditUsers",
-        username: this.state.username,
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        user_id: sessionStorage.getItem("user"),
-        session_token: sessionStorage.getItem("token"),
-        mode: "ignorenull",
-      }),
-    })
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUsers",
+          username: this.state.username,
+          firstname: this.state.firstname,
+          lastname: this.state.lastname,
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          mode: "ignorenull",
+        }),
+      }
+    )
       .then((res) => res.json())
       .then(
         (result) => {
@@ -137,19 +143,19 @@ export default class View extends React.Component {
 
   render() {
     return (
-        <div className="profileFormDiv">
-          <p>Username : {this.state.username}</p>
-          <p>Firstname : {this.state.firstname}</p>
-          <p>Lastname : {this.state.lastname}</p>
-          <p>Sleep Time: {this.state.sleepTime} </p>
-          <p>Wake Time: {this.state.wakeTime} </p>
-          <p>Time Zone: </p>
+      <div className="profileFormDiv">
+        <p>Username : {this.state.username}</p>
+        <p>Firstname : {this.state.firstname}</p>
+        <p>Lastname : {this.state.lastname}</p>
+        <p>Sleep Time: {this.state.sleepTime} </p>
+        <p>Wake Time: {this.state.wakeTime} </p>
+        <p>Time Zone: </p>
 
-          <button className="profileButton rightCol1" onClick={this.props.action}>
-            {" "}
+        <button className="profileButton rightCol1" onClick={this.props.action}>
+          {" "}
           Edit{" "}
-          </button>
-        </div>
+        </button>
+      </div>
     );
   }
 }

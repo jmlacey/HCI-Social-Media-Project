@@ -13,7 +13,6 @@ class UserProfile extends Component {
   componentDidMount() {
     //Make a fetch call that grabs the three states and fills in the text boxes.
     // alert("WELCOME TO THE PROFILE PAGE");
-
     // fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php", {
     //   method: "post",
     //   body: JSON.stringify({
@@ -24,7 +23,6 @@ class UserProfile extends Component {
     //   .then(res => res.json())
     //   .then(
     //     result => {
-
     //       this.setState({
     //         // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
     //         // try and make the form component uncontrolled, which plays havoc with react
@@ -41,29 +39,37 @@ class UserProfile extends Component {
 
   submitHandler = (event) => {
     alert("OH BOI YOU HIT THE SUBMIT BUTTON");
-    
+
     //prevents from from actually submitting
     event.preventDefault();
 
-    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php", {
-      method: "post",
-      body: JSON.stringify({
-        action: "addOrEditUsers",
-        username: this.state.userName,
-        firstname: this.state.firstName,
-        lastname: this.state.lastName,
-        user_id: sessionStorage.getItem("user"),
-        session_token: sessionStorage.getItem("token"),
-        mode: "ignorenull"
-      })
-    })
-      .then(res => res.json())
+    alert("user_id is: " + sessionStorage.getItem("user"));
+    alert("session_token is: " + sessionStorage.getItem("token"));
+
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUsers",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          username: this.state.userName,
+          userid: sessionStorage.getItem("user"),
+          firstname: this.state.firstName,
+          lastname: this.state.lastName,
+
+          mode: "ignorenull",
+        }),
+      }
+    )
+      .then((res) => res.json())
       .then(
         (result) => {
           alert("check postman");
           console.log(result.message);
         },
-        error => {
+        (error) => {
           alert("FUCK!");
         }
       );

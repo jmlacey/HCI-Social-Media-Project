@@ -12,29 +12,32 @@ class UserProfile extends Component {
 
   componentDidMount() {
     //Make a fetch call that grabs the three states and fills in the text boxes.
-    // alert("WELCOME TO THE PROFILE PAGE");
-    // fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/usercontroller.php", {
-    //   method: "post",
-    //   body: JSON.stringify({
-    //     action: "getCompleteUsers",
-    //     user_id: this.props.userid
-    //   })
-    // })
-    //   .then(res => res.json())
-    //   .then(
-    //     result => {
-    //       this.setState({
-    //         // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
-    //         // try and make the form component uncontrolled, which plays havoc with react
-    //         userName: result.users[0].username || "",
-    //         firstName: result.users[0].first_name || "",
-    //         lastName: result.users[0].last_name || "",
-    //       });
-    //     },
-    //     error => {
-    //       alert("error!");
-    //     }
-    //   );
+    alert("WELCOME TO THE PROFILE PAGE");
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "getCompleteUsers",
+          userid: sessionStorage.getItem("user"),
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
+            // try and make the form component uncontrolled, which plays havoc with react
+            userName: result.users[0].username || "",
+            firstName: result.users[0].first_name || "",
+            lastName: result.users[0].last_name || "",
+          });
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
   }
 
   submitHandler = (event) => {

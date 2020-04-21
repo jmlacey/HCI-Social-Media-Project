@@ -69,7 +69,7 @@ class UserProfile extends Component {
           alert("CURSES! FOILED AGAIN!");
         }
       );
-
+    /*
       fetch(
         "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
         {
@@ -92,7 +92,8 @@ class UserProfile extends Component {
   
   
         },(error) => {alert("error!");});
-      }
+        */
+  };
 
   userNameChangeHandler = (event) => {
     this.setState({

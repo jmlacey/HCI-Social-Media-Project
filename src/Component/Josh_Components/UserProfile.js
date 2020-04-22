@@ -155,14 +155,18 @@ class UserProfile extends Component {
   };
 
   wakeTimeChangeHandler = (event) => {
+    const prefs1 = JSON.parse(JSON.stringify(this.state.wakeTime));
+    prefs1.pref_value = event.target.value;
     this.setState({
-      wakeTime: event.target.value,
+      wakeTime: prefs1,
     });
   };
 
   timeZoneChangeHandler = (event) => {
+    const prefs1 = JSON.parse(JSON.stringify(this.state.timeZone));
+    prefs1.pref_value = event.target.value;
     this.setState({
-      timeZone: event.target.value,
+      timeZone: prefs1,
     });
   };
 
@@ -199,7 +203,9 @@ class UserProfile extends Component {
             type="text"
             placeholder="Wake Time"
             onChange={this.wakeTimeChangeHandler}
-            value={this.state.wakeTime}
+            value={this.state.wakeTime
+              ? this.state.wakeTime.pref_value
+              : ""}
           ></input>
 
           <label for="fname">Time Zone</label>
@@ -207,7 +213,10 @@ class UserProfile extends Component {
             type="text"
             placeholder="Time Zone"
             onChange={this.timeZoneChangeHandler}
-            value={this.state.timeZone}
+            value={this.state.timeZone
+              ? this.state.timeZone.pref_value
+              : ""
+            }
           ></input>
 
 

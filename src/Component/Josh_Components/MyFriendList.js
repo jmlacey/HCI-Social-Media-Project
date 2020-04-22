@@ -7,7 +7,7 @@ export default class MyFriendList extends React.Component {
     super(props);
     this.state = {
       userid: props.userid,
-      connections: []
+      connections: [],
     };
   }
 
@@ -16,27 +16,30 @@ export default class MyFriendList extends React.Component {
   }
 
   loadFriends() {
-    fetch("http://stark.cse.buffalo.edu/hci/connectioncontroller.php", {
-      method: "post",
-      body: JSON.stringify({
-        action: "getConnections",
-        user_id: this.state.userid
-      })
-    })
-      .then(res => res.json())
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "getConnections",
+          user_id: this.state.userid,
+        }),
+      }
+    )
+      .then((res) => res.json())
       .then(
-        result => {
+        (result) => {
           if (result.connections) {
             this.setState({
               isLoaded: true,
-              connections: result.connections
+              connections: result.connections,
             });
           }
         },
-        error => {
+        (error) => {
           this.setState({
             isLoaded: true,
-            error
+            error,
           });
         }
       );
@@ -53,7 +56,7 @@ export default class MyFriendList extends React.Component {
       return (
         <div className="post">
           <ul>
-            {connections.map(connection => (
+            {connections.map((connection) => (
               <div key={connection.connection_id} className="userlist">
                 <img className="friendImg" alt="friendIcon" src={friend} />
                 {connection.name} - {connection.connection_status}

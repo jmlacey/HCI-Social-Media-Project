@@ -44,7 +44,7 @@ export default class Edit extends React.Component {
         method: "post",
         body: JSON.stringify({
           action: "getCompleteUsers",
-          user_id: sessionStorage.getItem("user")
+          user_id: sessionStorage.getItem("user"),
         }),
       }
     )

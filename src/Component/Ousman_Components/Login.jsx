@@ -9,9 +9,40 @@ class Header extends Component {
       alanmessage: "",
       sessiontoken: "",
       user_id: "",
-      userid: ""
+      userid: "",
+
+      //For resetting password
+      email: "",
+      forgotPassword: false,
+      newPassword: "",
+      confirmPassword: "",
+      otp: "",
     };
   }
+
+  otpChangeHandler = (event) => {
+    this.setState({
+      otp: event.target.value,
+    });
+  };
+
+  newPassChangeHandler = (event) => {
+    this.setState({
+      newPassword: event.target.value,
+    });
+  };
+
+  confirmChangeHandler = (event) => {
+    this.setState({
+      confirmPassword: event.target.value,
+    });
+  };
+
+  emailChangeHandler = (event) => {
+    this.setState({
+      email: event.target.value,
+    });
+  };
 
   myChangeHandler = (event) => {
     this.setState({
@@ -99,7 +130,15 @@ class Header extends Component {
       );
   }
 
+  forgotPasswordButton = () => {
+    this.setState({
+      forgotPassword: true,
+    });
 
+    alert(
+      "Enter your email to recieve a one time password. Then, use the one time password to change your actual password!"
+    );
+  };
 
   deleteAccount() {
     // alert("Deleting Account : " + sessionStorage.getItem("userid"));
@@ -120,22 +159,17 @@ class Header extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-
-          if(result.user){
-          
-          //DO WHATEVER YOU WANT WITH THE JSON HERE
-          sessionStorage.removeItem("token");
-          sessionStorage.removeItem("user");
-          sessionStorage.removeItem("user_id");
-          this.setState({
-
-            session_token: "",
-            user_id: "",
-            user: ""
-
-          })
-        }
-
+          if (result.user) {
+            //DO WHATEVER YOU WANT WITH THE JSON HERE
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("user");
+            sessionStorage.removeItem("user_id");
+            this.setState({
+              session_token: "",
+              user_id: "",
+              user: "",
+            });
+          }
         },
         (error) => {
           alert("error!");
@@ -143,8 +177,119 @@ class Header extends Component {
       );
   }
 
+  SendOTP = () => {
+    alert("yee");
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "forgotpassword",
+          email_addr: this.state.email,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert(
+            "Check your " +
+              this.state.email +
+              " email for your one time password"
+          );
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+  };
+
+  changeThePassword = () => {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          //API FIELDS
+          action: "setpassword",
+          email_addr: this.state.email,
+          token: this.state.otp,
+          newpassword: this.state.newPassword,
+          confirmpassword: this.state.confirmPassword,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert(
+            "Log in using your " +
+              this.state.email +
+              " adress and your new password!"
+          );
+          //DO WHATEVER YOU WANT WITH THE JSON HERE
+          this.setState({
+            forgotPassword: false,
+          });
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+  };
+
   render() {
     if (!sessionStorage.getItem("token")) {
+      if (this.state.forgotPassword) {
+        return (
+          <div>
+            <label for="fname">Email</label>
+            <input
+              type="text"
+              placeholder="Your email"
+              onChange={this.emailChangeHandler}
+              value={this.state.email}
+            ></input>
+
+            <input
+              type="submit"
+              value="SEND ONE TIME PASSWORD"
+              onClick={this.SendOTP}
+            ></input>
+
+            <label>Enter OTP</label>
+            <input
+              type="text"
+              placeholder="Your OTP"
+              onChange={this.otpChangeHandler}
+              value={this.state.otp}
+            ></input>
+
+            <label>New Password</label>
+            <input
+              type="text"
+              placeholder="Your New Password"
+              onChange={this.newPassChangeHandler}
+              value={this.state.newPassword}
+            ></input>
+
+            <label>Confirm New Password</label>
+            <input
+              type="text"
+              placeholder="Confirm New Password"
+              onChange={this.confirmChangeHandler}
+              value={this.state.confirmPassword}
+            ></input>
+
+            <input
+              type="submit"
+              value="Change Password"
+              onClick={this.changeThePassword}
+            ></input>
+          </div>
+        );
+      }
+
       return (
         <div className="formDiv">
           <div class="centered">
@@ -169,8 +314,11 @@ class Header extends Component {
               <input type="submit" value="Login"></input>
             </form>
 
-          
-           
+            <input
+              type="submit"
+              value="Forgot Password"
+              onClick={this.forgotPasswordButton}
+            ></input>
 
             <p>Username is : {this.state.username}</p>
             <p>Password is : {this.state.password}</p>
@@ -185,11 +333,9 @@ class Header extends Component {
               <input type="submit" value="Logout"></input>
             </form>
 
-            <form onSubmit ={this.deleteAccount}>
-                <input type="submit" value="Delete Account"></input>
-              </form>
-
-            
+            <form onSubmit={this.deleteAccount}>
+              <input type="submit" value="Delete Account"></input>
+            </form>
           </div>
         </div>
       );

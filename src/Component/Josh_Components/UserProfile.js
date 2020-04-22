@@ -69,30 +69,6 @@ class UserProfile extends Component {
           alert("CURSES! FOILED AGAIN!");
         }
       );
-    /*
-      fetch(
-        "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
-        {
-          method: "post",
-          body: JSON.stringify({
-  
-            //API FIELDS
-            action: "addOrEditUserPrefs",
-            user_id: sessionStorage.getItem("user"),
-            userid: sessionStorage.getItem("user"),
-            session_token: sessionStorage.getItem("token"),
-            prefname: "testPref",
-            prefvalue: this.state.testArtifact, 
-            
-  
-          }),}).then((res) => res.json()).then((result) => {
-  
-  
-          //DO WHATEVER YOU WANT WITH THE JSON HERE
-  
-  
-        },(error) => {alert("error!");});
-        */
   };
 
   userNameChangeHandler = (event) => {
@@ -147,12 +123,6 @@ class UserProfile extends Component {
             value={this.state.lastName}
           ></input>
 
-          <input
-            type="text"
-            placeholder="Enter anything. ANYTHING YOU WANT:"
-            onChange={this.artifactsChangeHandler}
-            value={this.state.testArtifact}
-          ></input>
 
           <input type="submit" value="Save"></input>
         </form>

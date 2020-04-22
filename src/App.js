@@ -100,7 +100,7 @@ class MainContent extends React.Component {
         </div>
         */
 
-        <ProfilePage />
+                <ProfilePage /> 
       );
     }
 

@@ -19,6 +19,7 @@ import SignUp from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
 import ProfilePage from "./Component/Josh_Components/UserProfile.js";
+import RealProfile from "./Component/Zach_components/Profile.js"
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class MainContent extends React.Component {
     if (this.state.section === "test") {
       return (
         <div className="App">
-          <ProfilePage />
+          <RealProfile />
         </div>
       );
     }
@@ -100,7 +101,7 @@ class MainContent extends React.Component {
         </div>
         */
 
-        <ProfilePage />
+        <RealProfile />
       );
     }
 

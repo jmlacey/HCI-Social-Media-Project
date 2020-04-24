@@ -8,11 +8,21 @@ export default class Buddy extends React.Component {
       //326 is Wagz1 user id, for testing
       buddyID: "",
       buddyName: "",
+
+      time: new Date(),
     };
   }
 
   componentDidMount() {
     this.loadBuddy();
+  }
+
+  updateTime() {
+    this.setState({ time: new Date() });
+  }
+
+  componentWillMount() {
+    setInterval(() => this.updateTime(), 1000);
   }
 
   loadBuddy() {
@@ -121,6 +131,8 @@ export default class Buddy extends React.Component {
         ></input>
 
         <p>Your sleep buddy is {this.state.buddyName}</p>
+        <p>The time is: {this.state.time.toLocaleTimeString()} </p>
+        <p>Your timezone is: {/\((.*)\)/.exec(this.state.time.toString())[1]} </p>
       </div>
     );
   }

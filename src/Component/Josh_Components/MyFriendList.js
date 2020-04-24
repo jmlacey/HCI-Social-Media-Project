@@ -46,11 +46,6 @@ export default class MyFriendList extends React.Component {
   }
 
   render() {
-
-
-
-
-    
     const { error, isLoaded, connections } = this.state;
     if (error) {
       return <div> Error: {error.message} </div>;
@@ -63,7 +58,7 @@ export default class MyFriendList extends React.Component {
             {connections.map((connection) => (
               <div key={connection.connection_id} className="userlist">
                 <img className="friendImg" alt="friendIcon" src={friend} />
-                {connection.username} - {connection.connection_status}
+                {"UserName: " + connection.user_id} - {connection.connection_status}
               </div>
             ))}
           </ul>

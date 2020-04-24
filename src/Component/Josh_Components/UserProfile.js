@@ -56,6 +56,7 @@ class UserProfile extends Component {
           username: this.state.userName,
           firstname: this.state.firstName,
           lastname: this.state.lastName,
+          name: this.state.userName,
           mode: "ignorenulls",
         }),
       }

@@ -58,7 +58,7 @@ export default class MyFriendList extends React.Component {
             {connections.map((connection) => (
               <div key={connection.connection_id} className="userlist">
                 <img className="friendImg" alt="friendIcon" src={friend} />
-                {"UserName: " + connection.name}
+                {"UserName: " + connection.name} -{connection.connection_status}
               </div>
             ))}
           </ul>

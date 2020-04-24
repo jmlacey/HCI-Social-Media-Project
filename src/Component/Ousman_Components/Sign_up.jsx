@@ -142,21 +142,21 @@ class Sign_up extends Component {
 
   render() {
     return (
-      <div>
-        <meta
+      <div class="col-3 col-s-3 menu">
+      <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         ></meta>
-        <div class="split left">
+        <div class="col-3 col-s-3 divide gauche">
           <div class="centered">
             <img src={logo2} alt="" className="malik" />
           </div>
         </div>
-        <div class="split right">
+        <div class="col-3 col-s-3 divide droit">
           <div class="centered">
-            <div className="signformDiv">
+            <div className=" col-3 col-s-3 signformDiv">
               <h1>CREATE AN ACCOUNT</h1>
-              <form onSubmit={this.submitHandler}>
+              <form className="col-3 col-s-3" onSubmit={this.submitHandler}>
                 <label for="fname">Email</label>
                 <input
                   type="text"
@@ -168,7 +168,7 @@ class Sign_up extends Component {
                 <input type="submit" value="SEND ONE TIME PASSWORD"></input>
               </form>
 
-              <form onSubmit={this.OTPSubmit}>
+              <form className="col-5 col-s-3" onSubmit={this.OTPSubmit}>
                 <label>Enter OTP</label>
                 <input
                   type="text"

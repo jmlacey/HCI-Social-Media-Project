@@ -16,6 +16,7 @@ body {
   padding: 0;
 }
 
+
 /*-----------------
 
 Header
@@ -59,12 +60,13 @@ Navigation bar
 }
 
 .element_link {
-  display: block;
+  display: inline;
   text-align: center;
-  padding: 10px;
+  padding-right: 5px;
   text-decoration: none;
-  margin-right: 20px;
-  border-radius: 10px;
+  margin-right: 12px;
+  border-radius: 5px;
+  color: white;
 }
 
 .element_link:hover:not(.active) {
@@ -122,15 +124,19 @@ Header Login
 Sign Up Page
     
 ----------------*/
-.split {
+.divide {
   height: 100%;
   width: 50%;
   position: fixed;
   overflow-x: hidden;
 }
 
-.right {
+.droit {
   right: 0;
+}
+
+.gauche {
+  left: 0;
 }
 
 .centered {
@@ -611,3 +617,23 @@ IDK about any of the shit beneath this :(
   text-decoration: none;
   cursor: pointer;
 }
+
+.left{
+  height: 100%;
+  width: 25%;
+  background-color: blue;
+  position: fixed;
+  overflow-x: hidden;
+  left: 0;
+}
+
+.right {
+  height: 100%;
+  width: 75%;
+  background-color: red;
+  position: fixed;
+  overflow-x: hidden;
+  right: 0;
+}
+
+

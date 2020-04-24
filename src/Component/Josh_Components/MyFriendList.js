@@ -54,7 +54,12 @@ export default class MyFriendList extends React.Component {
       return <div> Loading... </div>;
     } else {
       return (
-        <div className="post">
+       
+
+<body>
+        <div className="split right">
+  <div className="centered">
+  <div className="post">
           <ul>
             {connections.map((connection) => (
               <div key={connection.connection_id} className="userlist">
@@ -64,6 +69,17 @@ export default class MyFriendList extends React.Component {
             ))}
           </ul>
         </div>
+  </div>
+</div>
+
+
+
+<div className="split left">
+  <div className="centered">
+   
+  </div>
+</div>
+</body>
       );
     }
   }

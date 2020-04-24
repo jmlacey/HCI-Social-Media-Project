@@ -21,7 +21,7 @@ export default class MyFriendList extends React.Component {
 
   userNameToID() {
     fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
       {
         method: "POST",
         body: JSON.stringify({

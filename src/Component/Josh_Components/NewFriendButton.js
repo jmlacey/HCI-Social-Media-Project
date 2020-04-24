@@ -33,21 +33,24 @@ export default class MyFriendList extends React.Component {
       .then((response) => response.json())
       .then(
         (response) => {
+          //TESTING
+          alert(response.users.length);
+
           this.setState({
-            connectionID: response.users.length > 0 ? response.users[0] : "",
+            connectionID: response.users.length > 0 ? response.users[0].user_id : "",
           });
+
+          if (this.state.connectionID !== "") {
+            alert("Adding the friend! Lets GOOOOO");
+            this.addFriend();
+          } else {
+            alert("Not a valid user!");
+          }
         },
         (error) => {
           alert("error!");
         }
       );
-
-    if (this.state.connectionID !== "") {
-      alert("Adding the friend! Lets GOOOOO");
-      this.addFriend();
-    } else {
-      alert("Not a valid user!");
-    }
   }
 
   addFriend() {
@@ -65,6 +68,13 @@ export default class MyFriendList extends React.Component {
     )
       .then((response) => response.json())
       .then((response) => {
+        alert(
+          "Added " +
+            this.state.userName +
+            " AKA " +
+            this.state.connectionID +
+            " to your friends list! Hooray!"
+        );
         this.setState({
           submitMessage: response.Status,
         });
@@ -72,10 +82,8 @@ export default class MyFriendList extends React.Component {
   }
 
   addFriendButton = (event) => {
-    this.userNameToID();
-
     event.preventDefault();
-    alert("Added " + this.state.userName + " to your friends list! Hooray!");
+    this.userNameToID();
   };
 
   changeInputState = (event) => {

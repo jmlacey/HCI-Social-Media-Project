@@ -4,65 +4,47 @@ export default class Buddy extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userid: props.userid,
-      connections: [],
+      //FOR NOW WE ARE STORING THE BUDDY NAME IN USER ROLE. It will be an id.
+      //326 is Wagz1 user id, for testing
+      buddyID: "",
     };
   }
-  state = {};
 
   componentDidMount() {
-    this.loadBuddies();
-  }
-
-  loadBuddies() {
+    //Getting the buddy indo
     fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/connectioncontroller.php",
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
       {
         method: "post",
         body: JSON.stringify({
-          action: "getConnections",
-          // action: "getUserArtifacts",    Will implement once profile is working
-          // artifacttype: "sleepTime",
-          // artifacttype: "wakeTime",
-          // artifacttype: "timeZone",
+          action: "getUsers",
+          userid: sessionStorage.getItem("user"),
         }),
       }
     )
       .then((res) => res.json())
       .then(
         (result) => {
-          if (result.connections) {
-            this.setState({
-              isLoaded: true,
-              connections: result.connections,
-            });
-          }
+          this.setState({
+            buddyID: result.users[0].user_role,
+          });
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
+          alert("error!");
         }
       );
   }
 
   render() {
-    const { error, isLoaded, connections } = this.state;
-    if (error) {
-      return <div> Error: {error.message} </div>;
-    } else if (!isLoaded) {
-      return <div> Loading... </div>;
-    } else {
-      return (
-        <ul className="buddyList">
-          {connections.map((connection) => (
-            <button key={connection.connection_id} className="buddyButtons">
-              {connection.name} - {connection.connection_status}
-            </button>
-          ))}
-        </ul>
-      );
-    }
+    return (
+      <div>
+        <input
+          type="text"
+          placeholder="Test add buddy by id"
+          onChange={this.emailChangeHandler}
+          value={this.state.email}
+        ></input>
+      </div>
+    );
   }
 }

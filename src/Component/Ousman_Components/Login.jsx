@@ -81,6 +81,12 @@ class Header extends Component {
             sessionStorage.setItem("user", result.user.user_id);
             sessionStorage.setItem("email", result.user.username);
 
+            // if (result.user.user_role === null || result.user.user_role === "") {
+            //   sessionStorage.setItem("buddyID", "none");
+            // } else {
+            //   sessionStorage.setItem("buddyID", result.user.user_role);
+            // }
+
             this.setState({
               sessiontoken: result.user.session_token,
               alanmessage: result.user.session_token,

@@ -81,11 +81,79 @@ class Header extends Component {
             sessionStorage.setItem("user", result.user.user_id);
             sessionStorage.setItem("email", result.user.username);
 
-            // if (result.user.user_role === null || result.user.user_role === "") {
-            //   sessionStorage.setItem("buddyID", "none");
-            // } else {
-            //   sessionStorage.setItem("buddyID", result.user.user_role);
-            // }
+
+            if (result.user.status === null) {
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserPrefs",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    prefname: "TimeZone",
+                  }),
+                }
+              )
+                .then((res) => res.json())
+                .then(
+                  (result) => {
+                    console.log(result.message);
+                  },
+                  (error) => {
+                    alert("CURSES! FOILED AGAIN!");
+                  }
+                );
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserPrefs",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    prefname: "WakeTime",
+                  }),
+                }
+              )
+                .then((res) => res.json())
+                .then(
+                  (result) => {
+                    console.log(result.message);
+                  },
+                  (error) => {
+                    alert("CURSES! FOILED AGAIN!");
+                  }
+                );
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    //API FIELDS
+                    action: "addOrEditUsers",
+                    user_id: result.user.user_id,
+                    userid: result.user.user_id,
+                    session_token: result.user.session_token,
+                    status: "initialized",
+                  }),
+                }
+              )
+                .then((res) => res.json())
+                .then(
+                  (result) => {
+                    //DO WHATEVER YOU WANT WITH THE JSON HERE
+                    alert("STATUS INITIALIZED. YAYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+                  },
+                  (error) => {
+                    alert("error!");
+                  }
+                );
+            }
 
             this.setState({
               sessiontoken: result.user.session_token,

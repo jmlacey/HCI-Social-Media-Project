@@ -53,32 +53,38 @@ export default class MyFriendList extends React.Component {
       return <div> Loading... </div>;
     } else {
       return (
-       
-
-<body>
-        <div className="split right">
-  <div className="centered">
-  <div className="post">
-          <ul>
-            {connections.map((connection) => (
-              <div key={connection.connection_id} className="userlist">
-                <img className="friendImg" alt="friendIcon" src={friend} />
-                {"UserName: " + connection.name} -{connection.connection_status}
+        <body>
+          <div className="split right">
+            <div className="centered">
+              <div className="post">
+                <ul>
+                  {connections.map((connection) => (
+                    <div key={connection.connection_id} className="userlist">
+                      <img
+                        className="friendImg"
+                        alt="friendIcon"
+                        src={friend}
+                      />
+                      {"UserName: " + connection.name} -
+                      {"Status: " + connection.connection_status}
+                      <button
+                        className="profileButton"
+                        onClick={this.deletefriend}
+                      >
+                        {" "}
+                        Delete Friend{" "}
+                      </button>
+                    </div>
+                  ))}
+                </ul>
               </div>
-            ))}
-          </ul>
-        </div>
-  </div>
-</div>
+            </div>
+          </div>
 
-
-
-<div className="split left">
-  <div className="centered">
-   
-  </div>
-</div>
-</body>
+          <div className="split left">
+            <div className="centered"></div>
+          </div>
+        </body>
       );
     }
   }

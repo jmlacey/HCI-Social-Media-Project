@@ -7,6 +7,7 @@ export default class MyFriendList extends React.Component {
     this.state = {
       userName: "",
       connectionID: "",
+      idForDelete: "",
       typingMessage: "",
       submitMessage: "",
 
@@ -33,28 +34,27 @@ export default class MyFriendList extends React.Component {
               response.users.length > 0 ? response.users[0].user_id : "",
           });
 
-          if (this.state.connectionID !== "") {
-            alert("Adding the friend! Lets GOOOOO");
-            this.addFriend();
-          } else {
-            alert("Not a valid user!");
-          }
+          // if (this.state.connectionID !== "") {
+          //   alert("Adding the friend! Lets GOOOOO");
+          //   this.addFriend();
+          // } else {
+          //   alert("Not a valid user!");
+          // }
         },
         (error) => {
           alert("error!");
         }
       );
   }
-  //copy of above method, but for use with deletion of friends
-  userNameToID2() {
+  userNameToConnectionID() {
+    this.userNameToID();
     fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
         method: "POST",
         body: JSON.stringify({
-          action: "getUsers",
-          connectionid: "34",
-          username: this.state.userName,
+          action: "getConnections",
+          connectuserid: this.state.connectionID,
         }),
       }
     )
@@ -62,12 +62,14 @@ export default class MyFriendList extends React.Component {
       .then(
         (response) => {
           this.setState({
-            connectionID:
-              response.users.length > 0 ? response.users[0].user_id : "",
+            idForDelete:
+              response.connections.length > 0
+                ? response.connections[0].connectionid
+                : "",
           });
 
-          if (this.state.connectionID !== "") {
-            alert("Deleting friend, lets goo");
+          if (this.state.idForDelete !== "") {
+            alert("Deleting the friend! Lets GOOOOO");
             this.deletefriend();
           } else {
             alert("Not a valid user!");
@@ -78,7 +80,6 @@ export default class MyFriendList extends React.Component {
         }
       );
   }
-
   addFriend() {
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
@@ -121,18 +122,31 @@ export default class MyFriendList extends React.Component {
         method: "post",
         body: JSON.stringify({
           action: "deleteConnections",
-          user_id: this.state.userid,
+          user_id: sessionStorage.getItem("user"),
           session_token: sessionStorage.getItem("token"),
-          connectuserid: this.state.connectionID,
+          connectionid: this.state.idForDelete,
         }),
       }
-    );
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        alert(
+          "Deleted " +
+            this.state.userName +
+            " AKA " +
+            this.state.idForDelete +
+            " from your friends list! Hooray!"
+        );
+        this.setState({
+          submitMessage: response.Status,
+        });
+      });
   }
 
   //for deleting friends
   deleteFriendButton = (event) => {
     event.preventDefault();
-    this.userNameToID2();
+    this.userNameToConnectionID();
   };
 
   changeInputState = (event) => {

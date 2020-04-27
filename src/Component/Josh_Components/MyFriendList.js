@@ -8,11 +8,13 @@ export default class MyFriendList extends React.Component {
     this.state = {
       userid: props.userid,
       connections: [],
+      idForDelete: "",
     };
   }
 
   componentDidMount() {
     this.loadFriends();
+    this.deleteFriend(this.state.idForDelete);
   }
 
   loadFriends() {
@@ -45,6 +47,34 @@ export default class MyFriendList extends React.Component {
       );
   }
 
+  deleteFriend(idForDelete) {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "deleteConnections",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          connectionid: this.state.idForDelete,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        alert(
+          "Deleted " +
+            this.state.user_id +
+            " AKA " +
+            this.state.idForDelete +
+            " from your friends list! Hooray!"
+        );
+        this.setState({
+          submitMessage: response.Status,
+        });
+      });
+  }
+
   render() {
     const { error, isLoaded, connections } = this.state;
     if (error) {
@@ -59,10 +89,10 @@ export default class MyFriendList extends React.Component {
               <div key={connection.connection_id} className="userlist">
                 <img className="friendImg" alt="friendIcon" src={friend} />
                 {"UserName: " + connection.name} -{connection.connection_status}
-                <button className="profileButton" onClick={this.deletefriend}>
-                  {" "}
-                  Delete Friend{" "}
-                </button>
+                {/* button for deletion */}
+                <form className="profileButton">
+                  <input type="submit" value={connection.connection_id}></input>
+                </form>
               </div>
             ))}
           </ul>

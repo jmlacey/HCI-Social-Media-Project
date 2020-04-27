@@ -34,12 +34,12 @@ export default class MyFriendList extends React.Component {
               response.users.length > 0 ? response.users[0].user_id : "",
           });
 
-          // if (this.state.connectionID !== "") {
-          //   alert("Adding the friend! Lets GOOOOO");
-          //   this.addFriend();
-          // } else {
-          //   alert("Not a valid user!");
-          // }
+          if (this.state.connectionID !== "") {
+            alert("Adding the friend! Lets GOOOOO");
+            this.addFriend();
+          } else {
+            alert("Not a valid user!");
+          }
         },
         (error) => {
           alert("error!");
@@ -47,14 +47,12 @@ export default class MyFriendList extends React.Component {
       );
   }
   userNameToConnectionID() {
-    this.userNameToID();
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
         method: "POST",
         body: JSON.stringify({
           action: "getConnections",
-          connectuserid: this.state.connectionID,
         }),
       }
     )
@@ -124,6 +122,7 @@ export default class MyFriendList extends React.Component {
           action: "deleteConnections",
           user_id: sessionStorage.getItem("user"),
           session_token: sessionStorage.getItem("token"),
+          //
           connectionid: this.state.idForDelete,
         }),
       }

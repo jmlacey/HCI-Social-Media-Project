@@ -64,6 +64,8 @@ class MainContent extends React.Component {
     }
 
     if (this.state.section === "signup") {
+
+      
       return (
         <div className="App">
           <SignUp />
@@ -182,9 +184,11 @@ class App extends React.Component {
   }
 
   render() {
+    sessionStorage.setItem("token", "0");
     let mainContent = React.createRef();
-    if(this.state.section === "signup"){
-
+    alert(sessionStorage.getItem("token"));
+  if(sessionStorage.getItem("token") !== "0"){
+      //if(false){
     return (
 
       <div className="App">

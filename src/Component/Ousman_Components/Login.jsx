@@ -9,7 +9,8 @@ class Header extends Component {
       alanmessage: "",
       sessiontoken: "",
       user_id: "",
-      userid: ""
+      userid: "",
+      refresh: false,
     };
   }
 
@@ -54,8 +55,9 @@ class Header extends Component {
               sessiontoken: result.user.session_token,
               alanmessage: result.user.session_token,
             });
+            this.refreshPage();
           } else {
-            sessionStorage.removeItem("token");
+            sessionStorage.setItem("token", "0");
             sessionStorage.removeItem("user");
             sessionStorage.removeItem("email");
             this.setState({
@@ -91,15 +93,13 @@ class Header extends Component {
         (result) => {
           //DO WHATEVER YOU WANT WITH THE JSON HERE
           alert("Hooray! Logged out!");
-          sessionStorage.removeItem("token");
+          sessionStorage.setItem("token", "0");
         },
         (error) => {
           alert("error!");
         }
       );
   }
-
-
 
   deleteAccount() {
     // alert("Deleting Account : " + sessionStorage.getItem("userid"));
@@ -120,22 +120,17 @@ class Header extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-
-          if(result.user){
-          
-          //DO WHATEVER YOU WANT WITH THE JSON HERE
-          sessionStorage.removeItem("token");
-          sessionStorage.removeItem("user");
-          sessionStorage.removeItem("user_id");
-          this.setState({
-
-            session_token: "",
-            user_id: "",
-            user: ""
-
-          })
-        }
-
+          if (result.user) {
+            //DO WHATEVER YOU WANT WITH THE JSON HERE
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("user");
+            sessionStorage.removeItem("user_id");
+            this.setState({
+              session_token: "",
+              user_id: "",
+              user: "",
+            });
+          }
         },
         (error) => {
           alert("error!");
@@ -143,8 +138,14 @@ class Header extends Component {
       );
   }
 
+  refreshPage() {
+    //This doesntdo anything but do a soft refresh
+    this.setState({ refresh: true });
+  }
+
   render() {
-    if (!sessionStorage.getItem("token")) {
+    //alert(sessionStorage.getItem("token"));
+    if (sessionStorage.getItem("token") === "0") {
       return (
         <div className="formDiv">
           <div class="centered">
@@ -169,9 +170,6 @@ class Header extends Component {
               <input type="submit" value="Login"></input>
             </form>
 
-          
-           
-
             <p>Username is : {this.state.username}</p>
             <p>Password is : {this.state.password}</p>
           </div>
@@ -185,11 +183,9 @@ class Header extends Component {
               <input type="submit" value="Logout"></input>
             </form>
 
-            <form onSubmit ={this.deleteAccount}>
-                <input type="submit" value="Delete Account"></input>
-              </form>
-
-            
+            <form onSubmit={this.deleteAccount}>
+              <input type="submit" value="Delete Account"></input>
+            </form>
           </div>
         </div>
       );

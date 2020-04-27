@@ -8,13 +8,11 @@ export default class MyFriendList extends React.Component {
     this.state = {
       userid: props.userid,
       connections: [],
-      idForDelete: "",
     };
   }
 
   componentDidMount() {
     this.loadFriends();
-    this.deleteFriend(this.state.idForDelete);
   }
 
   loadFriends() {
@@ -47,7 +45,8 @@ export default class MyFriendList extends React.Component {
       );
   }
 
-  deleteFriend(idForDelete) {
+  deleteFriend = (idForDelete) => {
+    alert("delete friend called, deleting: " + idForDelete);
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
@@ -56,7 +55,7 @@ export default class MyFriendList extends React.Component {
           action: "deleteConnections",
           user_id: sessionStorage.getItem("user"),
           session_token: sessionStorage.getItem("token"),
-          connectionid: this.state.idForDelete,
+          connectionid: idForDelete,
         }),
       }
     )
@@ -64,16 +63,16 @@ export default class MyFriendList extends React.Component {
       .then((response) => {
         alert(
           "Deleted " +
-            this.state.user_id +
+            this.state.userid +
             " AKA " +
-            this.state.idForDelete +
+            idForDelete +
             " from your friends list! Hooray!"
         );
         this.setState({
           submitMessage: response.Status,
         });
       });
-  }
+  };
 
   render() {
     const { error, isLoaded, connections } = this.state;
@@ -90,9 +89,12 @@ export default class MyFriendList extends React.Component {
                 <img className="friendImg" alt="friendIcon" src={friend} />
                 {"UserName: " + connection.name} -{connection.connection_status}
                 {/* button for deletion */}
-                <form className="profileButton">
-                  <input type="submit" value={connection.connection_id}></input>
-                </form>
+                <button
+                  className="profileButton"
+                  onClick={() => this.deleteFriend(connection.connection_id)}
+                >
+                  Delete Friend
+                </button>
               </div>
             ))}
           </ul>

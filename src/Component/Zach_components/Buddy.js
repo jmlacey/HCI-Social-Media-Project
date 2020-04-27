@@ -17,6 +17,7 @@ export default class Buddy extends React.Component {
       time: new Date(),
       timeMinutes: "",
 
+      activated: false,
       timeToWakeUp: false,
     };
   }
@@ -50,7 +51,7 @@ export default class Buddy extends React.Component {
   checkIfItsTimeToWakeUp() {
     if (
       this.state.timeMinutes >= this.state.wakeTimeMinutes &&
-      this.state.timeMinutes < this.state.wakeTimeMinutes + 1
+      this.state.timeMinutes < this.state.wakeTimeMinutes + 10
     ) {
       this.setState({ timeToWakeUp: true });
       console.log("TIME TO WAKE UP!");
@@ -198,6 +199,7 @@ export default class Buddy extends React.Component {
     });
   };
 
+  //THE RENDER METHODS
   renderWakeUpGame = () => {
     return (
       <div>
@@ -221,6 +223,23 @@ export default class Buddy extends React.Component {
           Your wakeup cycle has been activated! When it is time to wake up, you
           will have 10 minutes to finish the game and get your points!
         </p>
+      </div>
+    );
+  };
+
+  dontHaveSleepCycleSetUp = () => {
+    return (
+      <div>
+        <p>
+          Looks like you havent set up a sleep cycle yet! Set one here and begin
+          your new lifestyle!
+        </p>
+        <input
+          type="time"
+          name="time"
+          onChange={this.wakeTimeChangeHandler}
+          value={this.state.wakeTime}
+        ></input>
       </div>
     );
   };
@@ -258,6 +277,7 @@ export default class Buddy extends React.Component {
             onChange={this.wakeTimeChangeHandler}
             value={this.state.wakeTime}
           ></input>
+          <p>The current time is: {this.state.time.toLocaleTimeString()} </p>
         </p>
 
         {this.state.timeToWakeUp

@@ -46,38 +46,7 @@ export default class MyFriendList extends React.Component {
         }
       );
   }
-  userNameToConnectionID() {
-    fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          action: "getConnections",
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then(
-        (response) => {
-          this.setState({
-            idForDelete:
-              response.connections.length > 0
-                ? response.connections[0].connectionid
-                : "",
-          });
 
-          if (this.state.idForDelete !== "") {
-            alert("Deleting the friend! Lets GOOOOO");
-            this.deletefriend();
-          } else {
-            alert("Not a valid user!");
-          }
-        },
-        (error) => {
-          alert("error!");
-        }
-      );
-  }
   addFriend() {
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
@@ -112,42 +81,6 @@ export default class MyFriendList extends React.Component {
     this.userNameToID();
   };
 
-  //simple api call for deleting friend
-  deletefriend() {
-    fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
-      {
-        method: "post",
-        body: JSON.stringify({
-          action: "deleteConnections",
-          user_id: sessionStorage.getItem("user"),
-          session_token: sessionStorage.getItem("token"),
-          //
-          connectionid: this.state.idForDelete,
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        alert(
-          "Deleted " +
-            this.state.userName +
-            " AKA " +
-            this.state.idForDelete +
-            " from your friends list! Hooray!"
-        );
-        this.setState({
-          submitMessage: response.Status,
-        });
-      });
-  }
-
-  //for deleting friends
-  deleteFriendButton = (event) => {
-    event.preventDefault();
-    this.userNameToConnectionID();
-  };
-
   changeInputState = (event) => {
     this.setState({ userName: event.target.value });
 
@@ -160,18 +93,7 @@ export default class MyFriendList extends React.Component {
     }
   };
   //change input but for deletion of friends
-  changeInputState2 = (event) => {
-    this.setState({ userName: event.target.value });
 
-    if (event.target.value === "") {
-      this.setState({ typingMessage: "" });
-    } else {
-      this.setState({
-        typingMessage:
-          "Delete " + event.target.value + " from your friends list!",
-      });
-    }
-  };
   render() {
     return (
       <div>
@@ -183,18 +105,6 @@ export default class MyFriendList extends React.Component {
             onChange={this.changeInputState}
           />
           <input type="submit" className="element_link" value="Add Friend!" />
-        </form>
-        <form onSubmit={this.deleteFriendButton}>
-          <input
-            type="text"
-            placeholder="Enter the friends username that you want to delete here!"
-            onChange={this.changeInputState2}
-          />
-          <input
-            type="submit"
-            className="element_link"
-            value="Delete Friend!"
-          />
         </form>
       </div>
     );

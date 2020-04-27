@@ -74,6 +74,29 @@ export default class MyFriendList extends React.Component {
       });
   };
 
+  blockFriend = (idForBlocking) => {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditConnections",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          connectionid: idForBlocking,
+          connectionstatus: "BLOCKED",
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        alert("Blocked " + idForBlocking);
+        this.setState({
+          submitMessage: response.Status,
+        });
+      });
+  };
+
   render() {
     const { error, isLoaded, connections } = this.state;
     if (error) {
@@ -87,13 +110,28 @@ export default class MyFriendList extends React.Component {
             {connections.map((connection) => (
               <div key={connection.connection_id} className="userlist">
                 <img className="friendImg" alt="friendIcon" src={friend} />
-                {"UserName: " + connection.name} -{connection.connection_status}
+                {"UserName: " + connection.name} -
+                {"Status: " + connection.connection_status}
+                {/* button for viewing profile */}
+                <button
+                  className="profileButton"
+                  onClick={() => alert("not yet")}
+                >
+                  View
+                </button>
                 {/* button for deletion */}
                 <button
                   className="profileButton"
                   onClick={() => this.deleteFriend(connection.connection_id)}
                 >
                   Delete Friend
+                </button>
+                {/* button for blocking */}
+                <button
+                  className="profileButton"
+                  onClick={() => this.blockFriend(connection.connection_id)}
+                >
+                  Block
                 </button>
               </div>
             ))}

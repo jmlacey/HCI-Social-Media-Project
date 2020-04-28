@@ -81,8 +81,24 @@ class Header extends Component {
             sessionStorage.setItem("user", result.user.user_id);
             sessionStorage.setItem("email", result.user.username);
 
+            if (
+              result.user.status === null ||
+              result.user.status === "reinit"
+            ) {
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserPrefs",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    prefname: "lastWokeUp",
+                  }),
+                }
+              );
 
-            if (result.user.status === null || result.user.status === "reinit") {
               fetch(
                 "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
                 {
@@ -154,35 +170,35 @@ class Header extends Component {
                   }
                 );
 
-                fetch(
-                  "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
-                  {
-                    method: "post",
-                    body: JSON.stringify({
-                      action: "addOrEditUserPrefs",
-                      user_id: sessionStorage.getItem("user"),
-                      session_token: sessionStorage.getItem("token"),
-                      userid: sessionStorage.getItem("user"),
-                      prefname: "SleepyPoints",
-                      prefvalue: 0,
-                    }),
-                  }
-                );
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserPrefs",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    prefname: "SleepyPoints",
+                    prefvalue: 0,
+                  }),
+                }
+              );
 
-                fetch(
-                  "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
-                  {
-                    method: "post",
-                    body: JSON.stringify({
-                      action: "addOrEditUserPrefs",
-                      user_id: sessionStorage.getItem("user"),
-                      session_token: sessionStorage.getItem("token"),
-                      userid: sessionStorage.getItem("user"),
-                      prefname: "SleepCycleActivated",
-                      prefvalue: false,
-                    }),
-                  }
-                );
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserPrefs",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    prefname: "SleepCycleActivated",
+                    prefvalue: false,
+                  }),
+                }
+              );
             }
 
             this.setState({

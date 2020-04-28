@@ -6,6 +6,9 @@ export default class Buddy extends React.Component {
     this.state = {
       //FOR NOW WE ARE STORING THE BUDDY NAME IN USER ROLE. It will be an id.
       //326 is Wagz1 user id, for testing
+      alreadyHitButtonToday: false,
+      lastHitButton: "",
+
       buddyID: "",
       buddyName: "",
       wakeTime: "",
@@ -19,6 +22,8 @@ export default class Buddy extends React.Component {
 
       activated: false,
       timeToWakeUp: false,
+
+      testDate: "",
     };
   }
 
@@ -28,6 +33,9 @@ export default class Buddy extends React.Component {
 
   updateTime() {
     this.setState({ time: new Date() });
+
+    //Testing
+    this.setState({ testDate: this.state.time.toLocaleDateString() });
 
     //If the time is before 10, do something. Else, do something else.
     let minutesString = this.state.time.toTimeString();
@@ -99,6 +107,14 @@ export default class Buddy extends React.Component {
               timeZoneId = pref2.pref_id;
             }
           });
+
+          let lastTimeWokeUp = "";
+          result.users[0]["user_prefs"].forEach(function (pref3) {
+            if (pref3.pref_name === "lastWokeUp") {
+              lastTimeWokeUp = pref3.pref_value;
+            }
+          });
+
           this.setState({
             // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
             // try and make the form component uncontrolled, which plays havoc with react
@@ -107,7 +123,13 @@ export default class Buddy extends React.Component {
             wakeTimeId: wakeTimeId,
             timeZone: timeZone,
             timeZoneId: timeZoneId,
+            lastHitButton: lastTimeWokeUp,
           });
+
+          if (this.state.time.toLocaleDateString() == lastTimeWokeUp) {
+            this.setState({ alreadyHitButtonToday: true });
+          }
+
           this.IDToUserName();
           this.getwakeTimeMinutes();
         },
@@ -201,19 +223,24 @@ export default class Buddy extends React.Component {
 
   //THE RENDER METHODS
   renderWakeUpGame = () => {
-    return (
-      <div>
-        <p>YOU WOKE UP! You are woke.</p>
-        <p>
-          If you press this button, you and your sleep buddy will get 10 points!
-        </p>
-        <input
-          type="submit"
-          value="I WOKE UP!"
-          onClick={this.testAssignBuddy}
-        ></input>
-      </div>
-    );
+    if (this.state.alreadyHitButtonToday) {
+      return (
+        <div>
+          <p>You already hit the button today! Come back tomorrow!</p>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <p>YOU WOKE UP! You are woke.</p>
+          <p>
+            If you press this button, you and your sleep buddy will get 10
+            points!
+          </p>
+          <input type="submit" value="I WOKE UP!" onClick={this.buttonSubmit()}></input>
+        </div>
+      );
+    }
   };
 
   dontRenderWakeUpGame = () => {
@@ -243,6 +270,33 @@ export default class Buddy extends React.Component {
       </div>
     );
   };
+
+  buttonSubmit(){
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUserPrefs",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: sessionStorage.getItem("user"),
+          prefid: this.state.wakeTimeId,
+          prefname: "lastWokeUp",
+          prefvalue: this.state.wakeTime,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result.message);
+        },
+        (error) => {
+          alert("CURSES! FOILED AGAIN!");
+        }
+      );
+  }
 
   render() {
     /*

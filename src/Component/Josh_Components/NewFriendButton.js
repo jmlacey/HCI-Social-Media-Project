@@ -37,7 +37,6 @@ export default class MyFriendList extends React.Component {
           if (this.state.connectionID !== "") {
             alert("Adding the friend! Lets GOOOOO");
             this.addFriend();
-            this.addFriend2();
           } else {
             alert("Not a valid user!");
           }
@@ -77,35 +76,6 @@ export default class MyFriendList extends React.Component {
       });
   }
 
-  addFriend2() {
-    fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          action: "addOrEditConnections",
-          user_id: this.state.connections.connectuserid,
-          session_token: this.state.connections.session_token,
-          connectuserid: this.state.connections.connectuserid,
-          connectionstatus: "pending",
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        alert(
-          "Added " +
-          this.state.connections.username +
-            " AKA " +
-            this.state.connections.connectuserid +
-            " to your friends list! Hooray!"
-        );
-        this.setState({
-          submitMessage: response.Status,
-        });
-      });
-  }
-
   addFriendButton = (event) => {
     event.preventDefault();
     this.userNameToID();
@@ -136,6 +106,7 @@ export default class MyFriendList extends React.Component {
           />
           <input type="submit" className="element_link" value="Add Friend!" />
         </form>
+        <h1>Pending Invitations:</h1>
       </div>
     );
   }

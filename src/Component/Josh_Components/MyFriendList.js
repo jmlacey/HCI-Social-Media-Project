@@ -9,7 +9,6 @@ export default class MyFriendList extends React.Component {
       userid: props.userid,
       connections: [],
       connectionstatus: "",
-
     };
   }
 
@@ -76,7 +75,7 @@ export default class MyFriendList extends React.Component {
       });
   };
 
-  blockFriend = (idForBlocking) => {
+  blockFriend = (name, connectionid, connectuserid) => {
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
@@ -85,15 +84,24 @@ export default class MyFriendList extends React.Component {
           action: "addOrEditConnections",
           user_id: sessionStorage.getItem("user"),
           session_token: sessionStorage.getItem("token"),
-          connectionid: idForBlocking,
+          connectionstatus: "BLOCKED",
+          //need to pass these values in or else the connection gets overwritten.
+          connectuserid: connectuserid,
+          connectionid: connectionid,
         }),
       }
     )
       .then((response) => response.json())
       .then((response) => {
-        alert("Blocked " + idForBlocking);
+        alert(
+          "Blocked: " +
+            name +
+            ", connectionid is: " +
+            connectionid +
+            ", connectuserid is: " +
+            connectuserid
+        );
         this.setState({
-          connectionstatus: "BLOCKED",
           submitMessage: response.Status,
         });
       });
@@ -131,7 +139,13 @@ export default class MyFriendList extends React.Component {
                 {/* button for blocking */}
                 <button
                   className="profileButton"
-                  onClick={() => this.blockFriend(connection.connection_id)}
+                  onClick={() =>
+                    this.blockFriend(
+                      connection.name,
+                      connection.connection_id,
+                      connection.connect_user_id
+                    )
+                  }
                 >
                   Block
                 </button>

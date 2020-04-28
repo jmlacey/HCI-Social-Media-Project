@@ -8,6 +8,8 @@ export default class MyFriendList extends React.Component {
     this.state = {
       userid: props.userid,
       connections: [],
+      connectionstatus: "",
+
     };
   }
 
@@ -84,7 +86,6 @@ export default class MyFriendList extends React.Component {
           user_id: sessionStorage.getItem("user"),
           session_token: sessionStorage.getItem("token"),
           connectionid: idForBlocking,
-          connectionstatus: "BLOCKED",
         }),
       }
     )
@@ -92,6 +93,7 @@ export default class MyFriendList extends React.Component {
       .then((response) => {
         alert("Blocked " + idForBlocking);
         this.setState({
+          connectionstatus: "BLOCKED",
           submitMessage: response.Status,
         });
       });

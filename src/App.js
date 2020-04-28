@@ -9,7 +9,6 @@ import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
 import View from "./Component/Anthony_Components/viewprofile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
-import Discussion from "./Component/Discussion.jsx";
 import Edit from "./Component/Anthony_Components/editprofile.jsx";
 
 //My stuff

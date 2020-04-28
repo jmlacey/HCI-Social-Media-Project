@@ -188,6 +188,21 @@ Discussison
   display: inline-flex;
 }
 
+.posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.postbody {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
 /*-----------------
 
 Profile Page
@@ -484,21 +499,6 @@ IDK about any of the shit beneath this :(
   align-items: flex-start;
   justify-content: center;
   flex-grow: 1;
-}
-
-.posts {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.postbody {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
 }
 
 .comment-block {

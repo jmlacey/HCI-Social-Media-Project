@@ -23,6 +23,7 @@ export default class PostForm extends React.Component {
         action: "addOrEditPosts",
         user_id: sessionStorage.getItem("user"),
         session_token: sessionStorage.getItem("token"),
+        userid: sessionStorage.getItem("user"),
         posttext: this.state.post_text
       })
     })

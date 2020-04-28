@@ -17,7 +17,7 @@ export default class CommentForm extends React.Component {
     event.preventDefault();
 
     //make the api call to the authentication page
-    fetch("http://stark.cse.buffalo.edu/hci/postcontroller.php", {
+    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/api/postcontroller.php", {
       method: "post",
       body: JSON.stringify({
         action: "addOrEditPosts",

@@ -119,7 +119,7 @@ class MainContent extends React.Component {
     if (this.state.section === "Discussion") {
       return (
         <div className="discussionPage">
-          <Discussion />
+          <PostForm />
         </div>
       );
     }

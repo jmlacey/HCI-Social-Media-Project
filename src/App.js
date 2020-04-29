@@ -7,7 +7,7 @@ import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
-import View from "./Component/Anthony_Components/viewprofile.jsx";
+// import View from "./Component/Anthony_Components/viewprofile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
 import Edit from "./Component/Anthony_Components/editprofile.jsx";
 
@@ -17,7 +17,7 @@ import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import SignUp from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
-import ProfilePage from "./Component/Josh_Components/UserProfile.js";
+// import ProfilePage from "./Component/Josh_Components/UserProfile.js";
 import RealProfile from "./Component/Zach_components/Profile.js"
 
 class MainContent extends React.Component {

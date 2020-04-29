@@ -46,7 +46,6 @@ export default class PostingList extends React.Component {
   }
 
   render() {
-    //this.loadPosts();
     const {error, isLoaded, posts} = this.state;
     if (error) {
       return <div> Error: {error.message} </div>;

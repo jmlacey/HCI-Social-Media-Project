@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700");
 
 /*-----------------
@@ -15,7 +14,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 
 /*-----------------
 
@@ -200,7 +198,7 @@ Profile Page
     
 ----------------*/
 .profilePage {
-width: 100%;
+  width: 100%;
 }
 
 .profileFormDiv {
@@ -231,8 +229,18 @@ width: 100%;
   float: right;
 }
 
+.rightColFriendsList {
+  width: 70%;
+  float: right;
+}
+
 .leftCol1 {
   width: 15%;
+  float: left;
+}
+
+.leftColFriendsList {
+  width: 30%;
   float: left;
 }
 
@@ -322,8 +330,6 @@ IDK about any of the shit beneath this :(
   padding: 10 20 0 0;
 }
 
-
-
 .avatar {
   vertical-align: middle;
   width: 50px;
@@ -344,8 +350,6 @@ IDK about any of the shit beneath this :(
   color: white;
 }
 
-
-
 .timeInput {
   background-color: #7155d3;
   font-size: 14px;
@@ -355,7 +359,6 @@ IDK about any of the shit beneath this :(
 .friendImg {
   height: 80px;
 }
-
 
 .App {
   text-align: center;
@@ -618,7 +621,7 @@ IDK about any of the shit beneath this :(
   cursor: pointer;
 }
 
-.left{
+.left {
   height: 100%;
   width: 25%;
   background-color: blue;
@@ -635,5 +638,3 @@ IDK about any of the shit beneath this :(
   overflow-x: hidden;
   right: 0;
 }
-
-

@@ -6,7 +6,6 @@ export default class Buddy extends React.Component {
     this.state = {
       //FOR NOW WE ARE STORING THE BUDDY NAME IN USER ROLE. It will be an id.
       //326 is Wagz1 user id, for testing
-      alreadyHitButtonToday: false,
       lastHitButton: "",
       lastHitButtonID: "",
 
@@ -20,24 +19,34 @@ export default class Buddy extends React.Component {
 
       time: new Date(),
       timeMinutes: "",
+      //Compare this to see if the user has already pressed the button today.
+      currentDate: "",
 
       activated: "",
       activatedID: "",
       timeToWakeUp: false,
 
-      testDate: "",
+      yourSleepyPoints: "",
+      theirSleepyPoints: ""
     };
+    this.activateIt = this.activateIt.bind(this);
+    this.deactivateIt = this.deactivateIt.bind(this);
+    this.buttonSubmit = this.buttonSubmit.bind(this);
   }
 
   componentDidMount() {
     this.loadInfo();
+
+    this.setState({ time: new Date() });
+
+    let day = this.state.time.getDate();
+    let month = this.state.time.getMonth() + 1;
+    let year = this.state.time.getFullYear();
+    this.setState({ currentDate: day + "-" + month + "-" + year });
   }
 
   updateTime() {
     this.setState({ time: new Date() });
-
-    //Testing
-    this.setState({ testDate: this.state.time.toLocaleDateString() });
 
     //If the time is before 10, do something. Else, do something else.
     let minutesString = this.state.time.toTimeString();
@@ -132,6 +141,7 @@ export default class Buddy extends React.Component {
             // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
             // try and make the form component uncontrolled, which plays havoc with react
             buddyID: result.users[0].user_role || "",
+            yourSleepyPoints: result.users[0].status || "",
             wakeTime: wakeTime || "",
             wakeTimeId: wakeTimeId || "",
             timeZone: timeZone || "",
@@ -141,10 +151,6 @@ export default class Buddy extends React.Component {
             activated: sleepCycleActivated || "",
             activatedID: sleepCycleActivatedID || "",
           });
-
-          if (this.state.time.toLocaleDateString() == lastTimeWokeUp) {
-            this.setState({ alreadyHitButtonToday: true });
-          }
 
           this.IDToUserName();
           this.getwakeTimeMinutes();
@@ -238,7 +244,7 @@ export default class Buddy extends React.Component {
   };
 
   //THE RENDER METHODS
-  renderNotActivated = () => {
+  renderNotActivated() {
     return (
       <div>
         <p>
@@ -263,9 +269,9 @@ export default class Buddy extends React.Component {
         </p>
       </div>
     );
-  };
+  }
 
-  renderActivated = () => {
+  renderActivated() {
     return (
       <div>
         <p>The current time is: {this.state.time.toLocaleTimeString()} </p>
@@ -279,13 +285,16 @@ export default class Buddy extends React.Component {
         ></input>
       </div>
     );
-  };
+  }
 
-  renderWakeUpGame = () => {
-    if (this.state.alreadyHitButtonToday) {
+  renderWakeUpGame() {
+    if (this.state.lastHitButton === this.state.currentDate) {
       return (
         <div>
-          <p>You already hit the button today! Come back tomorrow!</p>
+          <p>
+            Congrats! You got your points for today! Come back tomorrow to get
+            more!
+          </p>
         </div>
       );
     } else {
@@ -299,14 +308,14 @@ export default class Buddy extends React.Component {
           <input
             type="submit"
             value="I WOKE UP!"
-            onClick={this.buttonSubmit()}
+            onClick={this.buttonSubmit}
           ></input>
         </div>
       );
     }
-  };
+  }
 
-  dontRenderWakeUpGame = () => {
+  dontRenderWakeUpGame() {
     return (
       <div>
         <p>
@@ -315,7 +324,7 @@ export default class Buddy extends React.Component {
         </p>
       </div>
     );
-  };
+  }
 
   buttonSubmit() {
     fetch(
@@ -327,9 +336,9 @@ export default class Buddy extends React.Component {
           user_id: sessionStorage.getItem("user"),
           session_token: sessionStorage.getItem("token"),
           userid: sessionStorage.getItem("user"),
-          prefid: this.state.wakeTimeId,
+          prefid: this.state.lastHitButtonID,
           prefname: "lastWokeUp",
-          prefvalue: this.state.wakeTime,
+          prefvalue: this.state.currentDate,
         }),
       }
     )
@@ -337,15 +346,93 @@ export default class Buddy extends React.Component {
       .then(
         (result) => {
           console.log(result.message);
+          this.setState({
+            lastHitButton: this.state.currentDate,
+          });
         },
         (error) => {
           alert("CURSES! FOILED AGAIN!");
         }
       );
+
+    //Incrementing the sleep points of the user
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "getUsers",
+          userid: sessionStorage.getItem("user"),
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          this.setState({ yourSleepyPoints: result.users[0].status || "" });
+          this.setState({
+            yourSleepyPoints: parseInt(this.state.yourSleepyPoints) + 1,
+          });
+
+          fetch(
+            "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+            {
+              method: "post",
+              body: JSON.stringify({
+                action: "addOrEditUsers",
+                user_id: sessionStorage.getItem("user"),
+                session_token: sessionStorage.getItem("token"),
+                userid: sessionStorage.getItem("user"),
+                status: parseInt(this.state.yourSleepyPoints),
+              }),
+            }
+          );
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+
+    //Incrementing the sleep points of the user's sleep buddy
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "getUsers",
+          userid: this.state.buddyID,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          this.setState({ theirSleepyPoints: result.users[0].status || "" });
+          this.setState({
+            theirSleepyPoints: parseInt(this.state.theirSleepyPoints) + 1,
+          });
+
+          fetch(
+            "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+            {
+              method: "post",
+              body: JSON.stringify({
+                action: "addOrEditUsers",
+                user_id: sessionStorage.getItem("user"),
+                session_token: sessionStorage.getItem("token"),
+                userid: sessionStorage.getItem("user"),
+                status: parseInt(this.state.theirSleepyPoints),
+              }),
+            }
+          );
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
   }
 
   activateIt() {
-    alert(this.state.activatedID); //
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
       {
@@ -364,7 +451,7 @@ export default class Buddy extends React.Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          this.setState({ activateSubmit: "true" });
+          this.setState({ activated: "true" });
         },
         (error) => {
           alert("CURSES! FOILED AGAIN!");
@@ -373,7 +460,6 @@ export default class Buddy extends React.Component {
   }
 
   deactivateIt() {
-    alert(this.state.activatedID);
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
       {
@@ -392,7 +478,7 @@ export default class Buddy extends React.Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          this.setState({ activateSubmit: "false" });
+          this.setState({ activated: "false" });
         },
         (error) => {
           alert("CURSES! FOILED AGAIN!");
@@ -405,7 +491,7 @@ export default class Buddy extends React.Component {
       <div>
         <p>Your sleep buddy is {this.state.buddyName}</p>
 
-        {this.state.activated != "true"
+        {this.state.activated !== "true"
           ? this.renderNotActivated()
           : this.renderActivated()}
       </div>

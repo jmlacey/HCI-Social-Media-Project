@@ -155,7 +155,7 @@ class Header extends Component {
                     user_id: result.user.user_id,
                     userid: result.user.user_id,
                     session_token: result.user.session_token,
-                    status: "initialized",
+                    status: "0",
                   }),
                 }
               )
@@ -163,7 +163,7 @@ class Header extends Component {
                 .then(
                   (result) => {
                     //DO WHATEVER YOU WANT WITH THE JSON HERE
-                    alert("STATUS INITIALIZED. YAYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+                    alert("STATUS INITIALIZED.");
                   },
                   (error) => {
                     alert("error!");

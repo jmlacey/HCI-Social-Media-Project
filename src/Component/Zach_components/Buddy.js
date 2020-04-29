@@ -8,6 +8,7 @@ export default class Buddy extends React.Component {
       //326 is Wagz1 user id, for testing
       alreadyHitButtonToday: false,
       lastHitButton: "",
+      lastHitButtonID: "",
 
       buddyID: "",
       buddyName: "",
@@ -20,7 +21,8 @@ export default class Buddy extends React.Component {
       time: new Date(),
       timeMinutes: "",
 
-      activated: false,
+      activated: "",
+      activatedID: "",
       timeToWakeUp: false,
 
       testDate: "",
@@ -109,9 +111,20 @@ export default class Buddy extends React.Component {
           });
 
           let lastTimeWokeUp = "";
+          let lastTimeWokeUpID = "";
           result.users[0]["user_prefs"].forEach(function (pref3) {
             if (pref3.pref_name === "lastWokeUp") {
               lastTimeWokeUp = pref3.pref_value;
+              lastTimeWokeUpID = pref3.pref_id;
+            }
+          });
+
+          let sleepCycleActivated = "";
+          let sleepCycleActivatedID = "";
+          result.users[0]["user_prefs"].forEach(function (pref4) {
+            if (pref4.pref_name === "SleepCycleActivated") {
+              sleepCycleActivated = pref4.pref_value;
+              sleepCycleActivatedID = pref4.pref_id;
             }
           });
 
@@ -124,6 +137,9 @@ export default class Buddy extends React.Component {
             timeZone: timeZone,
             timeZoneId: timeZoneId,
             lastHitButton: lastTimeWokeUp,
+            lastHitButtonID: lastTimeWokeUpID,
+            activated: sleepCycleActivated,
+            activatedID: sleepCycleActivatedID,
           });
 
           if (this.state.time.toLocaleDateString() == lastTimeWokeUp) {
@@ -222,6 +238,44 @@ export default class Buddy extends React.Component {
   };
 
   //THE RENDER METHODS
+  renderNotActivated = () => {
+    return (
+      <div>
+        <p>
+          Your sleep cycle has not been activated. Set a wakeup time and hit the
+          button below to start!
+        </p>
+        <p>
+          Your wakeup time:
+          <input
+            type="time"
+            name="time"
+            onChange={this.wakeTimeChangeHandler}
+            value={this.state.wakeTime}
+          ></input>
+        </p>
+        <p>
+          <input
+            type="submit"
+            value="Activate!"
+            onClick={this.buttonSubmit()}
+          ></input>
+        </p>
+      </div>
+    );
+  };
+
+  renderActivated = () => {
+    return (
+      <div>
+        <p>The current time is: {this.state.time.toLocaleTimeString()} </p>
+        {this.state.timeToWakeUp
+          ? this.renderWakeUpGame()
+          : this.dontRenderWakeUpGame()}
+      </div>
+    );
+  };
+
   renderWakeUpGame = () => {
     if (this.state.alreadyHitButtonToday) {
       return (
@@ -237,7 +291,11 @@ export default class Buddy extends React.Component {
             If you press this button, you and your sleep buddy will get 10
             points!
           </p>
-          <input type="submit" value="I WOKE UP!" onClick={this.buttonSubmit()}></input>
+          <input
+            type="submit"
+            value="I WOKE UP!"
+            onClick={this.buttonSubmit()}
+          ></input>
         </div>
       );
     }
@@ -271,7 +329,7 @@ export default class Buddy extends React.Component {
     );
   };
 
-  buttonSubmit(){
+  buttonSubmit() {
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
       {
@@ -323,20 +381,10 @@ export default class Buddy extends React.Component {
     return (
       <div>
         <p>Your sleep buddy is {this.state.buddyName}</p>
-        <p>
-          <label for="fname">Your wakeup time is: </label>
-          <input
-            type="time"
-            name="time"
-            onChange={this.wakeTimeChangeHandler}
-            value={this.state.wakeTime}
-          ></input>
-          <p>The current time is: {this.state.time.toLocaleTimeString()} </p>
-        </p>
 
-        {this.state.timeToWakeUp
-          ? this.renderWakeUpGame()
-          : this.dontRenderWakeUpGame()}
+        {this.state.activated != "true"
+          ? this.renderNotActivated()
+          : this.renderActivated()}
       </div>
     );
   }

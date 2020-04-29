@@ -83,6 +83,7 @@ export default class MyFriendList extends React.Component {
         body: JSON.stringify({
           action: "addOrEditConnections",
           user_id: sessionStorage.getItem("user"),
+          userid: sessionStorage.getItem("user"),
           session_token: sessionStorage.getItem("token"),
           connectionstatus: "BLOCKED",
           //need to pass these values in or else the connection gets overwritten.

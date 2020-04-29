@@ -41,7 +41,7 @@ class MainContent extends React.Component {
       username: "",
       password: "",
       user_id: "",
-      userid: ""
+      userid: "",
     };
   }
 
@@ -174,7 +174,6 @@ function toggleModal(app) {
   });
 }
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -186,107 +185,105 @@ class App extends React.Component {
   render() {
     sessionStorage.setItem("token", "0");
     let mainContent = React.createRef();
-    alert(sessionStorage.getItem("token"));
-  if(sessionStorage.getItem("token") !== "0"){
-      //if(false){
-    return (
+    if ((this.state.section = "signup")) {
+      return (
+        <div className="App">
+          <header className="header">
+            <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
+              SLEEP.IO
+            </h1>
+            <img src={logo} alt="" className="headerImg" />
+            <div className="container">
+              <nav className="navBar">
+                <div className="Nav_Div">
+                  <ul className="sideBar">
+                    <li className="Nav_Element">
+                      <a
+                        className="element_link"
+                        onClick={(e) => setMenuOption("login", mainContent, e)}
+                      >
+                        Login
+                      </a>
 
-      <div className="App">
-        <header className="header">
-          <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
-            SLEEP.IO
-          </h1>
-          <img src={logo} alt="" className="headerImg" />
-          <div className="container">
-            <nav className="navBar">
-              <div className="Nav_Div">
-                <ul className="sideBar">
-                  <li className="Nav_Element">
-                    <a
-                      className="element_link"
-                      onClick={(e) => setMenuOption("login", mainContent, e)}
-                    >
-                      Login
-                    </a>
+                      <a
+                        className="element_link"
+                        onClick={(e) =>
+                          setMenuOption("Discussion", mainContent, e)
+                        }
+                      >
+                        Discussion
+                      </a>
 
-                    <a
-                      className="element_link"
-                      onClick={(e) =>
-                        setMenuOption("Discussion", mainContent, e)
-                      }
-                    >
-                      Discussion
-                    </a>
+                      <a
+                        className="element_link"
+                        onClick={(e) =>
+                          setMenuOption("friends", mainContent, e)
+                        }
+                      >
+                        Friends
+                      </a>
 
-                    <a
-                      className="element_link"
-                      onClick={(e) => setMenuOption("friends", mainContent, e)}
-                    >
-                      Friends
-                    </a>
+                      <a
+                        className="element_link"
+                        onClick={(e) =>
+                          setMenuOption("profile", mainContent, e)
+                        }
+                      >
+                        Profile
+                      </a>
 
-                    <a
-                      className="element_link"
-                      onClick={(e) => setMenuOption("profile", mainContent, e)}
-                    >
-                      Profile
-                    </a>
+                      <a
+                        className="element_link"
+                        onClick={(e) => setMenuOption("buddy", mainContent, e)}
+                      >
+                        Buddy
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </header>
 
-                    <a
-                      className="element_link"
-                      onClick={(e) => setMenuOption("buddy", mainContent, e)}
-                    >
-                      Buddy
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </nav>
+          <div className="maincontent" id="mainContent">
+            <MainContent ref={mainContent} />
           </div>
-        </header>
 
-        <div className="maincontent" id="mainContent">
-          <MainContent ref={mainContent} />
+          <Modal
+            show={this.state.openModal}
+            onClose={(e) => toggleModal(this, e)}
+          >
+            This is a modal dialog!
+          </Modal>
         </div>
+      );
+    } else
+      return (
+        <div className="App">
+          <header className="header">
+            <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
+              SLEEP.IO
+            </h1>
+            <img src={logo} alt="" className="headerImg" />
+            <div className="container">
+              <nav className="navBar">
+                <div className="Nav_Div">
+                  <ul className="sideBar">
+                    <li className="Nav_Element">
+                      <a
+                        className="element_link"
+                        onClick={(e) => setMenuOption("login", mainContent, e)}
+                      >
+                        Login
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
 
-        <Modal
-          show={this.state.openModal}
-          onClose={(e) => toggleModal(this, e)}
-        >
-          This is a modal dialog!
-        </Modal>
-      </div>
-    );
-  }
-
-else 
-return(
-  <div className="App">
-<header className="header">
-  <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
-    SLEEP.IO
-  </h1>
-  <img src={logo} alt="" className="headerImg" />
-  <div className="container">
-    <nav className="navBar">
-      <div className="Nav_Div">
-        <ul className="sideBar">
-          <li className="Nav_Element">
-            <a
-              className="element_link"
-              onClick={(e) => setMenuOption("login", mainContent, e)}
-            >
-              Login
-            </a>
-
-            </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-
-  <nav className="r">
-     {/* <form className="login" style={{ paddingRight: 5 }}>
+            <nav className="r">
+              {/* <form className="login" style={{ paddingRight: 5 }}>
       <label style={{ color: "white" }} for="username">
         Username
       </label>
@@ -309,22 +306,21 @@ return(
       <input type="submit" value="Login"></input>
 
     </form> */}
+            </nav>
+          </header>
 
-  </nav>
-</header>
+          <div className="maincontent" id="mainContent">
+            <MainContent ref={mainContent} />
+          </div>
 
-<div className="maincontent" id="mainContent">
-  <MainContent ref={mainContent} />
-</div>
-
-<Modal
-  show={this.state.openModal}
-  onClose={(e) => toggleModal(this, e)}
->
-  This is a modal dialog!
-</Modal>
-</div>
-);
-}
+          <Modal
+            show={this.state.openModal}
+            onClose={(e) => toggleModal(this, e)}
+          >
+            This is a modal dialog!
+          </Modal>
+        </div>
+      );
+  }
 }
 export default App;

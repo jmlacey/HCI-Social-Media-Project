@@ -132,14 +132,14 @@ export default class Buddy extends React.Component {
             // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
             // try and make the form component uncontrolled, which plays havoc with react
             buddyID: result.users[0].user_role || "",
-            wakeTime: wakeTime,
-            wakeTimeId: wakeTimeId,
-            timeZone: timeZone,
-            timeZoneId: timeZoneId,
-            lastHitButton: lastTimeWokeUp,
-            lastHitButtonID: lastTimeWokeUpID,
-            activated: sleepCycleActivated,
-            activatedID: sleepCycleActivatedID,
+            wakeTime: wakeTime || "",
+            wakeTimeId: wakeTimeId || "",
+            timeZone: timeZone || "",
+            timeZoneId: timeZoneId || "",
+            lastHitButton: lastTimeWokeUp || "",
+            lastHitButtonID: lastTimeWokeUpID || "",
+            activated: sleepCycleActivated || "",
+            activatedID: sleepCycleActivatedID || "",
           });
 
           if (this.state.time.toLocaleDateString() == lastTimeWokeUp) {
@@ -258,7 +258,7 @@ export default class Buddy extends React.Component {
           <input
             type="submit"
             value="Activate!"
-            onClick={this.buttonSubmit()}
+            onClick={this.activateIt}
           ></input>
         </p>
       </div>
@@ -272,6 +272,11 @@ export default class Buddy extends React.Component {
         {this.state.timeToWakeUp
           ? this.renderWakeUpGame()
           : this.dontRenderWakeUpGame()}
+        <input
+          type="submit"
+          value="Deactivate Sleep Cycle"
+          onClick={this.deactivateIt}
+        ></input>
       </div>
     );
   };
@@ -312,23 +317,6 @@ export default class Buddy extends React.Component {
     );
   };
 
-  dontHaveSleepCycleSetUp = () => {
-    return (
-      <div>
-        <p>
-          Looks like you havent set up a sleep cycle yet! Set one here and begin
-          your new lifestyle!
-        </p>
-        <input
-          type="time"
-          name="time"
-          onChange={this.wakeTimeChangeHandler}
-          value={this.state.wakeTime}
-        ></input>
-      </div>
-    );
-  };
-
   buttonSubmit() {
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
@@ -356,15 +344,83 @@ export default class Buddy extends React.Component {
       );
   }
 
+  activateIt() {
+    alert(this.state.activatedID); //
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUserPrefs",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: sessionStorage.getItem("user"),
+          prefid: this.state.activatedID,
+          prefname: "SleepCycleActivated",
+          prefvalue: "true",
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          this.setState({ activateSubmit: "true" });
+        },
+        (error) => {
+          alert("CURSES! FOILED AGAIN!");
+        }
+      );
+  }
+
+  deactivateIt() {
+    alert(this.state.activatedID);
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUserPrefs",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: sessionStorage.getItem("user"),
+          prefid: this.state.activatedID,
+          prefname: "SleepCycleActivated",
+          prefvalue: "false",
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          this.setState({ activateSubmit: "false" });
+        },
+        (error) => {
+          alert("CURSES! FOILED AGAIN!");
+        }
+      );
+  }
+
   render() {
-    /*
+    return (
+      <div>
+        <p>Your sleep buddy is {this.state.buddyName}</p>
+
+        {this.state.activated != "true"
+          ? this.renderNotActivated()
+          : this.renderActivated()}
+      </div>
+    );
+  }
+}
+
+/*
     <p>The time is: {this.state.time.toLocaleTimeString()} </p>
     <p>
       Your timezone is: {/\((.*)\)/.exec(this.state.time.toString())[1]}{" "}
     </p>
 */
 
-    /*
+/*
         <input
           type="text"
           placeholder="Test add buddy by id"
@@ -377,15 +433,3 @@ export default class Buddy extends React.Component {
           onClick={this.testAssignBuddy}
         ></input>
 */
-
-    return (
-      <div>
-        <p>Your sleep buddy is {this.state.buddyName}</p>
-
-        {this.state.activated != "true"
-          ? this.renderNotActivated()
-          : this.renderActivated()}
-      </div>
-    );
-  }
-}

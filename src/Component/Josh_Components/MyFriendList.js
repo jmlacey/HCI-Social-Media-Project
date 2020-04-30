@@ -16,11 +16,9 @@ export default class MyFriendList extends React.Component {
       username: "",
       firstname: "",
       lastname: "",
-      file: null
-
+      file: null,
     };
-    this.handleChange = this.handleChange.bind(this)
-
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -31,8 +29,8 @@ export default class MyFriendList extends React.Component {
 
   handleChange(event) {
     this.setState({
-      file: URL.createObjectURL(event.target.files[0])
-    })
+      file: URL.createObjectURL(event.target.files[0]),
+    });
   }
 
   loadFriends() {
@@ -42,7 +40,7 @@ export default class MyFriendList extends React.Component {
         method: "post",
         body: JSON.stringify({
           action: "getConnections",
-          user_id: this.state.userid,
+          userid: this.state.userid,
           connectionstatus: "Active",
         }),
       }
@@ -67,13 +65,14 @@ export default class MyFriendList extends React.Component {
   }
 
   loadBlocked() {
+    
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
         method: "post",
         body: JSON.stringify({
           action: "getConnections",
-          user_id: this.state.userid,
+          userid: this.state.userid,
           //only show pending users
           connectionstatus: "BLOCKED",
         }),
@@ -105,7 +104,7 @@ export default class MyFriendList extends React.Component {
         method: "post",
         body: JSON.stringify({
           action: "getConnections",
-          user_id: this.state.userid,
+          userid: this.state.userid,
           //only show pending users
           connectionstatus: "pending",
         }),
@@ -408,33 +407,35 @@ export default class MyFriendList extends React.Component {
     return (
       <div>
         {/* <h1>Viewing {this.state.username} 's Profile</h1> */}
-          
 
         <div>
-        {/* This displays the default Alan profile Pic */}
-        <img src={friend}/>
+          {/* This displays the default Alan profile Pic */}
+          <img src={friend} />
 
-        {/* This gives you the option to upload a profile pic yourself */}
-        
-        {/* <input type="file" onChange={this.handleChange}/>
+          {/* This gives you the option to upload a profile pic yourself */}
+
+          {/* <input type="file" onChange={this.handleChange}/>
         <img src={this.state.file}/> */}
 
-            <p >Username: {this.state.username} </p>
-            
-            <p >First Name: {this.state.firstname} </p>
-           
-            <p >Last Name: {this.state.lastname} </p> 
-           
-          <p>  <label for="Sleep Time">Sleep Time:    </label>
-            <input type="time" id="Sleep Time" name="Sleep Time"/> </p> 
+          <p>Username: {this.state.username} </p>
 
-           <p> <label for="Wake Up Time">Wake Up Time:  </label>
-            <input type="time" id="Wake Up Time" name="Wake Up Time"/></p>
+          <p>First Name: {this.state.firstname} </p>
 
+          <p>Last Name: {this.state.lastname} </p>
 
+          <p>
+            {" "}
+            <label for="Sleep Time">Sleep Time: </label>
+            <input type="time" id="Sleep Time" name="Sleep Time" />{" "}
+          </p>
 
-              <input type="submit" value="Message"></input>
+          <p>
+            {" "}
+            <label for="Wake Up Time">Wake Up Time: </label>
+            <input type="time" id="Wake Up Time" name="Wake Up Time" />
+          </p>
 
+          <input type="submit" value="Message"></input>
         </div>
         <button
           className="profileButton"

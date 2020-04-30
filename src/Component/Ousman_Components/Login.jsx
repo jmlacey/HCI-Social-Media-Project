@@ -359,7 +359,7 @@ class Header extends Component {
   };
 
   render() {
-    if (!sessionStorage.getItem("token")) {
+    if (!sessionStorage.getItem("token") || (sessionStorage.getItem("token") && sessionStorage.getItem("token") === "0")) {
       if (this.state.forgotPassword) {
         return (
           <div>
@@ -446,6 +446,7 @@ class Header extends Component {
         </div>
       );
     } else {
+    
       return (
         <div className="formDiv">
           <div class="centered">

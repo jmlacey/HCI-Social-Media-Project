@@ -199,6 +199,20 @@ class Header extends Component {
                   }),
                 }
               );
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/uacontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserArtifacts",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    artifacttype: "ProfilePic",
+                  }),
+                }
+              );
             }
 
             this.setState({

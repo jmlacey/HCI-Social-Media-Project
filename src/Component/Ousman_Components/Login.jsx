@@ -199,6 +199,20 @@ class Header extends Component {
                   }),
                 }
               );
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/uacontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserArtifacts",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    artifacttype: "ProfilePic",
+                  }),
+                }
+              );
             }
 
             this.setState({
@@ -358,6 +372,32 @@ class Header extends Component {
       );
   };
 
+  Reinitialize = () => {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          //API FIELDS
+          action: "addOrEditUsers",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: sessionStorage.getItem("user"),
+          status: "reinit"
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+    
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+  };
+
   render() {
     if (!sessionStorage.getItem("token") || (sessionStorage.getItem("token") && sessionStorage.getItem("token") === "0")) {
       if (this.state.forgotPassword) {
@@ -450,6 +490,10 @@ class Header extends Component {
       return (
         <div className="formDiv">
           <div class="centered">
+          <form onSubmit={this.Reinitialize}>
+              <input type="submit" value="reinit"></input>
+            </form>
+
             <form onSubmit={this.logout}>
               <input type="submit" value="Logout"></input>
             </form>

@@ -44,6 +44,8 @@ export default class ProfilePic extends Component {
     }
 
     uploadPicture = () => {
+        console.log("This is the pic URL" + this.state.profilePicURL);
+        
         //Make a fetch call that grabs the three states and fills in the text boxes.
         fetch(
             "http://stark.cse.buffalo.edu/cse410/reactioneers/api/uacontroller.php",
@@ -63,11 +65,7 @@ export default class ProfilePic extends Component {
             .then((res) => res.json())
             .then(
                 (result) => {
-                    this.setState({
-                        // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
-                        // try and make the form component uncontrolled, which plays havoc with react
-
-                    });
+                    
                 },
                 (error) => {
                     alert("error!");
@@ -86,11 +84,10 @@ export default class ProfilePic extends Component {
         return (
             <div>
                 <img
-                    src={this.state.profilePicURL}
-                    alt="new">
+                    src={this.state.profilePicURL}>
                 </img>
 
-                <form onSubmit={this.UploadPicure}>
+                <form >
                     <input
                         type="text"
                         placeholder="Picture URL"
@@ -99,7 +96,7 @@ export default class ProfilePic extends Component {
                     </input>
 
 
-                    <input type="submit" value="Upload" />
+                    <input type="button" value="Upload" onClick={this.uploadPicture}/>
                 </form>
             </div>
         );

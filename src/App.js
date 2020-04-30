@@ -9,7 +9,6 @@ import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
 // import View from "./Component/Anthony_Components/viewprofile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
-import Discussion from "./Component/Discussion.jsx";
 import Edit from "./Component/Anthony_Components/editprofile.jsx";
 
 //My stuff
@@ -18,6 +17,7 @@ import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import SignUp from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
+// import ProfilePage from "./Component/Josh_Components/UserProfile.js";
 import RealProfile from "./Component/Zach_components/Profile.js"
 import ProfilePic from "./Component/Zach_components/ProfilePic.js";
 
@@ -127,7 +127,7 @@ class MainContent extends React.Component {
     if (this.state.section === "Discussion") {
       return (
         <div className="discussionPage">
-          <Discussion />
+          <PostForm />
         </div>
       );
     }

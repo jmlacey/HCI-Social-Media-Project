@@ -25,6 +25,7 @@ export default class MyFriendList extends React.Component {
         body: JSON.stringify({
           action: "getConnections",
           user_id: this.state.userid,
+          connectionstatus: "Active",
         }),
       }
     )
@@ -141,6 +142,62 @@ export default class MyFriendList extends React.Component {
       });
   };
 
+  acceptInvitation = (name, connectionid, connectuserid) => {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditConnections",
+          user_id: sessionStorage.getItem("user"),
+          userid: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          connectionstatus: "Active",
+          //need to pass these values in or else the connection gets overwritten.
+          connectuserid: connectuserid,
+          connectionid: connectionid,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        alert(
+          "Added " +
+            name +
+            ", connectionid is: " +
+            connectionid +
+            ", connectuserid is: " +
+            connectuserid
+        );
+        this.setState({
+          submitMessage: response.Status,
+        });
+      });
+    //next fetch call to add friend both ways
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditConnections",
+          user_id: sessionStorage.getItem("user"),
+          userid: connectuserid,
+          session_token: sessionStorage.getItem("token"),
+          connectionstatus: "Active",
+          //need to pass these values in or else the connection gets overwritten.
+          connectuserid: sessionStorage.getItem("user"),
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        alert("other fetch call worked...?");
+        this.setState({
+          submitMessage: response.Status,
+        });
+      });
+  };
+
   render() {
     const { error, isLoaded, connections, pendingConnections } = this.state;
     if (error) {
@@ -205,6 +262,26 @@ export default class MyFriendList extends React.Component {
                   <img className="friendImg" alt="friendIcon" src={friend} />
                   {"UserName: " + connection.name} -
                   {"Status: " + connection.connection_status}
+                  {/* button for accept */}
+                  <button
+                    className="profileButton"
+                    onClick={() =>
+                      this.acceptInvitation(
+                        connection.name,
+                        connection.connection_id,
+                        connection.connect_user_id
+                      )
+                    }
+                  >
+                    Accept
+                  </button>
+                  {/* button for ignore */}
+                  <button
+                    className="profileButton"
+                    onClick={() => this.deleteFriend(connection.connection_id)}
+                  >
+                    Ignore
+                  </button>
                 </div>
               ))}
             </ul>

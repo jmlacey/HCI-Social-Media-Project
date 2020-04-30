@@ -48,13 +48,14 @@ export default class MyFriendList extends React.Component {
   }
 
   addFriend() {
+    alert(this.state.connectionID);
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
         method: "POST",
         body: JSON.stringify({
           action: "addOrEditConnections",
-          user_id: sessionStorage.getItem("user"),
+          user_id: sessionStorage.getItem("user"), //always me
           userid: this.state.connectionID,
           session_token: sessionStorage.getItem("token"),
           connectuserid: sessionStorage.getItem("user"),
@@ -65,11 +66,11 @@ export default class MyFriendList extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         alert(
-          "Added " +
+          "Sent " +
             this.state.userName +
             " AKA " +
             this.state.connectionID +
-            " to your friends list! Hooray!"
+            " an invitation! Hooray!"
         );
         this.setState({
           submitMessage: response.Status,

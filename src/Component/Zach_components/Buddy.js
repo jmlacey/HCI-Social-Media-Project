@@ -375,6 +375,7 @@ export default class Buddy extends React.Component {
   }
 
   buttonSubmit() {
+    //Updating the lastHitButton pref
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
       {
@@ -441,6 +442,8 @@ export default class Buddy extends React.Component {
         }
       );
 
+    alert(this.state.buddyID);
+
     //Incrementing the sleep points of the user's sleep buddy
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
@@ -460,6 +463,10 @@ export default class Buddy extends React.Component {
             theirSleepyPoints: parseInt(this.state.theirSleepyPoints) + 1,
           });
 
+          alert(sessionStorage.getItem("user"));
+          alert(this.state.theirSleepyPoints);
+          alert(sessionStorage.getItem("token"));
+
           fetch(
             "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
             {
@@ -468,8 +475,8 @@ export default class Buddy extends React.Component {
                 action: "addOrEditUsers",
                 user_id: sessionStorage.getItem("user"),
                 session_token: sessionStorage.getItem("token"),
-                userid: sessionStorage.getItem("user"),
-                status: parseInt(this.state.theirSleepyPoints),
+                userid: this.state.buddyID,
+                status: this.state.theirSleepyPoints,
               }),
             }
           );
@@ -522,9 +529,6 @@ export default class Buddy extends React.Component {
         }),
       }
     );
-    alert("the user id is:" + this.state.buddyID);
-    alert("the prefid is :" + this.state.theirWakeTimeID);
-    alert("the pref value is : " + this.state.wakeTime);
 
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",

@@ -30,6 +30,7 @@ export default class Buddy extends React.Component {
       theirSleepyPoints: "",
 
       theirWakeTimeID: "",
+      theirSleepCycleActivatedID: "",
     };
     this.activateIt = this.activateIt.bind(this);
     this.deactivateIt = this.deactivateIt.bind(this);
@@ -52,7 +53,7 @@ export default class Buddy extends React.Component {
 
     //If the time is before 10, do something. Else, do something else.
     let minutesString = this.state.time.toTimeString();
-    if (minutesString.charAt(7) != " ") {
+    if (minutesString.charAt(7) !== " ") {
       let minutesInt =
         (parseInt(minutesString.charAt(0)) * 10 +
           parseInt(minutesString.charAt(1))) *
@@ -179,8 +180,19 @@ export default class Buddy extends React.Component {
                     buddywakeTimeId = pref100.pref_id;
                   }
                 });
+
+                let buddyWakeTimeActivated = "";
+                let buddyWakeTimeActivatedID = "";
+                result.users[0]["user_prefs"].forEach(function (pref1001) {
+                  if (pref1001.pref_name === "SleepCycleActivated") {
+                    buddyWakeTimeActivated = pref1001.pref_value;
+                    buddyWakeTimeActivatedID = pref1001.pref_id;
+                  }
+                });
+
                 this.setState({
                   theirWakeTimeID: buddywakeTimeId || "",
+                  theirSleepCycleActivatedID: buddyWakeTimeActivatedID || "",
                 });
               },
               (error) => {
@@ -308,6 +320,9 @@ export default class Buddy extends React.Component {
     return (
       <div>
         <p>The current time is: {this.state.time.toLocaleTimeString()} </p>
+        <p>
+          And your wakeup time is: {this.state.wakeTime} (24 hour time format)
+        </p>
         {this.state.timeToWakeUp
           ? this.renderWakeUpGame()
           : this.dontRenderWakeUpGame()}
@@ -465,7 +480,7 @@ export default class Buddy extends React.Component {
       );
   }
 
-  activateIt() {  
+  activateIt() {
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
       {
@@ -511,7 +526,6 @@ export default class Buddy extends React.Component {
     alert("the prefid is :" + this.state.theirWakeTimeID);
     alert("the pref value is : " + this.state.wakeTime);
 
-
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
       {
@@ -527,7 +541,21 @@ export default class Buddy extends React.Component {
         }),
       }
     );
-
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUserPrefs",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: this.state.buddyID,
+          prefid: this.state.theirSleepCycleActivatedID,
+          prefname: "SleepCycleActivated",
+          prefvalue: "true",
+        }),
+      }
+    );
   }
 
   deactivateIt() {
@@ -555,6 +583,22 @@ export default class Buddy extends React.Component {
           alert("CURSES! FOILED AGAIN!");
         }
       );
+
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUserPrefs",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: this.state.buddyID,
+          prefid: this.state.theirSleepCycleActivatedID,
+          prefname: "SleepCycleActivated",
+          prefvalue: "false",
+        }),
+      }
+    );
   }
 
   render() {

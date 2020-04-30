@@ -401,6 +401,12 @@ export default class MyFriendList extends React.Component {
         <p>
           Name: {this.state.firstname} {this.state.lastname}
         </p>
+        <button
+          className="profileButton"
+          onClick={() => this.setState({ viewProfileActivated: "false" })}
+        >
+          Exit
+        </button>
       </div>
     );
   }

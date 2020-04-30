@@ -4,7 +4,7 @@ export default class ProfilePic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            profileId: "",
+            profileID: "",
             profilePicURL: ""
         };
     }
@@ -25,11 +25,11 @@ export default class ProfilePic extends Component {
             .then(
                 (result) => {
                     let profilePicURL = "";
-                    let profileId = "";
-                    results.users[0]["user_artifacts"].forEach(function (artifact1) {
+                    let profileID = "";
+                    result.users[0]["user_artifacts"].forEach(function (artifact1) {
                         if (artifact1.artifact_type === "ProfilePic") {
                             profilePicURL = artifact1.artifact_url;
-                            profileId = artifact1.artifact_id;
+                            profileID = artifact1.artifact_id;
                         }
                     });
                     this.setState({

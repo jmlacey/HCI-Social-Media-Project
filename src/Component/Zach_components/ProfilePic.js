@@ -4,7 +4,6 @@ export default class ProfilePic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: "",
             profileId: "",
             profilePicURL: ""
         };
@@ -18,17 +17,24 @@ export default class ProfilePic extends Component {
                 method: "post",
                 body: JSON.stringify({
                     action: "getCompleteUsers",
-                    userid: sessionStorage.getItem("user"),
+                    userid: sessionStorage.getItem("user")
                 }),
             }
         )
             .then((res) => res.json())
             .then(
                 (result) => {
+                    let profilePicURL = "";
+                    let profileId = "";
+                    results.users[0]["user_artifacts"].forEach(function (artifact1) {
+                        if (artifact1.artifact_type === "ProfilePic") {
+                            profilePicURL = artifact1.artifact_url;
+                            profileId = artifact1.artifact_id;
+                        }
+                    });
                     this.setState({
-                        // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
-                        // try and make the form component uncontrolled, which plays havoc with react
-
+                        profilePicURL: profilePicURL,
+                        profileID: profileID
                     });
                 },
                 (error) => {
@@ -39,14 +45,18 @@ export default class ProfilePic extends Component {
 
     uploadPicture = () => {
         //Make a fetch call that grabs the three states and fills in the text boxes.
-
         fetch(
-            "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+            "http://stark.cse.buffalo.edu/cse410/reactioneers/api/uacontroller.php",
             {
                 method: "post",
                 body: JSON.stringify({
-                    action: "getCompleteUsers",
+                    action: "addOrEditUserArtifacts",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
                     userid: sessionStorage.getItem("user"),
+                    artifactid: this.state.profileID,
+                    artifacttype: "ProfilePic",
+                    artifacturl: this.state.profilePicURL
                 }),
             }
         )
@@ -65,27 +75,31 @@ export default class ProfilePic extends Component {
             );
     }
 
-    uploadedPic = React.useRef(null);
-
-    uploadPicHandler = event => {
-        const [file] = event.target.files;
-        if (file) {
-            const reader = new FileReader();
-            const { current } = this.uploadedPic;
-            current.file = file;
-            reader.onload = event => {
-                current.src = event.target.result;
-            }
-            reader.readAsDataURL(file);
-        }
+    uploadPicHandler = (event) => {
+        let x = event.target;
+        this.setState({
+            profilePicURL: x.value
+        });
     };
 
     render() {
         return (
             <div>
+                <img
+                    src={this.state.profilePicURL}
+                    alt="new">
+                </img>
+
                 <form onSubmit={this.UploadPicure}>
-                    <input type="file" onChange={this.uploadPicHandler} mulitple="false" />
-                    <img ref={this.uploadedPic}></img>
+                    <input
+                        type="text"
+                        placeholder="Picture URL"
+                        onChange={this.uploadPicHandler}
+                        value={this.state.profilePicURL}>
+                    </input>
+
+
+                    <input type="submit" value="Upload" />
                 </form>
             </div>
         );

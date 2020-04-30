@@ -18,8 +18,9 @@ import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import SignUp from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
-import ProfilePage from "./Component/Josh_Components/UserProfile.js";
+import ProfilePage from "./Component/Zach_Components/ProfilePic.js";
 import RealProfile from "./Component/Zach_components/Profile.js"
+import ProfilePic from "./Component/Zach_Components/ProfilePic.js";
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -99,9 +100,10 @@ class MainContent extends React.Component {
           <Picture />
           <View action={this.startEdit} />
         </div>
-        */
-
-        <RealProfile />
+        */<div>
+          <ProfilePic />
+          <RealProfile />
+        </div>
       );
     }
 

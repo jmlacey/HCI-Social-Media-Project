@@ -605,7 +605,7 @@ export default class Buddy extends React.Component {
     );
   }
 
-  render() {
+  renderSleepBuddyExists() {
     return (
       <div>
         <p>Your sleep buddy is {this.state.buddyName}</p>
@@ -613,6 +613,20 @@ export default class Buddy extends React.Component {
         {this.state.activated !== "true"
           ? this.renderNotActivated()
           : this.renderActivated()}
+      </div>
+    );
+  }
+
+  renderSleepBuddyDoesNotExist() {
+    return <p>You dont have a sleep buddy!</p>;
+  }
+
+  render() {
+    return (
+      <div>
+        {false
+          ? this.renderSleepBuddyExists()
+          : this.renderSleepBuddyDoesNotExist()}
       </div>
     );
   }

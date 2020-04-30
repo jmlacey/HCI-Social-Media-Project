@@ -623,18 +623,18 @@ IDK about any of the shit beneath this :(
 
 .left {
   height: 100%;
-  width: 25%;
-  background-color: blue;
-  position: fixed;
+  width: 40%;
+  background-color: lightgray;
+  position: absolute;
   overflow-x: hidden;
   left: 0;
 }
 
 .right {
   height: 100%;
-  width: 75%;
-  background-color: red;
-  position: fixed;
+  width: 60%;
+  background-color: grey;
+  position: absolute;
   overflow-x: hidden;
   right: 0;
 }

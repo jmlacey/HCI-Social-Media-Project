@@ -116,6 +116,9 @@ export default class MyFriendList extends React.Component {
       return <div> Loading... </div>;
     } else {
       return (
+        <body>
+        <div className="split right">
+          {/* <div className="centered"> */}
         <div className="post">
           <ul>
             {connections.map((connection) => (
@@ -154,6 +157,13 @@ export default class MyFriendList extends React.Component {
             ))}
           </ul>
         </div>
+        {/* </div> */}
+          </div>
+
+          <div className="split left">
+            {/* <div className="centered"></div> */}
+          </div>
+        </body>
       );
     }
   }

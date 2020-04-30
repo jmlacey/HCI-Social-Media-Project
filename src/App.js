@@ -38,6 +38,11 @@ class MainContent extends React.Component {
       email: "",
       sessiontoken: "",
       alanmessage: "",
+
+      username: "",
+      password: "",
+      user_id: "",
+      userid: "",
     };
   }
 
@@ -60,6 +65,8 @@ class MainContent extends React.Component {
     }
 
     if (this.state.section === "signup") {
+
+      
       return (
         <div className="App">
           <SignUp />
@@ -177,116 +184,144 @@ class App extends React.Component {
   }
 
   render() {
+    sessionStorage.setItem("token", "0");
     let mainContent = React.createRef();
-    return (
-      <div className="App">
-        <header className="header">
-          <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
-            SLEEP.IO
-          </h1>
-          <img src={logo} alt="" className="headerImg" />
-          <div className="container">
-            <nav className="navBar">
-              <div className="Nav_Div">
-                <ul className="sideBar">
-                  <li className="Nav_Element">
-                    <button
-                      className="element_link"
-                      onClick={(e) => setMenuOption("login", mainContent, e)}
-                    >
-                      Login
-                    </button>
-                  </li>
+    if ((this.state.section = "signup")) {
+      return (
+        <div className="App">
+          <header className="header">
+            <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
+              SLEEP.IO
+            </h1>
+            <img src={logo} alt="" className="headerImg" />
+            <div className="container">
+              <nav className="navBar">
+                <div className="Nav_Div">
+                  <ul className="sideBar">
+                    <li className="Nav_Element">
+                      <a
+                        className="element_link"
+                        onClick={(e) => setMenuOption("login", mainContent, e)}
+                      >
+                        Login
+                      </a>
 
-                  <li className="Nav_Element">
-                    <button
-                      className="element_link"
-                      onClick={(e) =>
-                        setMenuOption("Discussion", mainContent, e)
-                      }
-                    >
-                      Discussion
-                    </button>
-                  </li>
+                      <a
+                        className="element_link"
+                        onClick={(e) =>
+                          setMenuOption("Discussion", mainContent, e)
+                        }
+                      >
+                        Discussion
+                      </a>
 
-                  <li className="Nav_Element">
-                    <button
-                      className="element_link"
-                      onClick={(e) => setMenuOption("friends", mainContent, e)}
-                    >
-                      Friends
-                    </button>
-                  </li>
+                      <a
+                        className="element_link"
+                        onClick={(e) =>
+                          setMenuOption("friends", mainContent, e)
+                        }
+                      >
+                        Friends
+                      </a>
 
-                  <li className="Nav_Element">
-                    <button
-                      className="element_link"
-                      onClick={(e) => setMenuOption("profile", mainContent, e)}
-                    >
-                      Profile
-                    </button>
-                  </li>
+                      <a
+                        className="element_link"
+                        onClick={(e) =>
+                          setMenuOption("profile", mainContent, e)
+                        }
+                      >
+                        Profile
+                      </a>
 
-                  <li className="Nav_Element">
-                    <button
-                      className="element_link"
-                      onClick={(e) => setMenuOption("buddy", mainContent, e)}
-                    >
-                      Buddy
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </nav>
+                      <a
+                        className="element_link"
+                        onClick={(e) => setMenuOption("buddy", mainContent, e)}
+                      >
+                        Buddy
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </header>
+
+          <div className="maincontent" id="mainContent">
+            <MainContent ref={mainContent} />
           </div>
 
-          <nav className="r">
-            <div className="login" style={{ paddingRight: 5 }}>
-              <label style={{ color: "white" }} for="username">
-                Username
-              </label>
-              <input
-                type="text"
-                id="usename"
-                placeholder="Your username"
-                className="inputBox"
-              ></input>
-            </div>
-
-            <div className="login" style={{ paddingLeft: 5 }}>
-              <label for="password" style={{ color: "white" }}>
-                Password
-              </label>
-              <input
-                type="text"
-                id="password"
-                placeholder="Your password"
-                className="inputBox"
-              ></input>
-            </div>
-
-            <div>
-              <input
-                type="button"
-                value="Login"
-                className="loginButton2"
-              ></input>
-            </div>
-          </nav>
-        </header>
-
-        <div className="maincontent" id="mainContent">
-          <MainContent ref={mainContent} />
+          <Modal
+            show={this.state.openModal}
+            onClose={(e) => toggleModal(this, e)}
+          >
+            This is a modal dialog!
+          </Modal>
         </div>
+      );
+    } else
+      return (
+        <div className="App">
+          <header className="header">
+            <h1 style={{ color: "white", padding: 5, marginTop: 20 }}>
+              SLEEP.IO
+            </h1>
+            <img src={logo} alt="" className="headerImg" />
+            <div className="container">
+              <nav className="navBar">
+                <div className="Nav_Div">
+                  <ul className="sideBar">
+                    <li className="Nav_Element">
+                      <a
+                        className="element_link"
+                        onClick={(e) => setMenuOption("login", mainContent, e)}
+                      >
+                        Login
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
 
-        <Modal
-          show={this.state.openModal}
-          onClose={(e) => toggleModal(this, e)}
-        >
-          This is a modal dialog!
-        </Modal>
-      </div>
-    );
+            <nav className="r">
+              {/* <form className="login" style={{ paddingRight: 5 }}>
+      <label style={{ color: "white" }} for="username">
+        Username
+      </label>
+      <input
+        type="text"
+        id="usename"
+        placeholder="Your username"
+        className="inputBox"
+      ></input> 
+
+      <label for="password" style={{ color: "white" }}>
+        Password
+      </label>
+      <input
+        type="text"
+        id="password"
+        placeholder="Your password"
+        className="inputBox"
+      ></input>
+      <input type="submit" value="Login"></input>
+
+    </form> */}
+            </nav>
+          </header>
+
+          <div className="maincontent" id="mainContent">
+            <MainContent ref={mainContent} />
+          </div>
+
+          <Modal
+            show={this.state.openModal}
+            onClose={(e) => toggleModal(this, e)}
+          >
+            This is a modal dialog!
+          </Modal>
+        </div>
+      );
   }
 }
 export default App;

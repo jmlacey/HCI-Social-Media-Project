@@ -7,6 +7,7 @@ export default class MyFriendList extends React.Component {
     this.state = {
       userName: "",
       connectionID: "",
+      idForDelete: "",
       typingMessage: "",
       submitMessage: "",
 
@@ -14,11 +15,6 @@ export default class MyFriendList extends React.Component {
       connections: [],
     };
   }
-
-  componentDidMount() {
-    //this.addFriend();
-  }
-
   userNameToID() {
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
@@ -33,11 +29,9 @@ export default class MyFriendList extends React.Component {
       .then((response) => response.json())
       .then(
         (response) => {
-          //TESTING
-          alert(response.users.length);
-
           this.setState({
-            connectionID: response.users.length > 0 ? response.users[0].user_id : "",
+            connectionID:
+              response.users.length > 0 ? response.users[0].user_id : "",
           });
 
           if (this.state.connectionID !== "") {
@@ -60,20 +54,22 @@ export default class MyFriendList extends React.Component {
         method: "POST",
         body: JSON.stringify({
           action: "addOrEditConnections",
-          user_id: sessionStorage.getItem("user"),
+          user_id: sessionStorage.getItem("user"), //always me
+          userid: this.state.connectionID,
           session_token: sessionStorage.getItem("token"),
-          connectuserid: this.state.connectionID,
+          connectuserid: sessionStorage.getItem("user"),
+          connectionstatus: "pending",
         }),
       }
     )
       .then((response) => response.json())
       .then((response) => {
         alert(
-          "Added " +
+          "Sent " +
             this.state.userName +
             " AKA " +
             this.state.connectionID +
-            " to your friends list! Hooray!"
+            " an invitation! Hooray!"
         );
         this.setState({
           submitMessage: response.Status,
@@ -97,18 +93,19 @@ export default class MyFriendList extends React.Component {
       });
     }
   };
-
   render() {
     return (
-      <form onSubmit={this.addFriendButton}>
-        <h1>{this.state.typingMessage}</h1>
-        <input
-          type="text"
-          placeholder="Enter a name to add here!"
-          onChange={this.changeInputState}
-        />
-        <input type="submit" className="element_link" value="Add Friend!" />
-      </form>
+      <div>
+        <form onSubmit={this.addFriendButton}>
+          <h1>{this.state.typingMessage}</h1>
+          <input
+            type="text"
+            placeholder="Enter a name to add here!"
+            onChange={this.changeInputState}
+          />
+          <input type="submit" className="element_link" value="Add Friend!" />
+        </form>
+      </div>
     );
   }
 }

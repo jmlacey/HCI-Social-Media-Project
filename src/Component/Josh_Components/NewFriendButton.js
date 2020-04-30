@@ -93,8 +93,6 @@ export default class MyFriendList extends React.Component {
       });
     }
   };
-  //change input but for deletion of friends
-
   render() {
     return (
       <div>

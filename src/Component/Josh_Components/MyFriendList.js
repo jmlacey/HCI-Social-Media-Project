@@ -11,6 +11,11 @@ export default class MyFriendList extends React.Component {
       pendingConnections: [],
       blockedConnections: [],
       viewProfileActivated: "",
+
+      //components of a connections profile
+      username: "",
+      firstname: "",
+      lastname: "",
     };
   }
 
@@ -229,14 +234,37 @@ export default class MyFriendList extends React.Component {
             });
           });
       });
-    //next fetch call to add friend both ways
   };
+
+  //get user by their userid
+  viewProfile(userid) {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          action: "getCompleteUsers",
+          userid: userid,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({
+          viewProfileActivated: "true",
+          firstname: response.users[0].first_name,
+          lastname: response.users[0].last_name,
+          username: response.users[0].username,
+        });
+      });
+  }
+
   render() {
     return (
       <div>
         {this.state.viewProfileActivated !== "true"
           ? this.renderNotActivated()
-          : this.openProfile()}
+          : this.openProfileRender()}
       </div>
     );
   }
@@ -270,7 +298,7 @@ export default class MyFriendList extends React.Component {
                     <button
                       className="profileButton"
                       onClick={() =>
-                        this.setState({ viewProfileActivated: "true" })
+                        this.viewProfile(connection.connect_user_id)
                       }
                     >
                       View
@@ -311,7 +339,7 @@ export default class MyFriendList extends React.Component {
                         this.deleteFriend(connection.connection_id)
                       }
                     >
-                      yikes
+                      Hide
                     </button>
                   </div>
                 ))}
@@ -329,6 +357,13 @@ export default class MyFriendList extends React.Component {
                   <img className="friendImg" alt="friendIcon" src={friend} />
                   {"UserName: " + connection.name} -
                   {"Status: " + connection.connection_status}
+                  {/* button for viewing profile */}
+                  <button
+                    className="profileButton"
+                    onClick={() => this.viewProfile(connection.connect_user_id)}
+                  >
+                    View
+                  </button>
                   {/* button for accept */}
                   <button
                     className="profileButton"
@@ -358,7 +393,15 @@ export default class MyFriendList extends React.Component {
     }
   }
 
-  openProfile() {
+  openProfileRender() {
     alert("viewing profile");
+    return (
+      <div>
+        <h1>Viewing {this.state.username} 's Profile</h1>
+        <p>
+          Name: {this.state.firstname} {this.state.lastname}
+        </p>
+      </div>
+    );
   }
 }

@@ -9,12 +9,15 @@ export default class MyFriendList extends React.Component {
       userid: props.userid,
       connections: [],
       pendingConnections: [],
+      blockedConnections: [],
+      viewProfileActivated: "",
     };
   }
 
   componentDidMount() {
     this.loadFriends();
     this.loadPending();
+    this.loadBlocked();
   }
 
   loadFriends() {
@@ -36,6 +39,38 @@ export default class MyFriendList extends React.Component {
             this.setState({
               isLoaded: true,
               connections: result.connections,
+            });
+          }
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error,
+          });
+        }
+      );
+  }
+
+  loadBlocked() {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "getConnections",
+          user_id: this.state.userid,
+          //only show pending users
+          connectionstatus: "BLOCKED",
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          if (result.connections) {
+            this.setState({
+              isLoaded: true,
+              blockedConnections: result.connections,
             });
           }
         },
@@ -196,9 +231,24 @@ export default class MyFriendList extends React.Component {
       });
     //next fetch call to add friend both ways
   };
-
   render() {
-    const { error, isLoaded, connections, pendingConnections } = this.state;
+    return (
+      <div>
+        {this.state.viewProfileActivated !== "true"
+          ? this.renderNotActivated()
+          : this.openProfile()}
+      </div>
+    );
+  }
+
+  renderNotActivated() {
+    const {
+      error,
+      isLoaded,
+      connections,
+      pendingConnections,
+      blockedConnections,
+    } = this.state;
     if (error) {
       return <div> Error: {error.message} </div>;
     } else if (!isLoaded) {
@@ -219,7 +269,9 @@ export default class MyFriendList extends React.Component {
                     {/* button for viewing profile */}
                     <button
                       className="profileButton"
-                      onClick={() => alert("not yet")}
+                      onClick={() =>
+                        this.setState({ viewProfileActivated: "true" })
+                      }
                     >
                       View
                     </button>
@@ -244,6 +296,22 @@ export default class MyFriendList extends React.Component {
                       }
                     >
                       Block
+                    </button>
+                  </div>
+                ))}
+                {blockedConnections.map((connection) => (
+                  <div key={connection.connection_id} className="userlist">
+                    <img className="friendImg" alt="friendIcon" src={friend} />
+                    {"UserName: " + connection.name} -
+                    {"Status: " + connection.connection_status}
+                    {/* button for completely ignoring this fool */}
+                    <button
+                      className="profileButton"
+                      onClick={() =>
+                        this.deleteFriend(connection.connection_id)
+                      }
+                    >
+                      yikes
                     </button>
                   </div>
                 ))}
@@ -288,5 +356,9 @@ export default class MyFriendList extends React.Component {
         </body>
       );
     }
+  }
+
+  openProfile() {
+    alert("viewing profile");
   }
 }

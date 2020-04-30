@@ -16,13 +16,23 @@ export default class MyFriendList extends React.Component {
       username: "",
       firstname: "",
       lastname: "",
+      file: null
+
     };
+    this.handleChange = this.handleChange.bind(this)
+
   }
 
   componentDidMount() {
     this.loadFriends();
     this.loadPending();
     this.loadBlocked();
+  }
+
+  handleChange(event) {
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0])
+    })
   }
 
   loadFriends() {
@@ -397,10 +407,35 @@ export default class MyFriendList extends React.Component {
     alert("viewing profile");
     return (
       <div>
-        <h1>Viewing {this.state.username} 's Profile</h1>
-        <p>
-          Name: {this.state.firstname} {this.state.lastname}
-        </p>
+        {/* <h1>Viewing {this.state.username} 's Profile</h1> */}
+          
+
+        <div>
+        {/* This displays the default Alan profile Pic */}
+        <img src={friend}/>
+
+        {/* This gives you the option to upload a profile pic yourself */}
+        
+        {/* <input type="file" onChange={this.handleChange}/>
+        <img src={this.state.file}/> */}
+
+            <p >Username: {this.state.username} </p>
+            
+            <p >First Name: {this.state.firstname} </p>
+           
+            <p >Last Name: {this.state.lastname} </p> 
+           
+          <p>  <label for="Sleep Time">Sleep Time:    </label>
+            <input type="time" id="Sleep Time" name="Sleep Time"/> </p> 
+
+           <p> <label for="Wake Up Time">Wake Up Time:  </label>
+            <input type="time" id="Wake Up Time" name="Wake Up Time"/></p>
+
+
+
+              <input type="submit" value="Message"></input>
+
+        </div>
         <button
           className="profileButton"
           onClick={() => this.setState({ viewProfileActivated: "false" })}

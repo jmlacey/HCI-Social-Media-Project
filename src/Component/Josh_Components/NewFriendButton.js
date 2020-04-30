@@ -98,7 +98,6 @@ export default class MyFriendList extends React.Component {
   render() {
     return (
       <div>
-        
         <form onSubmit={this.addFriendButton}>
           <h1>{this.state.typingMessage}</h1>
           <input
@@ -108,7 +107,6 @@ export default class MyFriendList extends React.Component {
           />
           <input type="submit" className="element_link" value="Add Friend!" />
         </form>
-        <h1>Pending Invitations:</h1>
       </div>
     );
   }

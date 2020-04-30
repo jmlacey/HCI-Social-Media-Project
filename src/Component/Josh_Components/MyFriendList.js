@@ -117,51 +117,55 @@ export default class MyFriendList extends React.Component {
     } else {
       return (
         <body>
-        <div className="split right">
-          {/* <div className="centered"> */}
-        <div className="post">
-          <ul>
-            {connections.map((connection) => (
-              <div key={connection.connection_id} className="userlist">
-                <img className="friendImg" alt="friendIcon" src={friend} />
-                {"UserName: " + connection.name} -
-                {"Status: " + connection.connection_status}
-                {/* button for viewing profile */}
-                <button
-                  className="profileButton"
-                  onClick={() => alert("not yet")}
-                >
-                  View
-                </button>
-                {/* button for deletion */}
-                <button
-                  className="profileButton"
-                  onClick={() => this.deleteFriend(connection.connection_id)}
-                >
-                  Delete Friend
-                </button>
-                {/* button for blocking */}
-                <button
-                  className="profileButton"
-                  onClick={() =>
-                    this.blockFriend(
-                      connection.name,
-                      connection.connection_id,
-                      connection.connect_user_id
-                    )
-                  }
-                >
-                  Block
-                </button>
-              </div>
-            ))}
-          </ul>
-        </div>
-        {/* </div> */}
+          <div className="split right">
+            {/* <div className="centered"> */}
+            <h1>Friends:</h1>
+            <div className="post">
+              <ul>
+                {connections.map((connection) => (
+                  <div key={connection.connection_id} className="userlist">
+                    <img className="friendImg" alt="friendIcon" src={friend} />
+                    {"UserName: " + connection.name} -
+                    {"Status: " + connection.connection_status}
+                    {/* button for viewing profile */}
+                    <button
+                      className="profileButton"
+                      onClick={() => alert("not yet")}
+                    >
+                      View
+                    </button>
+                    {/* button for deletion */}
+                    <button
+                      className="profileButton"
+                      onClick={() =>
+                        this.deleteFriend(connection.connection_id)
+                      }
+                    >
+                      Delete Friend
+                    </button>
+                    {/* button for blocking */}
+                    <button
+                      className="profileButton"
+                      onClick={() =>
+                        this.blockFriend(
+                          connection.name,
+                          connection.connection_id,
+                          connection.connect_user_id
+                        )
+                      }
+                    >
+                      Block
+                    </button>
+                  </div>
+                ))}
+              </ul>
+            </div>
+            {/* </div> */}
           </div>
 
           <div className="split left">
             {/* <div className="centered"></div> */}
+            <h1>Pending Invitations:</h1>
           </div>
         </body>
       );

@@ -27,7 +27,9 @@ export default class Buddy extends React.Component {
       timeToWakeUp: false,
 
       yourSleepyPoints: "",
-      theirSleepyPoints: ""
+      theirSleepyPoints: "",
+
+      theirWakeTimeID: "",
     };
     this.activateIt = this.activateIt.bind(this);
     this.deactivateIt = this.deactivateIt.bind(this);
@@ -154,6 +156,37 @@ export default class Buddy extends React.Component {
 
           this.IDToUserName();
           this.getwakeTimeMinutes();
+
+          //Embedded getcompleteusers call!
+          fetch(
+            "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+            {
+              method: "post",
+              body: JSON.stringify({
+                action: "getCompleteUsers",
+                userid: this.state.buddyID,
+              }),
+            }
+          )
+            .then((res) => res.json())
+            .then(
+              (result) => {
+                let buddywakeTime = "";
+                let buddywakeTimeId = "";
+                result.users[0]["user_prefs"].forEach(function (pref100) {
+                  if (pref100.pref_name === "WakeTime") {
+                    buddywakeTime = pref100.pref_value;
+                    buddywakeTimeId = pref100.pref_id;
+                  }
+                });
+                this.setState({
+                  theirWakeTimeID: buddywakeTimeId || "",
+                });
+              },
+              (error) => {
+                alert("error!");
+              }
+            );
         },
         (error) => {
           alert("error!");
@@ -432,7 +465,7 @@ export default class Buddy extends React.Component {
       );
   }
 
-  activateIt() {
+  activateIt() {  
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
       {
@@ -457,6 +490,44 @@ export default class Buddy extends React.Component {
           alert("CURSES! FOILED AGAIN!");
         }
       );
+
+    //Submit the wake time.
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUserPrefs",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: sessionStorage.getItem("user"),
+          prefid: this.state.wakeTimeId,
+          prefname: "WakeTime",
+          prefvalue: this.state.wakeTime,
+        }),
+      }
+    );
+    alert("the user id is:" + this.state.buddyID);
+    alert("the prefid is :" + this.state.theirWakeTimeID);
+    alert("the pref value is : " + this.state.wakeTime);
+
+
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUserPrefs",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: this.state.buddyID,
+          prefid: this.state.theirWakeTimeID,
+          prefname: "WakeTime",
+          prefvalue: this.state.wakeTime,
+        }),
+      }
+    );
+
   }
 
   deactivateIt() {

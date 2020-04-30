@@ -11,8 +11,6 @@ export default class Profile extends Component {
             wakeTimeId: "",
             timeZone: "",
             timeZoneId: "",
-            profilePic: "",
-            profileId: ""
         };
     }
 

@@ -141,7 +141,6 @@ export default class MyFriendList extends React.Component {
         });
       });
   };
-
   acceptInvitation = (name, connectionid, connectuserid) => {
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
@@ -172,30 +171,30 @@ export default class MyFriendList extends React.Component {
         this.setState({
           submitMessage: response.Status,
         });
+        fetch(
+          "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+          {
+            method: "post",
+            body: JSON.stringify({
+              action: "addOrEditConnections",
+              user_id: sessionStorage.getItem("user"),
+              userid: connectuserid,
+              session_token: sessionStorage.getItem("token"),
+              connectionstatus: "Active",
+              //need to pass these values in or else the connection gets overwritten.
+              connectuserid: sessionStorage.getItem("user"),
+            }),
+          }
+        )
+          .then((response) => response.json())
+          .then((response) => {
+            alert("added users to both accounts");
+            this.setState({
+              submitMessage: response.Status,
+            });
+          });
       });
     //next fetch call to add friend both ways
-    fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
-      {
-        method: "post",
-        body: JSON.stringify({
-          action: "addOrEditConnections",
-          user_id: sessionStorage.getItem("user"),
-          userid: connectuserid,
-          session_token: sessionStorage.getItem("token"),
-          connectionstatus: "Active",
-          //need to pass these values in or else the connection gets overwritten.
-          connectuserid: sessionStorage.getItem("user"),
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        alert("other fetch call worked...?");
-        this.setState({
-          submitMessage: response.Status,
-        });
-      });
   };
 
   render() {

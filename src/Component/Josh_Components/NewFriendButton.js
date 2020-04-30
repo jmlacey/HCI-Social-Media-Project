@@ -48,7 +48,6 @@ export default class MyFriendList extends React.Component {
   }
 
   addFriend() {
-    alert(this.state.connectionID);
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {

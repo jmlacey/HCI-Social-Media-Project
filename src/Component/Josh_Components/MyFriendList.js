@@ -8,12 +8,13 @@ export default class MyFriendList extends React.Component {
     this.state = {
       userid: props.userid,
       connections: [],
-      connectionstatus: "",
+      pendingConnections: [],
     };
   }
 
   componentDidMount() {
     this.loadFriends();
+    this.loadPending();
   }
 
   loadFriends() {
@@ -34,6 +35,38 @@ export default class MyFriendList extends React.Component {
             this.setState({
               isLoaded: true,
               connections: result.connections,
+            });
+          }
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error,
+          });
+        }
+      );
+  }
+
+  loadPending() {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "getConnections",
+          user_id: this.state.userid,
+          //only show pending users
+          connectionstatus: "pending",
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          if (result.connections) {
+            this.setState({
+              isLoaded: true,
+              pendingConnections: result.connections,
             });
           }
         },
@@ -109,7 +142,7 @@ export default class MyFriendList extends React.Component {
   };
 
   render() {
-    const { error, isLoaded, connections } = this.state;
+    const { error, isLoaded, connections, pendingConnections } = this.state;
     if (error) {
       return <div> Error: {error.message} </div>;
     } else if (!isLoaded) {
@@ -166,10 +199,18 @@ export default class MyFriendList extends React.Component {
           <div className="split left">
             {/* <div className="centered"></div> */}
             <h1>Pending Invitations:</h1>
+            <ul>
+              {pendingConnections.map((connection) => (
+                <div key={connection.connection_id} className="userlist">
+                  <img className="friendImg" alt="friendIcon" src={friend} />
+                  {"UserName: " + connection.name} -
+                  {"Status: " + connection.connection_status}
+                </div>
+              ))}
+            </ul>
           </div>
         </body>
       );
     }
   }
 }
-//{connection.name} - {connection.connection_status}

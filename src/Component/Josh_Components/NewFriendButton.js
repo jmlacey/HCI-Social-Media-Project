@@ -55,9 +55,9 @@ export default class MyFriendList extends React.Component {
         body: JSON.stringify({
           action: "addOrEditConnections",
           user_id: sessionStorage.getItem("user"),
-          userid: sessionStorage.getItem("user"),
+          userid: this.state.connectionID,
           session_token: sessionStorage.getItem("token"),
-          connectuserid: this.state.connectionID,
+          connectuserid: sessionStorage.getItem("user"),
           connectionstatus: "pending",
         }),
       }

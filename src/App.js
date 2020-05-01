@@ -231,12 +231,6 @@ class App extends React.Component {
                 <div className="Nav_Div">
                   <ul className="sideBar">
                     <li className="Nav_Element">
-                      <a
-                        className="element_link"
-                        onClick={(e) => setMenuOption("login", mainContent, e)}
-                      >
-                        Login
-                      </a>
 
                       <a
                         className="element_link"

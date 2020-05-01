@@ -179,7 +179,7 @@ class Sign_up extends Component {
 
                 <label>New Password</label>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="Your New Password"
                   onChange={this.passChangeHandler}
                   value={this.state.newPassword}
@@ -187,7 +187,7 @@ class Sign_up extends Component {
 
                 <label>Confirm New Password</label>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="Confirm New Password"
                   onChange={this.confirmChangeHandler}
                   value={this.state.confirmPassword}

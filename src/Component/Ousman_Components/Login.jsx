@@ -84,7 +84,7 @@ class Header extends Component {
             sessionStorage.setItem("token", result.user.session_token);
             sessionStorage.setItem("user", result.user.user_id);
             sessionStorage.setItem("email", result.user.email_addr);
-            alert("Welcome " + sessionStorage.getItem("email") + "!");
+            // alert("Welcome " + sessionStorage.getItem("email") + "!");
             if (
               result.user.status === null ||
               result.user.status === "reinit"
@@ -122,7 +122,7 @@ class Header extends Component {
                     console.log(result.message);
                   },
                   (error) => {
-                    alert("CURSES! FOILED AGAIN!");
+                    // alert("CURSES! FOILED AGAIN!");
                   }
                 );
 
@@ -145,7 +145,7 @@ class Header extends Component {
                     console.log(result.message);
                   },
                   (error) => {
-                    alert("CURSES! FOILED AGAIN!");
+                    // alert("CURSES! FOILED AGAIN!");
                   }
                 );
 
@@ -167,7 +167,7 @@ class Header extends Component {
                 .then(
                   (result) => {
                     //DO WHATEVER YOU WANT WITH THE JSON HERE
-                    alert("STATUS INITIALIZED.");
+                    // alert("STATUS INITIALIZED.");
                   },
                   (error) => {
                     alert("error!");

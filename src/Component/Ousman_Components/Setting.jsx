@@ -421,9 +421,9 @@ class Header extends Component {
       return (
         <div className="formDiv">
           <div class="centered">
-            <form onSubmit={this.Reinitialize}>
+            {/* <form onSubmit={this.Reinitialize}>
               <input type="submit" value="reinit"></input>
-            </form>
+            </form> */}
 
             <form onSubmit={this.logout}>
               <input type="submit" value="Logout"></input>

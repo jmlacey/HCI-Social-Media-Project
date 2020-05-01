@@ -181,7 +181,7 @@ export default class Buddy extends React.Component {
             activatedID: sleepCycleActivatedID || "",
           });
 
-          this.IDToUserName();
+       
           this.getwakeTimeMinutes();
 
           fetch(
@@ -322,6 +322,9 @@ export default class Buddy extends React.Component {
       .then((response) => response.json())
       .then(
         (response) => {
+          alert(
+            "Sleep Buddies Assigned! Refresh the page to bring up the new interface!"
+          );
           this.setState({
             buddyID: response.users.length > 0 ? response.users[0].user_id : "",
           });

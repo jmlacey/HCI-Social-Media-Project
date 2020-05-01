@@ -64,7 +64,7 @@ export default class ProfilePic extends Component {
     )
       .then((res) => res.json())
       .then(
-        (result) => {},
+        (result) => { },
         (error) => {
           alert("error!");
         }
@@ -82,24 +82,27 @@ export default class ProfilePic extends Component {
     return (
       <div className="profilePicture">
         <div className="profileBox">
-          <img alt="" src={this.state.profilePicURL}></img>
+          <img
+            alt=""
+            src={this.state.profilePicURL}>
+          </img>
+
+          <form>
+            <input
+              type="text"
+              placeholder="Picture URL"
+              onChange={this.uploadPicHandler}
+              value={this.state.profilePicURL}
+            ></input>
+
+            <input
+              type="button"
+              value="Upload"
+              onClick={this.uploadPicture}
+              className="profileButton"
+            />
+          </form>
         </div>
-
-        <form>
-          <input
-            type="text"
-            placeholder="Picture URL"
-            onChange={this.uploadPicHandler}
-            value={this.state.profilePicURL}
-          ></input>
-
-          <input
-            type="button"
-            value="Upload"
-            onClick={this.uploadPicture}
-            className="profileButton"
-          />
-        </form>
       </div>
     );
   }

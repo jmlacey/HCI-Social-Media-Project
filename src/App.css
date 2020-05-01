@@ -219,8 +219,8 @@ Discussison
 
 .commentlist {
   text-align: left;
-  background: lightblue;
-  color: black;
+  background: purple;
+  color: white;
   border-radius: 20px;
   padding: 10px;
   margin: 10px;
@@ -252,7 +252,7 @@ Discussison
 }
 
 .comment-indicator-text {
-  background-color: lightblue;
+  background-color: white;
   color: black;
   border-radius: 10px;
   font-size: 16px;
@@ -289,7 +289,6 @@ Profile Page
   float: left;
   width: 50%;
   margin-top: 5%;
-  padding-left: 300px;
 }
 .profileBox {
   height: 500px;
@@ -303,7 +302,7 @@ Profile Page
 }
 
 .profileButton {
-  background-color: blueviolet;
+  background-color: purple;
   padding: 15px;
   margin-top: 20px;
   border: none;
@@ -360,11 +359,51 @@ Profile Page
   display: flex;
   vertical-align: middle;
 }
+
+@media screen and (max-width: 700px) {
+  .profileFormDiv {
+    width: 100%;
+    margin-top: 10%;
+  }
+
+  .profilePicture {
+    width: 100%;
+    margin-top: 5%;
+  }
+  
+  .profileBox {
+    height: 0x;
+    width: 0px;
+    display: block;
+    margin-left: 0px;
+  }
+}
+
 /*-----------------
 
 Buddy Page
     
 ----------------*/
+.firstcolumn {
+  float: left;
+  width: 50%;
+  padding: 10px;
+ /* height: 300px; /* Should be removed. Only for demonstration */
+ background-color: purple;
+}
+
+.secondcolumn {
+  float: left;
+  width: 50%;
+  padding: 10px;
+ /* height: 300px; /* Should be removed. Only for demonstration */
+ background-color: grey;
+}
+
+
+
+
+
 .buddyPage {
   width: 100%;
   justify-content: center;
@@ -434,7 +473,11 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #4caf50;
+  background-color: #ffaa3b;
+}
+
+input[type="button"]:hover {
+  background-color: #ffaa3b;
 }
 
 /*-----------------
@@ -461,7 +504,7 @@ IDK about any of the shit beneath this :(
 }
 
 .avatarButton {
-  background-color: blueviolet;
+  background-color: purple;
   padding: 15px;
   margin-top: 20px;
   width: 200px;
@@ -473,7 +516,7 @@ IDK about any of the shit beneath this :(
 }
 
 .timeInput {
-  background-color: #7155d3;
+  background-color: purple;
   font-size: 14px;
   width: 160px;
 }
@@ -688,3 +731,6 @@ IDK about any of the shit beneath this :(
   overflow-x: hidden;
   right: 0;
 }
+
+
+

@@ -756,15 +756,14 @@ export default class Buddy extends React.Component {
     return (
       <div>
         <div class="firstcolumn">
-          <p>Some text..</p>
+          <p>Welcome to the sleep buddy page!</p>
         </div>
         <div class="secondcolumn">
-          <p>Some text..</p>
+          {this.state.hasSleepBuddy
+            ? this.renderSleepBuddyExists()
+            : this.renderSleepBuddyDoesNotExist()}
         </div>
         yeeeeeeeeee
-        {this.state.hasSleepBuddy
-          ? this.renderSleepBuddyExists()
-          : this.renderSleepBuddyDoesNotExist()}
       </div>
     );
   }

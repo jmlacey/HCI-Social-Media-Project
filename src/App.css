@@ -386,18 +386,20 @@ Buddy Page
 ----------------*/
 .firstcolumn {
   float: left;
-  width: 50%;
+  width: 34%;
   padding: 10px;
  /* height: 300px; /* Should be removed. Only for demonstration */
- background-color: purple;
+ background-color: #dddddd;
+ border-style: solid;
 }
 
 .secondcolumn {
   float: left;
-  width: 50%;
+  width: 66%;
   padding: 10px;
  /* height: 300px; /* Should be removed. Only for demonstration */
- background-color: grey;
+ background-color: white;
+ border-style: solid;
 }
 
 

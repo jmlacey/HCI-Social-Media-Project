@@ -17,6 +17,10 @@ export default class MyFriendList extends React.Component {
       firstname: "",
       lastname: "",
       file: null,
+
+      //for profile picture
+
+      profilePicURL: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -65,7 +69,6 @@ export default class MyFriendList extends React.Component {
   }
 
   loadBlocked() {
-    
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
@@ -259,11 +262,19 @@ export default class MyFriendList extends React.Component {
     )
       .then((response) => response.json())
       .then((response) => {
+        //for profile pic
+        let profilePicURL = "";
+        response.users[0]["user_artifacts"].forEach(function (artifact1) {
+          if (artifact1.artifact_type === "ProfilePic") {
+            profilePicURL = artifact1.artifact_url;
+          }
+        });
         this.setState({
           viewProfileActivated: "true",
           firstname: response.users[0].first_name,
           lastname: response.users[0].last_name,
           username: response.users[0].username,
+          profilePicURL: profilePicURL,
         });
       });
   }
@@ -410,7 +421,7 @@ export default class MyFriendList extends React.Component {
 
         <div>
           {/* This displays the default Alan profile Pic */}
-          <img src={friend} />
+          <img src={this.state.profilePicURL} />
 
           {/* This gives you the option to upload a profile pic yourself */}
 
@@ -423,19 +434,7 @@ export default class MyFriendList extends React.Component {
 
           <p>Last Name: {this.state.lastname} </p>
 
-          <p>
-            {" "}
-            <label for="Sleep Time">Sleep Time: </label>
-            <input type="time" id="Sleep Time" name="Sleep Time" />{" "}
-          </p>
-
-          <p>
-            {" "}
-            <label for="Wake Up Time">Wake Up Time: </label>
-            <input type="time" id="Wake Up Time" name="Wake Up Time" />
-          </p>
-
-          <input type="submit" value="Message"></input>
+          {/* <input type="submit" value="Message"></input> */}
         </div>
         <button
           className="profileButton"

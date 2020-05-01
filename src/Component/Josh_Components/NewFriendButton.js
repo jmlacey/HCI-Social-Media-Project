@@ -95,7 +95,7 @@ export default class MyFriendList extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div className="centeredCol">
         <form onSubmit={this.addFriendButton}>
           <h1>{this.state.typingMessage}</h1>
           <input

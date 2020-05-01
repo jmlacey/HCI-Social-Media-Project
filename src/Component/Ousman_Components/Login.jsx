@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import RealProfile from "../Zach_components/Profile.js";
 import ProfilePic from "../Zach_components/ProfilePic.js";
 
-
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -218,9 +217,6 @@ class Header extends Component {
                 }
               );
 
-              alert(sessionStorage.getItem("user"));
-              alert(sessionStorage.getItem("token"));
-
               fetch(
                 "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
                 {
@@ -337,7 +333,6 @@ class Header extends Component {
   }
 
   SendOTP = () => {
-    alert("yee");
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
       {
@@ -527,9 +522,9 @@ class Header extends Component {
         // </div>
         <div>
           <ProfilePic />
-          <RealProfile />      
-          </div>
-          );
+          <RealProfile />
+        </div>
+      );
       /*
       alert("Hooray! You are logged in!");
       console.log("Returning welcome message");

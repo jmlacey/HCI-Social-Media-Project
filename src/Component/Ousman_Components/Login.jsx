@@ -80,7 +80,7 @@ class Header extends Component {
             sessionStorage.setItem("token", result.user.session_token);
             sessionStorage.setItem("user", result.user.user_id);
             sessionStorage.setItem("email", result.user.username);
-
+            alert("logging in: " + sessionStorage.getItem("user"));
             if (
               result.user.status === null ||
               result.user.status === "reinit"
@@ -210,6 +210,24 @@ class Header extends Component {
                     session_token: sessionStorage.getItem("token"),
                     userid: sessionStorage.getItem("user"),
                     artifacttype: "ProfilePic",
+                  }),
+                }
+              );
+
+              alert(sessionStorage.getItem("user"));
+              alert(sessionStorage.getItem("token"));
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    //API FIELDS
+                    action: "addOrEditUsers",
+                    user_id: sessionStorage.getItem("user"),
+                    userid: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userrole: "nobody",
                   }),
                 }
               );
@@ -383,15 +401,13 @@ class Header extends Component {
           user_id: sessionStorage.getItem("user"),
           session_token: sessionStorage.getItem("token"),
           userid: sessionStorage.getItem("user"),
-          status: "reinit"
+          status: "reinit",
         }),
       }
     )
       .then((res) => res.json())
       .then(
-        (result) => {
-    
-        },
+        (result) => {},
         (error) => {
           alert("error!");
         }
@@ -399,7 +415,11 @@ class Header extends Component {
   };
 
   render() {
-    if (!sessionStorage.getItem("token") || (sessionStorage.getItem("token") && sessionStorage.getItem("token") === "0")) {
+    if (
+      !sessionStorage.getItem("token") ||
+      (sessionStorage.getItem("token") &&
+        sessionStorage.getItem("token") === "0")
+    ) {
       if (this.state.forgotPassword) {
         return (
           <div>
@@ -427,7 +447,7 @@ class Header extends Component {
 
             <label>New Password</label>
             <input
-              type="text"
+              type="password"
               placeholder="Your New Password"
               onChange={this.newPassChangeHandler}
               value={this.state.newPassword}
@@ -435,7 +455,7 @@ class Header extends Component {
 
             <label>Confirm New Password</label>
             <input
-              type="text"
+              type="password"
               placeholder="Confirm New Password"
               onChange={this.confirmChangeHandler}
               value={this.state.confirmPassword}
@@ -464,7 +484,7 @@ class Header extends Component {
               ></input>
               <label for="lname">Password</label>
               <input
-                type="text"
+                type="password"
                 id="lname"
                 name="lastname"
                 placeholder="Your password"
@@ -479,18 +499,14 @@ class Header extends Component {
               value="Forgot Password"
               onClick={this.forgotPasswordButton}
             ></input>
-
-            <p>Username is : {this.state.username}</p>
-            <p>Password is : {this.state.password}</p>
           </div>
         </div>
       );
     } else {
-    
       return (
         <div className="formDiv">
           <div class="centered">
-          <form onSubmit={this.Reinitialize}>
+            <form onSubmit={this.Reinitialize}>
               <input type="submit" value="reinit"></input>
             </form>
 

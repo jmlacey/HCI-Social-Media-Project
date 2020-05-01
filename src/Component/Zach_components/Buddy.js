@@ -246,7 +246,11 @@ export default class Buddy extends React.Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          this.setState({ buddyName: result.users[0].name });
+          if (result.users) {
+            this.setState({ buddyName: result.users[0].name });
+          } else {
+            alert("No user found!");
+          }
         },
         (error) => {
           alert("error!");

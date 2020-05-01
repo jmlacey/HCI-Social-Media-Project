@@ -251,8 +251,8 @@ class App extends React.Component {
                         Buddy
                       </a>
 
-                      <a className="element_link" onClick={this.logout}>
-                        Logout
+                      <a className="element_link" onClick={(e) => setMenuOption("login", mainContent, e)}>
+                        Setting
                       </a>
                     </li>
                   </ul>

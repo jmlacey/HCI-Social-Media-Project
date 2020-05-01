@@ -29,16 +29,21 @@ export default class MyFriendList extends React.Component {
       .then((response) => response.json())
       .then(
         (response) => {
+          if(response.users === undefined){
+  
+          }
+          else {
+            console.log(response.users);
           this.setState({
             connectionID:
               response.users.length > 0 ? response.users[0].user_id : "",
           });
-
+        }
           if (this.state.connectionID !== "") {
             alert("Adding the friend! Lets GOOOOO");
             this.addFriend();
           } else {
-            alert("Not a valid user!");
+            alert("Not a valid user! Please Enter a valid username!");
           }
         },
         (error) => {

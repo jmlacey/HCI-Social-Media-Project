@@ -274,7 +274,6 @@ export default class Buddy extends React.Component {
   }
 
   testAssignBuddy = () => {
-    alert("Doing it!");
     // alert(this.state.buddyID);
     // alert(sessionStorage.getItem("user"));
     // alert(sessionStorage.getItem("token"));
@@ -295,7 +294,6 @@ export default class Buddy extends React.Component {
           this.setState({
             buddyID: response.users.length > 0 ? response.users[0].user_id : "",
           });
-          alert(this.state.buddyID);
 
           if (this.state.connectionID === "") {
             alert("Not a valid user!");
@@ -330,7 +328,6 @@ export default class Buddy extends React.Component {
               }
             );
             // this.IDToUserName();
-            alert("Did it!");
           }
         },
         (error) => {
@@ -363,7 +360,6 @@ export default class Buddy extends React.Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          alert(this.state.buddyID);
           fetch(
             "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
             {
@@ -552,8 +548,6 @@ export default class Buddy extends React.Component {
         }
       );
 
-    alert(this.state.buddyID);
-
     //Incrementing the sleep points of the user's sleep buddy
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
@@ -572,10 +566,6 @@ export default class Buddy extends React.Component {
           this.setState({
             theirSleepyPoints: parseInt(this.state.theirSleepyPoints) + 1,
           });
-
-          alert(sessionStorage.getItem("user"));
-          alert(this.state.theirSleepyPoints);
-          alert(sessionStorage.getItem("token"));
 
           fetch(
             "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",

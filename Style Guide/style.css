@@ -22,7 +22,7 @@ li a {
 }
 
 li a:hover {
-    background-color: #7b1fa2;
+    background-color: purple;
 }
 
 .sb {
@@ -38,7 +38,7 @@ li a:hover {
 .footer2 {
     height: 100px;
     width: 100%;
-    background-color: #7b1fa2;
+    background-color: purple;
 }
 
 h1 {
@@ -73,7 +73,7 @@ tr:nth-child(even) {
 header {
     height: 100px;
     width: auto;
-    background-color: #7b1fa2;
+    background-color: purple;
 }
 
 .sb-icon {
@@ -150,17 +150,10 @@ body {
     border: solid 1px;
     border-color: black;
     border-radius: 10px;
-    background-color: #7b1fa2;
+    background-color: purple;
 }
 
-.sleepy-purple {
-    height: 150px;
-    width: 150px;
-    border: solid 1px;
-    border-color: black;
-    border-radius: 10px;
-    background-color: #653a96;
-}
+
 
 .white-background {
     height: 150px;
@@ -171,13 +164,21 @@ body {
     background-color: white;
 }
 
-.off-white-background {
+.black-color {
     height: 150px;
     width: 150px;
     border: solid 1px;
     border-color: black;
     border-radius: 10px;
-    background-color: #E0E0E0;
+    background-color: #000000;
+}
+.orange-yellow{
+    height: 150px;
+    width: 150px;
+    border: solid 1px;
+    border-color: black;
+    border-radius: 10px;
+    background-color: #ffaa3b;
 }
 
 .color-labels {
@@ -279,20 +280,12 @@ button {
     font-size: 14pt;
     color: white;
     cursor: pointer;
-    background-color: #7b1fa2;
+    background-color: purple;
     padding: 5px;
 }
 
-.successButton {
-    background-color: green;
-}
-
-.alertButton {
-    background-color: red;
-}
-
-.normButton:hover {
-    background-color: #653a96;
+.HoverButton:hover {
+    background-color: #ffaa3b;
 }
 
 
@@ -307,18 +300,25 @@ form {
     margin: 15px;
 }
 
+input[type=text].normForm {
+    border-color: purple;
+    box-shadow: 0 0 6px rgba(111, 206, 114, 0.2);
+  }
+
 input[type=text].successForm {
     border-color: #6fce72;
     box-shadow: 0 0 6px rgba(111, 206, 114, 0.2);
-  }
-  input[type=text].alertForm {
+}
+
+input[type=text].alertForm {
     border-color: #e4655f;
     box-shadow: 0 0 6px rgba(228, 101, 95, 0.2);
-  }
+}
 
-  select {
+select {
+    border-color: purple;
     position: relative;
     margin-left: 15px;
     padding: 5px;
     cursor: pointer;
-  }
+}

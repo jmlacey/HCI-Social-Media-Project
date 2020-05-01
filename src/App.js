@@ -1,10 +1,6 @@
 import React from "react";
 import "./App.css";
 import PostForm from "./Component/PostForm.js";
-// import FriendList from "./Component/FriendList.js";
-// import LoginForm from "./Component/LoginForm.js";
-// import Profile from "./Component/Profile.js";
-// import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
 // import View from "./Component/Anthony_Components/viewprofile.jsx";
@@ -17,7 +13,8 @@ import SignUp from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
 // import ProfilePage from "./Component/Josh_Components/UserProfile.js";
-import RealProfile from "./Component/Zach_components/Profile.js"
+
+import RealProfile from "./Component/Zach_components/Profile.js";
 import ProfilePic from "./Component/Zach_components/ProfilePic.js";
 
 class MainContent extends React.Component {
@@ -64,8 +61,6 @@ class MainContent extends React.Component {
     }
 
     if (this.state.section === "signup") {
-
-      
       return (
         <div className="App">
           <SignUp />
@@ -84,7 +79,6 @@ class MainContent extends React.Component {
     if (this.state.section === "friends") {
       return (
         <div>
-          <NewFriendButton />
           <MyFriendList userid={sessionStorage.getItem("user")} />
         </div>
       );
@@ -97,7 +91,7 @@ class MainContent extends React.Component {
         </div>
       );
     }
-    
+
     if (this.state.section === "profile") {
       return (
         <div className="profilePage">
@@ -193,7 +187,6 @@ class App extends React.Component {
                 <div className="Nav_Div">
                   <ul className="sideBar">
                     <li className="Nav_Element">
-
                       <a
                         className="element_link"
                         onClick={(e) =>

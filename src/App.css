@@ -269,6 +269,26 @@ Discussison
 Profile Page
     
 ----------------*/
+@media screen and (max-width: 1000px){
+  .profileFormDiv {
+    width: 100%;
+    margin-top: 10%;
+  }
+
+  .profilePicture {
+    width: 100%;
+    margin-top: 5%;
+    padding-left: 0px;
+  }
+
+  .profileBox {
+    height: 0px;
+    width: 0px;
+    display: block;
+    margin-left: 0px;
+  }
+}
+
 .profilePage:after {
   content: "";
   display: table;
@@ -291,6 +311,7 @@ Profile Page
   margin-top: 5%;
   padding-left: 300px;
 }
+
 .profileBox {
   height: 500px;
   width: 500px;
@@ -320,7 +341,6 @@ Profile Page
   border: 2px solid;
   border-color: black;
 }
-
 
 .leftCol {
   width: 49%;

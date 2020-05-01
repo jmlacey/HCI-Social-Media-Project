@@ -85,6 +85,7 @@ export default class ProfilePic extends Component {
             <div className="profilePicture">
                 <div className="profileBox">
                     <img
+                        alt=""
                         src={this.state.profilePicURL}>
                     </img>
 

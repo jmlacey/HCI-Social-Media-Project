@@ -16,11 +16,13 @@ export default class MyFriendList extends React.Component {
       username: "",
       firstname: "",
       lastname: "",
-      file: null
+      file: null,
 
+      //for profile picture
+
+      profilePicURL: "",
     };
-    this.handleChange = this.handleChange.bind(this)
-
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -31,8 +33,8 @@ export default class MyFriendList extends React.Component {
 
   handleChange(event) {
     this.setState({
-      file: URL.createObjectURL(event.target.files[0])
-    })
+      file: URL.createObjectURL(event.target.files[0]),
+    });
   }
 
   loadFriends() {
@@ -42,7 +44,7 @@ export default class MyFriendList extends React.Component {
         method: "post",
         body: JSON.stringify({
           action: "getConnections",
-          user_id: this.state.userid,
+          userid: this.state.userid,
           connectionstatus: "Active",
         }),
       }
@@ -67,13 +69,14 @@ export default class MyFriendList extends React.Component {
   }
 
   loadBlocked() {
+
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
         method: "post",
         body: JSON.stringify({
           action: "getConnections",
-          user_id: this.state.userid,
+          userid: this.state.userid,
           //only show pending users
           connectionstatus: "BLOCKED",
         }),
@@ -105,7 +108,7 @@ export default class MyFriendList extends React.Component {
         method: "post",
         body: JSON.stringify({
           action: "getConnections",
-          user_id: this.state.userid,
+          userid: this.state.userid,
           //only show pending users
           connectionstatus: "pending",
         }),
@@ -148,10 +151,10 @@ export default class MyFriendList extends React.Component {
       .then((response) => {
         alert(
           "Deleted " +
-            this.state.userid +
-            " AKA " +
-            idForDelete +
-            " from your friends list! Hooray!"
+          this.state.userid +
+          " AKA " +
+          idForDelete +
+          " from your friends list! Hooray!"
         );
         this.setState({
           submitMessage: response.Status,
@@ -180,11 +183,11 @@ export default class MyFriendList extends React.Component {
       .then((response) => {
         alert(
           "Blocked: " +
-            name +
-            ", connectionid is: " +
-            connectionid +
-            ", connectuserid is: " +
-            connectuserid
+          name +
+          ", connectionid is: " +
+          connectionid +
+          ", connectuserid is: " +
+          connectuserid
         );
         this.setState({
           submitMessage: response.Status,
@@ -212,11 +215,11 @@ export default class MyFriendList extends React.Component {
       .then((response) => {
         alert(
           "Added " +
-            name +
-            ", connectionid is: " +
-            connectionid +
-            ", connectuserid is: " +
-            connectuserid
+          name +
+          ", connectionid is: " +
+          connectionid +
+          ", connectuserid is: " +
+          connectuserid
         );
         this.setState({
           submitMessage: response.Status,
@@ -260,13 +263,26 @@ export default class MyFriendList extends React.Component {
     )
       .then((response) => response.json())
       .then((response) => {
+        //for profile pic
+        let profilePicURL = "";
+        response.users[0]["user_artifacts"].forEach(function (artifact1) {
+          if (artifact1.artifact_type === "ProfilePic") {
+            profilePicURL = artifact1.artifact_url;
+          }
+        });
         this.setState({
           viewProfileActivated: "true",
           firstname: response.users[0].first_name,
           lastname: response.users[0].last_name,
           username: response.users[0].username,
+          profilePicURL: profilePicURL,
+
         });
+        
+       
       });
+
+
   }
 
   render() {
@@ -408,33 +424,25 @@ export default class MyFriendList extends React.Component {
     return (
       <div>
         {/* <h1>Viewing {this.state.username} 's Profile</h1> */}
-          
 
         <div>
-        {/* This displays the default Alan profile Pic */}
-        <img src={friend}/>
+          {/* This displays the default Alan profile Pic */}
+        <img src={this.state.profilePicURL}/>
 
-        {/* This gives you the option to upload a profile pic yourself */}
-        
-        {/* <input type="file" onChange={this.handleChange}/>
+          {/* This gives you the option to upload a profile pic yourself */}
+
+          {/* <input type="file" onChange={this.handleChange}/>
         <img src={this.state.file}/> */}
 
-            <p >Username: {this.state.username} </p>
-            
-            <p >First Name: {this.state.firstname} </p>
-           
-            <p >Last Name: {this.state.lastname} </p> 
-           
-          <p>  <label for="Sleep Time">Sleep Time:    </label>
-            <input type="time" id="Sleep Time" name="Sleep Time"/> </p> 
+          <p>Username: {this.state.username} </p>
 
-           <p> <label for="Wake Up Time">Wake Up Time:  </label>
-            <input type="time" id="Wake Up Time" name="Wake Up Time"/></p>
+          <p>First Name: {this.state.firstname} </p>
 
+          <p>Last Name: {this.state.lastname} </p>
 
+         
 
-              <input type="submit" value="Message"></input>
-
+          {/* <input type="submit" value="Message"></input> */}
         </div>
         <button
           className="profileButton"

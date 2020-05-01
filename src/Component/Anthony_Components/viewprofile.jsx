@@ -40,36 +40,20 @@ export default class View extends React.Component {
         method: "post",
         body: JSON.stringify({
           action: "getCompleteUsers",
-          user_id: this.props.userid,
+          user_id: sessionStorage.getItem("user")
         }),
       }
     )
       .then((res) => res.json())
       .then(
         (result) => {
-          if (result.users) {
-            console.log(result.users);
-            let favoritecolor = "";
-
-            // read the user preferences and convert to an associative array for reference
-
-            result.users[0]["user_prefs"].forEach(function (pref) {
-              if (pref.pref_name === "FavoriteColor") {
-                favoritecolor = pref;
-              }
-            });
-
-            console.log(favoritecolor);
-
-            this.setState({
-              // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
-              // try and make the form component uncontrolled, which plays havoc with react
-              username: result.users[0].username || "",
-              firstname: result.users[0].first_name || "",
-              lastname: result.users[0].last_name || "",
-              favoritecolor: favoritecolor,
-            });
-          }
+          this.setState({
+            // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
+            // try and make the form component uncontrolled, which plays havoc with react
+            username: result.users[0].username || "",
+            firstname: result.users[0].first_name || "",
+            lastname: result.users[0].last_name || ""
+          });
         },
         (error) => {
           alert("error!");
@@ -80,65 +64,6 @@ export default class View extends React.Component {
   submitHandler = (event) => {
     //keep the form from actually submitting
     event.preventDefault();
-
-    //make the api call to the user controller
-    fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
-      {
-        method: "post",
-        body: JSON.stringify({
-          action: "addOrEditUsers",
-          username: this.state.username,
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          user_id: sessionStorage.getItem("user"),
-          session_token: sessionStorage.getItem("token"),
-          mode: "ignorenull",
-        }),
-      }
-    )
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            responseMessage: result.Status,
-          });
-        },
-        (error) => {
-          alert("error!");
-        }
-      );
-
-    //make the api call to the user prefs controller
-    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/api/uacontroller.php", {
-      method: "post",
-      body: JSON.stringify({
-        action: "addOrEditUserArtifacts",
-        user_id: sessionStorage.getItem("user"),
-        session_token: sessionStorage.getItem("token"),
-        artifacttype: "sleepTime",
-        artifacttype: "wakeTime",
-        artifacttype: "timeZone",
-        userid: sessionStorage.getItem("user"),
-      }),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            responseMessage: result.Status,
-          });
-        },
-        (error) => {
-          alert("error!");
-        }
-      );
-  };
-  //end of copy and paste from profile.js
-
-  state = {};
-  testAlert() {
-    alert("Im an alert");
   }
 
   render() {

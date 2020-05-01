@@ -69,7 +69,6 @@ export default class MyFriendList extends React.Component {
   }
 
   loadBlocked() {
-
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
@@ -151,10 +150,10 @@ export default class MyFriendList extends React.Component {
       .then((response) => {
         alert(
           "Deleted " +
-          this.state.userid +
-          " AKA " +
-          idForDelete +
-          " from your friends list! Hooray!"
+            this.state.userid +
+            " AKA " +
+            idForDelete +
+            " from your friends list! Hooray!"
         );
         this.setState({
           submitMessage: response.Status,
@@ -183,11 +182,11 @@ export default class MyFriendList extends React.Component {
       .then((response) => {
         alert(
           "Blocked: " +
-          name +
-          ", connectionid is: " +
-          connectionid +
-          ", connectuserid is: " +
-          connectuserid
+            name +
+            ", connectionid is: " +
+            connectionid +
+            ", connectuserid is: " +
+            connectuserid
         );
         this.setState({
           submitMessage: response.Status,
@@ -215,11 +214,11 @@ export default class MyFriendList extends React.Component {
       .then((response) => {
         alert(
           "Added " +
-          name +
-          ", connectionid is: " +
-          connectionid +
-          ", connectuserid is: " +
-          connectuserid
+            name +
+            ", connectionid is: " +
+            connectionid +
+            ", connectuserid is: " +
+            connectuserid
         );
         this.setState({
           submitMessage: response.Status,
@@ -276,13 +275,8 @@ export default class MyFriendList extends React.Component {
           lastname: response.users[0].last_name,
           username: response.users[0].username,
           profilePicURL: profilePicURL,
-
         });
-        
-       
       });
-
-
   }
 
   render() {
@@ -427,7 +421,7 @@ export default class MyFriendList extends React.Component {
 
         <div>
           {/* This displays the default Alan profile Pic */}
-        <img src={this.state.profilePicURL}/>
+          <img src={this.state.profilePicURL} />
 
           {/* This gives you the option to upload a profile pic yourself */}
 
@@ -439,8 +433,6 @@ export default class MyFriendList extends React.Component {
           <p>First Name: {this.state.firstname} </p>
 
           <p>Last Name: {this.state.lastname} </p>
-
-         
 
           {/* <input type="submit" value="Message"></input> */}
         </div>

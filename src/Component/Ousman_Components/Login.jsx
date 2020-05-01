@@ -10,9 +10,39 @@ class Header extends Component {
       sessiontoken: "",
       user_id: "",
       userid: "",
-      refresh: false,
+
+      //For resetting password
+      email: "",
+      forgotPassword: false,
+      newPassword: "",
+      confirmPassword: "",
+      otp: "",
     };
   }
+
+  otpChangeHandler = (event) => {
+    this.setState({
+      otp: event.target.value,
+    });
+  };
+
+  newPassChangeHandler = (event) => {
+    this.setState({
+      newPassword: event.target.value,
+    });
+  };
+
+  confirmChangeHandler = (event) => {
+    this.setState({
+      confirmPassword: event.target.value,
+    });
+  };
+
+  emailChangeHandler = (event) => {
+    this.setState({
+      email: event.target.value,
+    });
+  };
 
   myChangeHandler = (event) => {
     this.setState({
@@ -50,14 +80,165 @@ class Header extends Component {
             sessionStorage.setItem("token", result.user.session_token);
             sessionStorage.setItem("user", result.user.user_id);
             sessionStorage.setItem("email", result.user.username);
+            alert("logging in: " + sessionStorage.getItem("user"));
+            if (
+              result.user.status === null ||
+              result.user.status === "reinit"
+            ) {
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserPrefs",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    prefname: "lastWokeUp",
+                  }),
+                }
+              );
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserPrefs",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    prefname: "TimeZone",
+                  }),
+                }
+              )
+                .then((res) => res.json())
+                .then(
+                  (result) => {
+                    console.log(result.message);
+                  },
+                  (error) => {
+                    alert("CURSES! FOILED AGAIN!");
+                  }
+                );
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserPrefs",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    prefname: "WakeTime",
+                  }),
+                }
+              )
+                .then((res) => res.json())
+                .then(
+                  (result) => {
+                    console.log(result.message);
+                  },
+                  (error) => {
+                    alert("CURSES! FOILED AGAIN!");
+                  }
+                );
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    //API FIELDS
+                    action: "addOrEditUsers",
+                    user_id: result.user.user_id,
+                    userid: result.user.user_id,
+                    session_token: result.user.session_token,
+                    status: "0",
+                  }),
+                }
+              )
+                .then((res) => res.json())
+                .then(
+                  (result) => {
+                    //DO WHATEVER YOU WANT WITH THE JSON HERE
+                    alert("STATUS INITIALIZED.");
+                  },
+                  (error) => {
+                    alert("error!");
+                  }
+                );
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserPrefs",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    prefname: "SleepyPoints",
+                    prefvalue: 0,
+                  }),
+                }
+              );
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserPrefs",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    prefname: "SleepCycleActivated",
+                    prefvalue: false,
+                  }),
+                }
+              );
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/uacontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    action: "addOrEditUserArtifacts",
+                    user_id: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userid: sessionStorage.getItem("user"),
+                    artifacttype: "ProfilePic",
+                  }),
+                }
+              );
+
+              alert(sessionStorage.getItem("user"));
+              alert(sessionStorage.getItem("token"));
+
+              fetch(
+                "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+                {
+                  method: "post",
+                  body: JSON.stringify({
+                    //API FIELDS
+                    action: "addOrEditUsers",
+                    user_id: sessionStorage.getItem("user"),
+                    userid: sessionStorage.getItem("user"),
+                    session_token: sessionStorage.getItem("token"),
+                    userrole: "nobody",
+                  }),
+                }
+              );
+            }
 
             this.setState({
               sessiontoken: result.user.session_token,
               alanmessage: result.user.session_token,
             });
-            this.refreshPage();
           } else {
-            sessionStorage.setItem("token", "0");
+            sessionStorage.removeItem("token");
             sessionStorage.removeItem("user");
             sessionStorage.removeItem("email");
             this.setState({
@@ -93,13 +274,23 @@ class Header extends Component {
         (result) => {
           //DO WHATEVER YOU WANT WITH THE JSON HERE
           alert("Hooray! Logged out!");
-          sessionStorage.setItem("token", "0");
+          sessionStorage.removeItem("token");
         },
         (error) => {
           alert("error!");
         }
       );
   }
+
+  forgotPasswordButton = () => {
+    this.setState({
+      forgotPassword: true,
+    });
+
+    alert(
+      "Enter your email to recieve a one time password. Then, use the one time password to change your actual password!"
+    );
+  };
 
   deleteAccount() {
     // alert("Deleting Account : " + sessionStorage.getItem("userid"));
@@ -138,14 +329,147 @@ class Header extends Component {
       );
   }
 
-  refreshPage() {
-    //This doesntdo anything but do a soft refresh
-    this.setState({ refresh: true });
-  }
+  SendOTP = () => {
+    alert("yee");
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "forgotpassword",
+          email_addr: this.state.email,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert(
+            "Check your " +
+              this.state.email +
+              " email for your one time password"
+          );
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+  };
+
+  changeThePassword = () => {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          //API FIELDS
+          action: "setpassword",
+          email_addr: this.state.email,
+          token: this.state.otp,
+          newpassword: this.state.newPassword,
+          confirmpassword: this.state.confirmPassword,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert(
+            "Log in using your " +
+              this.state.email +
+              " adress and your new password!"
+          );
+          //DO WHATEVER YOU WANT WITH THE JSON HERE
+          this.setState({
+            forgotPassword: false,
+          });
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+  };
+
+  Reinitialize = () => {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          //API FIELDS
+          action: "addOrEditUsers",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: sessionStorage.getItem("user"),
+          status: "reinit",
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {},
+        (error) => {
+          alert("error!");
+        }
+      );
+  };
 
   render() {
-    //alert(sessionStorage.getItem("token"));
-    if (sessionStorage.getItem("token") === "0") {
+    if (
+      !sessionStorage.getItem("token") ||
+      (sessionStorage.getItem("token") &&
+        sessionStorage.getItem("token") === "0")
+    ) {
+      if (this.state.forgotPassword) {
+        return (
+          <div>
+            <label for="fname">Email</label>
+            <input
+              type="text"
+              placeholder="Your email"
+              onChange={this.emailChangeHandler}
+              value={this.state.email}
+            ></input>
+
+            <input
+              type="submit"
+              value="SEND ONE TIME PASSWORD"
+              onClick={this.SendOTP}
+            ></input>
+
+            <label>Enter OTP</label>
+            <input
+              type="text"
+              placeholder="Your OTP"
+              onChange={this.otpChangeHandler}
+              value={this.state.otp}
+            ></input>
+
+            <label>New Password</label>
+            <input
+              type="password"
+              placeholder="Your New Password"
+              onChange={this.newPassChangeHandler}
+              value={this.state.newPassword}
+            ></input>
+
+            <label>Confirm New Password</label>
+            <input
+              type="password"
+              placeholder="Confirm New Password"
+              onChange={this.confirmChangeHandler}
+              value={this.state.confirmPassword}
+            ></input>
+
+            <input
+              type="submit"
+              value="Change Password"
+              onClick={this.changeThePassword}
+            ></input>
+          </div>
+        );
+      }
+
       return (
         <div className="formDiv">
           <div class="centered">
@@ -160,7 +484,7 @@ class Header extends Component {
               ></input>
               <label for="lname">Password</label>
               <input
-                type="text"
+                type="password"
                 id="lname"
                 name="lastname"
                 placeholder="Your password"
@@ -170,8 +494,11 @@ class Header extends Component {
               <input type="submit" value="Login"></input>
             </form>
 
-            <p>Username is : {this.state.username}</p>
-            <p>Password is : {this.state.password}</p>
+            <input
+              type="submit"
+              value="Forgot Password"
+              onClick={this.forgotPasswordButton}
+            ></input>
           </div>
         </div>
       );
@@ -179,6 +506,10 @@ class Header extends Component {
       return (
         <div className="formDiv">
           <div class="centered">
+            <form onSubmit={this.Reinitialize}>
+              <input type="submit" value="reinit"></input>
+            </form>
+
             <form onSubmit={this.logout}>
               <input type="submit" value="Logout"></input>
             </form>

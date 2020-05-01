@@ -192,22 +192,101 @@ Discussison
   display: inline-flex;
 }
 
+.posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.postbody {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.comments {
+  background: white;
+  width: 90%;
+  display: block;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  color: black;
+}
+
+.commentlist {
+  text-align: left;
+  background: lightblue;
+  color: black;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 12px;
+  width: 90%;
+  display: block;
+}
+
+.comment-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.comment-indicator {
+  text-align: right;
+  width: 100%;
+  display: block;
+  float: right;
+  margin-top: 10px;
+}
+
+.comment-icon {
+  width: 40px;
+  height: 40px;
+  float: right;
+}
+
+.comment-indicator-text {
+  background-color: lightblue;
+  color: black;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 120px;
+  padding: 5px;
+  float: right;
+  margin-left: 10px;
+  text-align: center;
+}
+
 /*-----------------
 
 Profile Page
     
 ----------------*/
-.profilePage {
-  width: 100%;
+.profilePage:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .profileFormDiv {
-  padding: 5%;
-  width: 70%;
-  position: absolute;
-  top: 20%;
-  left: 20%;
+  float: left;
+  width: 75%;
+  margin-top: 10%;
 }
+
+.profilePicture {
+  float: left;
+  width: 25%;
+  margin-top: 5%;
+}
+
 
 .profileButton {
   background-color: blueviolet;
@@ -217,6 +296,18 @@ Profile Page
   border-radius: 10px;
   cursor: pointer;
   color: white;
+}
+
+.profilePicture img{
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  border: 2px solid;
+  border-color: black;
+}
+
+.profileLabel {
+  margin-top: 100px;
 }
 
 .leftCol {
@@ -290,6 +381,17 @@ General
     
 ----------------*/
 input[type="text"],
+select {
+  width: 100%;
+  padding: 15px;
+  margin-top: 0px;
+  display: inline-block;
+  border: 1px solid purple;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+input[type="password"],
 select {
   width: 100%;
   padding: 15px;
@@ -461,27 +563,7 @@ IDK about any of the shit beneath this :(
   display: inline-flex;
 }
 
-.comments {
-  background: white;
-  width: 90%;
-  display: block;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 10px;
-  color: black;
-}
 
-.commentlist {
-  text-align: left;
-  background: lightblue;
-  color: black;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 10px;
-  font-size: 12px;
-  width: 90%;
-  display: block;
-}
 
 .hide {
   display: none;
@@ -495,28 +577,7 @@ IDK about any of the shit beneath this :(
   flex-grow: 1;
 }
 
-.posts {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
 
-.postbody {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.comment-block {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
 
 .sidenav {
   /* need to specify some position other than static, so height can apply.
@@ -550,32 +611,7 @@ IDK about any of the shit beneath this :(
   margin-bottom: 15px;
 }
 
-.comment-indicator {
-  text-align: right;
-  width: 100%;
-  display: block;
-  float: right;
-  margin-top: 10px;
-}
 
-.comment-icon {
-  width: 40px;
-  height: 40px;
-  float: right;
-}
-
-.comment-indicator-text {
-  background-color: lightblue;
-  color: black;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  width: 120px;
-  padding: 5px;
-  float: right;
-  margin-left: 10px;
-  text-align: center;
-}
 
 .hide {
   display: none;

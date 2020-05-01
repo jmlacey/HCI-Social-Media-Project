@@ -143,7 +143,7 @@ class Sign_up extends Component {
   render() {
     return (
       <div class="col-3 col-s-3 menu">
-      <meta
+        <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         ></meta>
@@ -194,11 +194,6 @@ class Sign_up extends Component {
                 ></input>
 
                 <input type="submit" value="SIGN UP"></input>
-
-                <p>Email is : {this.state.email}</p>
-                <p>otp is : {this.state.otp}</p>
-                <p>password is : {this.state.newPassword}</p>
-                <p>confirm password is : {this.state.confirmPassword}</p>
               </form>
             </div>
           </div>

@@ -17,7 +17,7 @@ export default class PostingList extends React.Component {
   }
 
   loadPosts() {
-    fetch("http://stark.cse.buffalo.edu/hci/postcontroller.php", {
+    fetch("http://stark.cse.buffalo.edu/cse410/reactioneers/api/postcontroller.php", {
       method: "post",
       body: JSON.stringify({
         action: "getPosts",
@@ -46,7 +46,6 @@ export default class PostingList extends React.Component {
   }
 
   render() {
-    //this.loadPosts();
     const {error, isLoaded, posts} = this.state;
     if (error) {
       return <div> Error: {error.message} </div>;

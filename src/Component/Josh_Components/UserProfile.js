@@ -7,7 +7,8 @@ class UserProfile extends Component {
       userName: "",
       firstName: "",
       lastName: "",
-      testArtifact: "",
+      wakeTime: "",
+      timeZone: ""
     };
   }
 
@@ -27,12 +28,28 @@ class UserProfile extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
+
+          let wakeTime = "";
+          result.users[0]["user_prefs"].forEach(function (pref1) {
+            if (pref1.pref_name === "WakeTime") {
+              wakeTime = pref1;
+            }
+          });
+
+          let timeZone = "";
+          result.users[0]["user_prefs"].forEach(function (pref2) {
+            if (pref2.pref_name === "TimeZone") {
+              timeZone = pref2;
+            }
+          });
           this.setState({
             // IMPORTANT!  You need to guard against any of these values being null.  If they are, it will
             // try and make the form component uncontrolled, which plays havoc with react
             userName: result.users[0].username || "",
             firstName: result.users[0].first_name || "",
             lastName: result.users[0].last_name || "",
+            wakeTime: wakeTime,
+            timeZone: timeZone
           });
         },
         (error) => {
@@ -59,8 +76,7 @@ class UserProfile extends Component {
           name: this.state.userName,
           mode: "ignorenulls",
         }),
-      }
-    )
+      })
       .then((res) => res.json())
       .then(
         (result) => {
@@ -70,30 +86,55 @@ class UserProfile extends Component {
           alert("CURSES! FOILED AGAIN!");
         }
       );
-    /*
-      fetch(
-        "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
-        {
-          method: "post",
-          body: JSON.stringify({
-  
-            //API FIELDS
-            action: "addOrEditUserPrefs",
-            user_id: sessionStorage.getItem("user"),
-            userid: sessionStorage.getItem("user"),
-            session_token: sessionStorage.getItem("token"),
-            prefname: "testPref",
-            prefvalue: this.state.testArtifact, 
-            
-  
-          }),}).then((res) => res.json()).then((result) => {
-  
-  
-          //DO WHATEVER YOU WANT WITH THE JSON HERE
-  
-  
-        },(error) => {alert("error!");});
-        */
+
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUserPrefs",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: sessionStorage.getItem("user"),
+          prefid: this.state.wakeTime.pref_id,
+          prefname: "WakeTime",
+          prefvalue: this.state.wakeTime.pref_value
+        }),
+      })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result.message);
+
+        },
+        (error) => {
+          alert("CURSES! FOILED AGAIN!");
+        }
+      );
+
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/upcontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "addOrEditUserPrefs",
+          user_id: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userid: sessionStorage.getItem("user"),
+          prefid: this.state.timeZone.pref_id,
+          prefname: "TimeZone",
+          prefvalue: this.state.timeZone.pref_value
+        }),
+      })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result.message);
+        },
+        (error) => {
+          alert("CURSES! FOILED AGAIN!");
+        }
+      );
   };
 
   userNameChangeHandler = (event) => {
@@ -114,9 +155,19 @@ class UserProfile extends Component {
     });
   };
 
-  artifactsChangeHandler = (event) => {
+  wakeTimeChangeHandler = (event) => {
+    const prefs1 = JSON.parse(JSON.stringify(this.state.wakeTime));
+    prefs1.pref_value = event.target.value;
     this.setState({
-      testArtifact: event.target.value,
+      wakeTime: prefs1,
+    });
+  };
+
+  timeZoneChangeHandler = (event) => {
+    const prefs1 = JSON.parse(JSON.stringify(this.state.timeZone));
+    prefs1.pref_value = event.target.value;
+    this.setState({
+      timeZone: prefs1,
     });
   };
 
@@ -148,12 +199,27 @@ class UserProfile extends Component {
             value={this.state.lastName}
           ></input>
 
+          <label for="fname">Wake Up Time</label>
           <input
             type="text"
-            placeholder="Enter anything. ANYTHING YOU WANT:"
-            onChange={this.artifactsChangeHandler}
-            value={this.state.testArtifact}
+            placeholder="Wake Time"
+            onChange={this.wakeTimeChangeHandler}
+            value={this.state.wakeTime
+              ? this.state.wakeTime.pref_value
+              : ""}
           ></input>
+
+          <label for="fname">Time Zone</label>
+          <input
+            type="text"
+            placeholder="Time Zone"
+            onChange={this.timeZoneChangeHandler}
+            value={this.state.timeZone
+              ? this.state.timeZone.pref_value
+              : ""
+            }
+          ></input>
+
 
           <input type="submit" value="Save"></input>
         </form>

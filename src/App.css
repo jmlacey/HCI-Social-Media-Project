@@ -370,7 +370,7 @@ Profile Page
     width: 100%;
     margin-top: 5%;
   }
-  
+
   .profileBox {
     height: 0x;
     width: 0px;
@@ -388,23 +388,24 @@ Buddy Page
   float: left;
   width: 34%;
   padding: 10px;
- /* height: 300px; /* Should be removed. Only for demonstration */
- background-color: #dddddd;
- border-style: solid;
+  /* height: 300px; /* Should be removed. Only for demonstration */
+  background-color: purple;
+  border-style: solid;
+  min-height: 100%;
+  margin: 100px 0 0;
+  color: white;
 }
 
 .secondcolumn {
+  min-height: 100%;
   float: left;
   width: 66%;
   padding: 10px;
- /* height: 300px; /* Should be removed. Only for demonstration */
- background-color: white;
- border-style: solid;
+  /* height: 300px; /* Should be removed. Only for demonstration */
+  background-color: white;
+  border-style: solid;
+  margin: 100px 0 0;
 }
-
-
-
-
 
 .buddyPage {
   width: 100%;
@@ -733,6 +734,3 @@ IDK about any of the shit beneath this :(
   overflow-x: hidden;
   right: 0;
 }
-
-
-

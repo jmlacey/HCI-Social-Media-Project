@@ -163,6 +163,32 @@ export default class MyFriendList extends React.Component {
           submitMessage: response.Status,
         });
       });
+
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          action: "deleteConnections",
+          user_id: idForDelete,
+          session_token: sessionStorage.getItem("token"),
+          connectionid: sessionStorage.getItem("user"),
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        alert(
+          "Deleted " +
+            this.state.userid +
+            " AKA " +
+            idForDelete +
+            " from your friends list! Hooray!"
+        );
+        this.setState({
+          submitMessage: response.Status,
+        });
+      });
   };
 
   blockFriend = (name, connectionid, connectuserid) => {
@@ -266,12 +292,19 @@ export default class MyFriendList extends React.Component {
     )
       .then((response) => response.json())
       .then((response) => {
+        //for profile pic
+        let profilePicURL = "";
+        response.users[0]["user_artifacts"].forEach(function (artifact1) {
+          if (artifact1.artifact_type === "ProfilePic") {
+            profilePicURL = artifact1.artifact_url;
+          }
+        });
         this.setState({
           viewProfileActivated: "true",
           firstname: response.users[0].first_name,
           lastname: response.users[0].last_name,
           username: response.users[0].username,
-          profilePicURL: this.state.profilePicURL,
+          profilePicURL: profilePicURL,
           profilePoints: response.users[0].status,
         });
       });
@@ -308,7 +341,7 @@ export default class MyFriendList extends React.Component {
         <div>
           {" "}
           <NewFriendButton />
-          Loading...{" "}
+          You do not have any friends yet. Send a friend invitation above!{" "}
         </div>
       );
     } else {
@@ -446,26 +479,13 @@ export default class MyFriendList extends React.Component {
           {/* This displays the default Alan profile Pic */}
           <img img src={this.state.profilePicURL} />
         </div>
-        <div className="rightColFriendsList">
+        <div className="viewProfileText">
           <p>Username: {this.state.username} </p>
 
           <p>First Name: {this.state.firstname} </p>
 
           <p>Last Name: {this.state.lastname} </p>
 
-          <p>
-            {" "}
-            <label for="Sleep Time">Sleep Time: </label>
-            <input type="time" id="Sleep Time" name="Sleep Time" />{" "}
-          </p>
-
-          <p>
-            {" "}
-            <label for="Wake Up Time">Wake Up Time: </label>
-            <input type="time" id="Wake Up Time" name="Wake Up Time" />
-          </p>
-
-          <input type="submit" value="Message"></input>
           <p>Sleepy Score: {this.state.profilePoints} </p>
           <p>(The higher the sleepy score, the better.)</p>
         </div>

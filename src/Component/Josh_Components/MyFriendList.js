@@ -25,6 +25,8 @@ export default class MyFriendList extends React.Component {
 
       //for sleep points
       profilePoints: "",
+
+      timeZone: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -273,6 +275,12 @@ export default class MyFriendList extends React.Component {
             profilePicURL = artifact1.artifact_url;
           }
         });
+        let timeZonePref = "";
+        response.users[0]["user_prefs"].forEach(function (pref1) {
+          if (pref1.pref_name === "TimeZone") {
+            timeZonePref = pref1.pref_value;
+          }
+        });
         this.setState({
           viewProfileActivated: "true",
           firstname: response.users[0].first_name,
@@ -280,6 +288,7 @@ export default class MyFriendList extends React.Component {
           username: response.users[0].username,
           profilePicURL: profilePicURL,
           profilePoints: response.users[0].status,
+          timeZone: timeZonePref,
         });
       });
   }
@@ -460,11 +469,12 @@ export default class MyFriendList extends React.Component {
 
           <p>Last Name: {this.state.lastname} </p>
 
+          <p>Time Zone: {this.state.timeZone} </p>
           <p>Sleepy Score: {this.state.profilePoints} </p>
           <p>(The higher the sleepy score, the better.)</p>
         </div>
         <button
-          className="profileButton"
+          className="profileButton rightCol1"
           onClick={() => this.setState({ viewProfileActivated: "false" })}
         >
           Exit

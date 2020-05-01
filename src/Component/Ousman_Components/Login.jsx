@@ -79,8 +79,8 @@ class Header extends Component {
           if (result.user) {
             sessionStorage.setItem("token", result.user.session_token);
             sessionStorage.setItem("user", result.user.user_id);
-            sessionStorage.setItem("email", result.user.username);
-            alert("logging in: " + sessionStorage.getItem("user"));
+            sessionStorage.setItem("email", result.user.email_addr);
+            alert("Welcome " + sessionStorage.getItem("email") + "!");
             if (
               result.user.status === null ||
               result.user.status === "reinit"
@@ -255,7 +255,11 @@ class Header extends Component {
   };
 
   logout() {
-    alert("Logging out : " + sessionStorage.getItem("email"));
+    alert(
+      "Logging out : " +
+        sessionStorage.getItem("email") +
+        ". We are sorry to see you go :("
+    );
 
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
@@ -273,7 +277,6 @@ class Header extends Component {
       .then(
         (result) => {
           //DO WHATEVER YOU WANT WITH THE JSON HERE
-          alert("Hooray! Logged out!");
           sessionStorage.removeItem("token");
         },
         (error) => {
@@ -302,9 +305,9 @@ class Header extends Component {
         body: JSON.stringify({
           //API FIELDS
           action: "deleteUsers",
-          username: sessionStorage.getItem("email"),
           session_token: sessionStorage.getItem("token"),
           user_id: sessionStorage.getItem("user"),
+          userid: sessionStorage.getItem("user"),
         }),
       }
     )
@@ -315,7 +318,7 @@ class Header extends Component {
             //DO WHATEVER YOU WANT WITH THE JSON HERE
             sessionStorage.removeItem("token");
             sessionStorage.removeItem("user");
-            sessionStorage.removeItem("user_id");
+            sessionStorage.removeItem("email");
             this.setState({
               session_token: "",
               user_id: "",
@@ -415,10 +418,10 @@ class Header extends Component {
   };
 
   render() {
+    alert(sessionStorage.getItem("token"));
     if (
       !sessionStorage.getItem("token") ||
-      (sessionStorage.getItem("token") &&
-        sessionStorage.getItem("token") === "0")
+      sessionStorage.getItem("token") === "0"
     ) {
       if (this.state.forgotPassword) {
         return (

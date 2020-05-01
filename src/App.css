@@ -269,26 +269,6 @@ Discussison
 Profile Page
     
 ----------------*/
-@media screen and (max-width: 1000px) {
-  .profileFormDiv {
-    width: 100%;
-    margin-top: 10%;
-  }
-
-  .profilePicture {
-    width: 100%;
-    margin-top: 5%;
-    padding-left: 0px;
-  }
-
-  .profileBox {
-    height: 0px;
-    width: 0px;
-    display: block;
-    margin-left: 0px;
-  }
-}
-
 .profilePage:after {
   content: "";
   display: table;
@@ -301,17 +281,16 @@ Profile Page
 
 .profileFormDiv {
   float: left;
-  width: 75%;
+  width: 50%;
   margin-top: 10%;
 }
 
 .profilePicture {
   float: left;
-  width: 25%;
+  width: 50%;
   margin-top: 5%;
   padding-left: 300px;
 }
-
 .profileBox {
   height: 500px;
   width: 500px;
@@ -339,10 +318,6 @@ Profile Page
   border-radius: 50%;
   border: 2px solid;
   border-color: black;
-}
-
-.profileLabel {
-  margin-top: 100px;
 }
 
 .leftCol {

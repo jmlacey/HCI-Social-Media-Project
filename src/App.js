@@ -7,9 +7,8 @@ import Profile from "./Component/Profile.js";
 import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
-//import View from "./Component/Anthony_Components/viewProfile.jsx";
+// import View from "./Component/Anthony_Components/viewprofile.jsx";
 import Picture from "./Component/Anthony_Components/profilepicture";
-import Discussion from "./Component/Discussion.jsx";
 import Edit from "./Component/Anthony_Components/editprofile.jsx";
 
 //My stuff
@@ -18,7 +17,9 @@ import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import SignUp from "./Component/Ousman_Components/Sign_up.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import NewFriendButton from "./Component/Josh_Components/NewFriendButton.js";
-import ProfilePage from "./Component/Josh_Components/UserProfile.js";
+// import ProfilePage from "./Component/Josh_Components/UserProfile.js";
+import RealProfile from "./Component/Zach_components/Profile.js"
+import ProfilePic from "./Component/Zach_components/ProfilePic.js";
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class MainContent extends React.Component {
     if (this.state.section === "test") {
       return (
         <div className="App">
-          <ProfilePage />
+          <RealProfile />
         </div>
       );
     }
@@ -76,7 +77,7 @@ class MainContent extends React.Component {
     if (this.state.section === "login") {
       return (
         <div className="App">
-          <MyLogin />
+          <MyLogin toggleLogin={this.props.toggleLogin}/>
         </div>
       );
     }
@@ -105,9 +106,10 @@ class MainContent extends React.Component {
           <Picture />
           <View action={this.startEdit} />
         </div>
-        */
-
-        <ProfilePage />
+        */<div>
+          <ProfilePic />
+          <RealProfile />
+        </div>
       );
     }
 
@@ -125,7 +127,7 @@ class MainContent extends React.Component {
     if (this.state.section === "Discussion") {
       return (
         <div className="discussionPage">
-          <Discussion />
+          <PostForm />
         </div>
       );
     }
@@ -174,18 +176,59 @@ function toggleModal(app) {
   });
 }
 
+
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       openModal: false,
+      isLogin: false
     };
+
+    this.toggleLogin = this.toggleLogin.bind(this);
+
+  }
+
+   toggleLogin(){
+  this.setState({
+    isLogin: !this.state.isLogin
+  });
+   }
+  logout() {
+    alert("Logging out : " + sessionStorage.getItem("email"));
+
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/SocialAuth.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          //API FIELDS
+          action: "logout",
+          username: sessionStorage.getItem("email"),
+          session_token: sessionStorage.getItem("token"),
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          //DO WHATEVER YOU WANT WITH THE JSON HERE
+          alert("Hooray! Logged out!");
+          sessionStorage.removeItem("token");
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
   }
 
   render() {
+    // this.toggleLogin();
     sessionStorage.setItem("token", "0");
     let mainContent = React.createRef();
-    if ((this.state.section = "signup")) {
+    if (this.state.isLogin) {
       return (
         <div className="App">
           <header className="header">
@@ -238,6 +281,14 @@ class App extends React.Component {
                       >
                         Buddy
                       </a>
+                      
+                      <a
+                        className="element_link"
+                        onClick={this.logout}
+                      >
+                        Logout
+                      </a>
+                     
                     </li>
                   </ul>
                 </div>
@@ -246,7 +297,7 @@ class App extends React.Component {
           </header>
 
           <div className="maincontent" id="mainContent">
-            <MainContent ref={mainContent} />
+            <MainContent ref={mainContent} toggleLogin={() => this.toggleLogin()}/>
           </div>
 
           <Modal
@@ -310,7 +361,7 @@ class App extends React.Component {
           </header>
 
           <div className="maincontent" id="mainContent">
-            <MainContent ref={mainContent} />
+            <MainContent ref={mainContent}  toggleLogin={() => this.toggleLogin()}/>
           </div>
 
           <Modal

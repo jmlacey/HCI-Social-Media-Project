@@ -219,7 +219,7 @@ Discussison
 
 .commentlist {
   text-align: left;
-  background: lightblue;
+  background: white;
   color: black;
   border-radius: 20px;
   padding: 10px;
@@ -252,7 +252,7 @@ Discussison
 }
 
 .comment-indicator-text {
-  background-color: lightblue;
+  background-color: white;
   color: black;
   border-radius: 10px;
   font-size: 16px;
@@ -283,14 +283,15 @@ Profile Page
   float: left;
   width: 50%;
   margin-top: 10%;
+  padding-left: 100px;
 }
 
 .profilePicture {
   float: left;
   width: 50%;
   margin-top: 5%;
-  padding-left: 300px;
 }
+
 .profileBox {
   height: 500px;
   width: 500px;
@@ -360,6 +361,26 @@ Profile Page
   display: flex;
   vertical-align: middle;
 }
+
+@media screen and (max-width: 1200px) {
+  .profileFormDiv {
+    width: 100%;
+    margin-top: 10%;
+  }
+
+  .profilePicture {
+    width: 100%;
+    margin-top: 5%;
+  }
+  
+  .profileBox {
+    height: 0x;
+    width: 0px;
+    display: block;
+    margin-left: 0px;
+  }
+}
+
 /*-----------------
 
 Buddy Page

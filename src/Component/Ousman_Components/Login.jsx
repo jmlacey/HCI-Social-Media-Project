@@ -419,7 +419,6 @@ class Header extends Component {
   };
 
   render() {
-    alert(sessionStorage.getItem("token"));
     if (
       !sessionStorage.getItem("token") ||
       sessionStorage.getItem("token") === "0"

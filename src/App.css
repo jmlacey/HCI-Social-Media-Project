@@ -219,8 +219,8 @@ Discussison
 
 .commentlist {
   text-align: left;
-  background: white;
-  color: black;
+  background: purple;
+  color: white;
   border-radius: 20px;
   padding: 10px;
   margin: 10px;
@@ -283,7 +283,6 @@ Profile Page
   float: left;
   width: 50%;
   margin-top: 10%;
-  padding-left: 100px;
 }
 
 .profilePicture {
@@ -304,7 +303,7 @@ Profile Page
 }
 
 .profileButton {
-  background-color: blueviolet;
+  background-color: purple;
   padding: 15px;
   margin-top: 20px;
   border: none;
@@ -362,7 +361,7 @@ Profile Page
   vertical-align: middle;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 700px) {
   .profileFormDiv {
     width: 100%;
     margin-top: 10%;
@@ -455,7 +454,11 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #4caf50;
+  background-color: #ffaa3b;
+}
+
+input[type="button"]:hover {
+  background-color: #ffaa3b;
 }
 
 /*-----------------
@@ -482,7 +485,7 @@ IDK about any of the shit beneath this :(
 }
 
 .avatarButton {
-  background-color: blueviolet;
+  background-color: purple;
   padding: 15px;
   margin-top: 20px;
   width: 200px;
@@ -494,7 +497,7 @@ IDK about any of the shit beneath this :(
 }
 
 .timeInput {
-  background-color: #7155d3;
+  background-color: purple;
   font-size: 14px;
   width: 160px;
 }

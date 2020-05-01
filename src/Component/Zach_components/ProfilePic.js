@@ -83,21 +83,23 @@ export default class ProfilePic extends Component {
     render() {
         return (
             <div className="profilePicture">
-                <img
-                    src={this.state.profilePicURL}>
-                </img>
+                <div className="profileBox">
+                    <img
+                        src={this.state.profilePicURL}>
+                    </img>
 
-                <form >
-                    <input
-                        type="text"
-                        placeholder="Picture URL"
-                        onChange={this.uploadPicHandler}
-                        value={this.state.profilePicURL}>
-                    </input>
+                    <form >
+                        <input
+                            type="text"
+                            placeholder="Picture URL"
+                            onChange={this.uploadPicHandler}
+                            value={this.state.profilePicURL}>
+                        </input>
 
 
-                    <input type="button" value="Upload" onClick={this.uploadPicture} className="profileButton" />
-                </form>
+                        <input type="button" value="Upload" onClick={this.uploadPicture} className="profileButton" />
+                    </form>
+                </div>
             </div>
         );
     }

@@ -360,6 +360,12 @@ Profile Page
   float: right;
 }
 
+.viewProfileText {
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+
 .leftCol1 {
   width: 15%;
   float: left;
@@ -375,6 +381,10 @@ Profile Page
   float: right;
 }
 
+.centeredCol {
+  display: flex;
+  vertical-align: middle;
+}
 /*-----------------
 
 Buddy Page

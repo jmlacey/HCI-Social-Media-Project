@@ -72,6 +72,7 @@ export default class Profile extends Component {
   }
 
   submitHandler = (event) => {
+    alert("Profile Saved!");
     //prevents from from actually submitting
     event.preventDefault();
     fetch(

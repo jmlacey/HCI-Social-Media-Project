@@ -181,7 +181,6 @@ export default class Buddy extends React.Component {
             activatedID: sleepCycleActivatedID || "",
           });
 
-       
           this.getwakeTimeMinutes();
 
           fetch(
@@ -432,6 +431,11 @@ export default class Buddy extends React.Component {
   renderNotActivated() {
     return (
       <div>
+        <input
+          type="submit"
+          value="Abandon Sleep Buddy"
+          onClick={this.removeSleepBuddy}
+        ></input>
         <p>
           Your sleep cycle has not been activated. Set a wakeup time and hit the
           button below to start!
@@ -743,11 +747,6 @@ export default class Buddy extends React.Component {
     return (
       <div>
         <p>Your sleep buddy is {this.state.buddyName}</p>
-        <input
-          type="submit"
-          value="Abandon Sleep Buddy"
-          onClick={this.removeSleepBuddy}
-        ></input>
 
         {this.state.activated !== "true"
           ? this.renderNotActivated()

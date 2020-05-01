@@ -40,7 +40,6 @@ export default class MyFriendList extends React.Component {
           });
         }
           if (this.state.connectionID !== "") {
-            alert("Adding the friend! Lets GOOOOO");
             this.addFriend();
           } else {
             alert("Not a valid user! Please Enter a valid username!");
@@ -72,8 +71,6 @@ export default class MyFriendList extends React.Component {
         alert(
           "Sent " +
             this.state.userName +
-            " AKA " +
-            this.state.connectionID +
             " an invitation! Hooray!"
         );
         this.setState({

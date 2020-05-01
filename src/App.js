@@ -107,7 +107,6 @@ class MainContent extends React.Component {
       return (
         <div>
           <Setting />
-          
         </div>
       );
     }
@@ -192,11 +191,11 @@ class App extends React.Component {
       .then(
         (result) => {
           //DO WHATEVER YOU WANT WITH THE JSON HERE
-          alert("Hooray! Logged out!");
+          alert("Log out complete!");
           sessionStorage.removeItem("token");
         },
         (error) => {
-          alert("error!");
+          alert("Log out failed");
         }
       );
   }
@@ -232,6 +231,7 @@ class App extends React.Component {
                         onClick={(e) =>
                           setMenuOption("friends", mainContent, e)
                         }
+                        
                       >
                         Friends
                       </a>

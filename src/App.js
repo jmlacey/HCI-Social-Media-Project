@@ -6,6 +6,7 @@ import logo from "./Component/logo.png";
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
 import MyLogin from "./Component/Ousman_Components/Login.jsx";
 import SignUp from "./Component/Ousman_Components/Sign_up.jsx";
+import Setting from "./Component/Ousman_Components/Setting.jsx";
 import Buddy from "./Component/Zach_components/Buddy.js";
 import RealProfile from "./Component/Zach_components/Profile.js";
 import ProfilePic from "./Component/Zach_components/ProfilePic.js";
@@ -102,14 +103,14 @@ class MainContent extends React.Component {
       );
     }
 
-    // if (this.state.section === "allowEdit") {
-    //   return (
-    //     <div>
-    //       <Picture />
-    //       <Edit action={this.doneEdit} />
-    //     </div>
-    //   );
-    // }
+    if (this.state.section === "allowEdit") {
+      return (
+        <div>
+          <Setting />
+          
+        </div>
+      );
+    }
 
     // if (this.state.section === "test") {
     //   return <MyFriendList userid={sessionStorage.getItem("user")} />;
@@ -251,7 +252,7 @@ class App extends React.Component {
                         Buddy
                       </a>
 
-                      <a className="element_link" onClick={(e) => setMenuOption("login", mainContent, e)}>
+                      <a className="element_link" onClick={(e) => setMenuOption("allowEdit", mainContent, e)}>
                         Setting
                       </a>
                     </li>

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import RealProfile from "../Zach_components/Profile.js";
-import ProfilePic from "../Zach_components/ProfilePic.js";
-
+import Discussion from "../PostForm.js";
 
 class Header extends Component {
   constructor(props) {
@@ -419,115 +417,26 @@ class Header extends Component {
   };
 
   render() {
-    if (
-      !sessionStorage.getItem("token") ||
-      (sessionStorage.getItem("token") &&
-        sessionStorage.getItem("token") === "0")
-    ) {
-      if (this.state.forgotPassword) {
-        return (
-          <div>
-            <label for="fname">Email</label>
-            <input
-              type="text"
-              placeholder="Your email"
-              onChange={this.emailChangeHandler}
-              value={this.state.email}
-            ></input>
-
-            <input
-              type="submit"
-              value="SEND ONE TIME PASSWORD"
-              onClick={this.SendOTP}
-            ></input>
-
-            <label>Enter OTP</label>
-            <input
-              type="text"
-              placeholder="Your OTP"
-              onChange={this.otpChangeHandler}
-              value={this.state.otp}
-            ></input>
-
-            <label>New Password</label>
-            <input
-              type="password"
-              placeholder="Your New Password"
-              onChange={this.newPassChangeHandler}
-              value={this.state.newPassword}
-            ></input>
-
-            <label>Confirm New Password</label>
-            <input
-              type="password"
-              placeholder="Confirm New Password"
-              onChange={this.confirmChangeHandler}
-              value={this.state.confirmPassword}
-            ></input>
-
-            <input
-              type="submit"
-              value="Change Password"
-              onClick={this.changeThePassword}
-            ></input>
-          </div>
-        );
-      }
-
+    
       return (
         <div className="formDiv">
           <div class="centered">
-            <form action="/action_page.php" onSubmit={this.submitHandler}>
-              <label for="fname">Email</label>
-              <input
-                type="text"
-                id="fname"
-                name="firstname"
-                placeholder="Your email"
-                onChange={this.myChangeHandler}
-              ></input>
-              <label for="lname">Password</label>
-              <input
-                type="password"
-                id="lname"
-                name="lastname"
-                placeholder="Your password"
-                onChange={this.passwordChangeHandler}
-              ></input>
-
-              <input type="submit" value="Login"></input>
+            <form onSubmit={this.Reinitialize}>
+              <input type="submit" value="reinit"></input>
             </form>
 
-            <input
-              type="submit"
-              value="Forgot Password"
-              onClick={this.forgotPasswordButton}
-            ></input>
+            <form onSubmit={this.logout}>
+              <input type="submit" value="Logout"></input>
+            </form>
+
+            <form onSubmit={this.deleteAccount}>
+              <input type="submit" value="Delete Account"></input>
+            </form>
           </div>
         </div>
+        // <Discussion/>
       );
-    } else {
-      return (
-        // <div className="formDiv">
-        //   <div class="centered">
-        //     <form onSubmit={this.Reinitialize}>
-        //       <input type="submit" value="reinit"></input>
-        //     </form>
 
-        //     <form onSubmit={this.logout}>
-        //       <input type="submit" value="Logout"></input>
-        //     </form>
-
-        //     <form onSubmit={this.deleteAccount}>
-        //       <input type="submit" value="Delete Account"></input>
-        //     </form>
-        //   </div>
-        // </div>
-        <div>
-          <ProfilePic />
-          <RealProfile />      
-          </div>
-          );
       /*
       alert("Hooray! You are logged in!");
       console.log("Returning welcome message");
@@ -540,6 +449,6 @@ class Header extends Component {
       */
     }
   }
-}
+
 
 export default Header;

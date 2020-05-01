@@ -103,7 +103,7 @@ export default class MyFriendList extends React.Component {
             placeholder="Enter a name to add here!"
             onChange={this.changeInputState}
           />
-          <input type="submit" className="element_link" value="Add Friend!" />
+          <input type="submit" value="Add Friend!" />
         </form>
       </div>
     );

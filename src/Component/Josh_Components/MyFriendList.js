@@ -19,6 +19,12 @@ export default class MyFriendList extends React.Component {
       firstname: "",
       lastname: "",
       file: null,
+
+      //for profile picture
+      profilePicURL: "",
+
+      //for sleep points
+      profilePoints: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -266,6 +272,8 @@ export default class MyFriendList extends React.Component {
           firstname: response.users[0].first_name,
           lastname: response.users[0].last_name,
           username: response.users[0].username,
+          profilePicURL: profilePicURL,
+          profilePoints: response.users[0].status,
         });
       });
   }
@@ -435,16 +443,9 @@ export default class MyFriendList extends React.Component {
     alert("viewing profile");
     return (
       <div>
-        {/* <h1>Viewing {this.state.username} 's Profile</h1> */}
-
         <div>
           {/* This displays the default Alan profile Pic */}
           <img src={friend} />
-
-          {/* This gives you the option to upload a profile pic yourself */}
-
-          {/* <input type="file" onChange={this.handleChange}/>
-        <img src={this.state.file}/> */}
 
           <p>Username: {this.state.username} </p>
 
@@ -465,6 +466,8 @@ export default class MyFriendList extends React.Component {
           </p>
 
           <input type="submit" value="Message"></input>
+          <p>Sleepy Score: {this.state.profilePoints} </p>
+          <p>(The higher the sleepy score, the better.)</p>
         </div>
         <button
           className="profileButton"

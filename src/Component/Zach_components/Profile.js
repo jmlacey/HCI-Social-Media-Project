@@ -206,7 +206,7 @@ export default class Profile extends Component {
     
       render() {
         return (
-          <div>
+          <div className="profileFormDiv">
             <form onSubmit={this.submitHandler}>
               <label for="fname">username</label>
               <input
@@ -232,13 +232,13 @@ export default class Profile extends Component {
                 value={this.state.lastName}
               ></input>
     
-              <label for="fname">Wake Up Time</label>
+              {/* <label for="fname">Wake Up Time</label>
               <input
                 type="time"
                 onChange={this.wakeTimeChangeHandler}
                 value={this.state.wakeTime
                 }
-              ></input>
+              ></input> */}
     
               <label for="fname">Time Zone</label>
               <select

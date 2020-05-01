@@ -45,7 +45,7 @@ export default class ProfilePic extends Component {
 
     uploadPicture = () => {
         console.log("This is the pic URL" + this.state.profilePicURL);
-        
+
         //Make a fetch call that grabs the three states and fills in the text boxes.
         fetch(
             "http://stark.cse.buffalo.edu/cse410/reactioneers/api/uacontroller.php",
@@ -65,7 +65,7 @@ export default class ProfilePic extends Component {
             .then((res) => res.json())
             .then(
                 (result) => {
-                    
+
                 },
                 (error) => {
                     alert("error!");
@@ -82,7 +82,7 @@ export default class ProfilePic extends Component {
 
     render() {
         return (
-            <div>
+            <div className="profilePicture">
                 <img
                     src={this.state.profilePicURL}>
                 </img>
@@ -96,7 +96,7 @@ export default class ProfilePic extends Component {
                     </input>
 
 
-                    <input type="button" value="Upload" onClick={this.uploadPicture}/>
+                    <input type="button" value="Upload" onClick={this.uploadPicture} className="profileButton" />
                 </form>
             </div>
         );

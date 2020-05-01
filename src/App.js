@@ -1,16 +1,15 @@
 import React from "react";
 import "./App.css";
 import PostForm from "./Component/PostForm.js";
-import FriendList from "./Component/FriendList.js";
-import LoginForm from "./Component/LoginForm.js";
-import Profile from "./Component/Profile.js";
-import FriendForm from "./Component/FriendForm.js";
+// import FriendList from "./Component/FriendList.js";
+// import LoginForm from "./Component/LoginForm.js";
+// import Profile from "./Component/Profile.js";
+// import FriendForm from "./Component/FriendForm.js";
 import Modal from "./Component/Modal.js";
 import logo from "./Component/logo.png";
 // import View from "./Component/Anthony_Components/viewprofile.jsx";
-import Picture from "./Component/Anthony_Components/profilepicture";
-import Edit from "./Component/Anthony_Components/editprofile.jsx";
-
+// import Picture from "./Component/Anthony_Components/profilepicture";
+// import Edit from "./Component/Anthony_Components/editprofile.jsx";
 //My stuff
 import MyFriendList from "./Component/Josh_Components/MyFriendList.js";
 import MyLogin from "./Component/Ousman_Components/Login.jsx";
@@ -98,32 +97,16 @@ class MainContent extends React.Component {
         </div>
       );
     }
-    //anthony's profile page...
+    
     if (this.state.section === "profile") {
       return (
-        /*
         <div className="profilePage">
-          <Picture />
-          <View action={this.startEdit} />
-        </div>
-        */<div>
           <ProfilePic />
           <RealProfile />
         </div>
       );
     }
 
-    if (this.state.section === "allowEdit") {
-      return (
-        <div>
-          <Picture />
-          <Edit action={this.doneEdit} />
-        </div>
-      );
-    }
-    //end of anthony's profile page
-
-    //made for Discussion
     if (this.state.section === "Discussion") {
       return (
         <div className="discussionPage">
@@ -132,33 +115,43 @@ class MainContent extends React.Component {
       );
     }
 
-    if (this.state.section === "test") {
-      return <MyFriendList userid={sessionStorage.getItem("user")} />;
-    }
-    if (this.state.section === "main") {
-      return (
-        <div>
-          <p>Social Media Test Harness</p>
-          <LoginForm />
-          <PostForm />
-        </div>
-      );
-    } else if (this.state.section === "friend") {
-      return (
-        <div>
-          <p>Friends</p>
-          <FriendForm userid={sessionStorage.getItem("user")} />
-          <FriendList userid={sessionStorage.getItem("user")} />
-        </div>
-      );
-    } else if (this.state.section === "settings") {
-      return (
-        <div className="settings">
-          <p>Settings</p>
-          <Profile userid={sessionStorage.getItem("user")} />
-        </div>
-      );
-    } else {
+    // if (this.state.section === "allowEdit") {
+    //   return (
+    //     <div>
+    //       <Picture />
+    //       <Edit action={this.doneEdit} />
+    //     </div>
+    //   );
+    // }
+
+    // if (this.state.section === "test") {
+    //   return <MyFriendList userid={sessionStorage.getItem("user")} />;
+    // }
+    // if (this.state.section === "main") {
+    //   return (
+    //     <div>
+    //       <p>Social Media Test Harness</p>
+    //       <LoginForm />
+    //       <PostForm />
+    //     </div>
+    //   );
+    // } else if (this.state.section === "friend") {
+    //   return (
+    //     <div>
+    //       <p>Friends</p>
+    //       <FriendForm userid={sessionStorage.getItem("user")} />
+    //       <FriendList userid={sessionStorage.getItem("user")} />
+    //     </div>
+    //   );
+    // } else if (this.state.section === "settings") {
+    //   return (
+    //     <div className="settings">
+    //       <p>Settings</p>
+    //       <Profile userid={sessionStorage.getItem("user")} />
+    //     </div>
+    //   );
+    // }
+    else {
       return <p>Unidentified Section!</p>;
     }
   }

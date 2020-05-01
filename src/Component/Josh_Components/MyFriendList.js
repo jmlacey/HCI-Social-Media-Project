@@ -73,7 +73,6 @@ export default class MyFriendList extends React.Component {
   }
 
   loadBlocked() {
-    
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
@@ -272,7 +271,7 @@ export default class MyFriendList extends React.Component {
           firstname: response.users[0].first_name,
           lastname: response.users[0].last_name,
           username: response.users[0].username,
-          profilePicURL: profilePicURL,
+          profilePicURL: this.state.profilePicURL,
           profilePoints: response.users[0].status,
         });
       });

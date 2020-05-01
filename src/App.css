@@ -365,6 +365,26 @@ Profile Page
 Buddy Page
     
 ----------------*/
+.firstcolumn {
+  float: left;
+  width: 50%;
+  padding: 10px;
+ /* height: 300px; /* Should be removed. Only for demonstration */
+ background-color: purple;
+}
+
+.secondcolumn {
+  float: left;
+  width: 50%;
+  padding: 10px;
+ /* height: 300px; /* Should be removed. Only for demonstration */
+ background-color: grey;
+}
+
+
+
+
+
 .buddyPage {
   width: 100%;
   justify-content: center;
@@ -688,3 +708,6 @@ IDK about any of the shit beneath this :(
   overflow-x: hidden;
   right: 0;
 }
+
+
+

@@ -442,10 +442,11 @@ export default class MyFriendList extends React.Component {
     alert("viewing profile");
     return (
       <div>
-        <div>
+        <div className="profilePicture img">
           {/* This displays the default Alan profile Pic */}
-          <img src={friend} />
-
+          <img img src={this.state.profilePicURL} />
+        </div>
+        <div className="rightColFriendsList">
           <p>Username: {this.state.username} </p>
 
           <p>First Name: {this.state.firstname} </p>

@@ -795,8 +795,8 @@ export default class Buddy extends React.Component {
             STATUS!
           </p>
           <p>
-            It also adds 1 to your sleep buddy's sleepy status, so don't let
-            them down!
+            It also adds 1 to your sleep buddy's sleepy score, so don't let them
+            down!
           </p>
         </div>
         <div class="secondcolumn">

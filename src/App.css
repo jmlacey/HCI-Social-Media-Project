@@ -269,6 +269,26 @@ Discussison
 Profile Page
     
 ----------------*/
+@media screen and (max-width: 1000px) {
+  .profileFormDiv {
+    width: 100%;
+    margin-top: 10%;
+  }
+
+  .profilePicture {
+    width: 100%;
+    margin-top: 5%;
+    padding-left: 0px;
+  }
+
+  .profileBox {
+    height: 0px;
+    width: 0px;
+    display: block;
+    margin-left: 0px;
+  }
+}
+
 .profilePage:after {
   content: "";
   display: table;
@@ -285,8 +305,19 @@ Profile Page
   float: left;
   width: 25%;
   margin-top: 5%;
+  padding-left: 300px;
 }
 
+.profileBox {
+  height: 500px;
+  width: 500px;
+  display: block;
+  margin-left: 100px;
+}
+
+.profileLabel {
+  padding-top: 10px;
+}
 
 .profileButton {
   background-color: blueviolet;
@@ -298,7 +329,7 @@ Profile Page
   color: white;
 }
 
-.profilePicture img{
+.profilePicture img {
   height: 300px;
   width: 300px;
   border-radius: 50%;
@@ -563,8 +594,6 @@ IDK about any of the shit beneath this :(
   display: inline-flex;
 }
 
-
-
 .hide {
   display: none;
 }
@@ -576,8 +605,6 @@ IDK about any of the shit beneath this :(
   justify-content: center;
   flex-grow: 1;
 }
-
-
 
 .sidenav {
   /* need to specify some position other than static, so height can apply.
@@ -610,8 +637,6 @@ IDK about any of the shit beneath this :(
 
   margin-bottom: 15px;
 }
-
-
 
 .hide {
   display: none;

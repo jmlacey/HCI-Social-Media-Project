@@ -1,6 +1,8 @@
 import React from "react";
 import "../../App.css";
 import friend from "./friend.png";
+//import friend button to use in render functions
+import NewFriendButton from "./NewFriendButton.js";
 
 export default class MyFriendList extends React.Component {
   constructor(props) {
@@ -287,18 +289,103 @@ export default class MyFriendList extends React.Component {
       blockedConnections,
     } = this.state;
     if (error) {
-      return <div> Error: {error.message} </div>;
+      return (
+        <div>
+          {" "}
+          <NewFriendButton />
+          Error: {error.message}{" "}
+        </div>
+      );
     } else if (!isLoaded) {
-      return <div> Loading... </div>;
+      return (
+        <div>
+          {" "}
+          <NewFriendButton />
+          Loading...{" "}
+        </div>
+      );
     } else {
       return (
-        <body>
-          <div className="split right">
-            {/* <div className="centered"> */}
-            <h1>Friends:</h1>
-            <div className="post">
+        <div>
+          <NewFriendButton />
+          <body>
+            <div className="split right">
+              {/* <div className="centered"> */}
+              <h1>Friends:</h1>
+              <div className="post">
+                <ul>
+                  {connections.map((connection) => (
+                    <div key={connection.connection_id} className="userlist">
+                      <img
+                        className="friendImg"
+                        alt="friendIcon"
+                        src={friend}
+                      />
+                      {"UserName: " + connection.name} -
+                      {"Status: " + connection.connection_status}
+                      {/* button for viewing profile */}
+                      <button
+                        className="profileButton"
+                        onClick={() =>
+                          this.viewProfile(connection.connect_user_id)
+                        }
+                      >
+                        View
+                      </button>
+                      {/* button for deletion */}
+                      <button
+                        className="profileButton"
+                        onClick={() =>
+                          this.deleteFriend(connection.connection_id)
+                        }
+                      >
+                        Delete Friend
+                      </button>
+                      {/* button for blocking */}
+                      <button
+                        className="profileButton"
+                        onClick={() =>
+                          this.blockFriend(
+                            connection.name,
+                            connection.connection_id,
+                            connection.connect_user_id
+                          )
+                        }
+                      >
+                        Block
+                      </button>
+                    </div>
+                  ))}
+                  {blockedConnections.map((connection) => (
+                    <div key={connection.connection_id} className="userlist">
+                      <img
+                        className="friendImg"
+                        alt="friendIcon"
+                        src={friend}
+                      />
+                      {"UserName: " + connection.name} -
+                      {"Status: " + connection.connection_status}
+                      {/* button for completely ignoring this fool */}
+                      <button
+                        className="profileButton"
+                        onClick={() =>
+                          this.deleteFriend(connection.connection_id)
+                        }
+                      >
+                        Hide
+                      </button>
+                    </div>
+                  ))}
+                </ul>
+              </div>
+              {/* </div> */}
+            </div>
+
+            <div className="split left">
+              {/* <div className="centered"></div> */}
+              <h1>Pending Invitations:</h1>
               <ul>
-                {connections.map((connection) => (
+                {pendingConnections.map((connection) => (
                   <div key={connection.connection_id} className="userlist">
                     <img className="friendImg" alt="friendIcon" src={friend} />
                     {"UserName: " + connection.name} -
@@ -312,92 +399,34 @@ export default class MyFriendList extends React.Component {
                     >
                       View
                     </button>
-                    {/* button for deletion */}
+                    {/* button for accept */}
                     <button
                       className="profileButton"
                       onClick={() =>
-                        this.deleteFriend(connection.connection_id)
-                      }
-                    >
-                      Delete Friend
-                    </button>
-                    {/* button for blocking */}
-                    <button
-                      className="profileButton"
-                      onClick={() =>
-                        this.blockFriend(
+                        this.acceptInvitation(
                           connection.name,
                           connection.connection_id,
                           connection.connect_user_id
                         )
                       }
                     >
-                      Block
+                      Accept
                     </button>
-                  </div>
-                ))}
-                {blockedConnections.map((connection) => (
-                  <div key={connection.connection_id} className="userlist">
-                    <img className="friendImg" alt="friendIcon" src={friend} />
-                    {"UserName: " + connection.name} -
-                    {"Status: " + connection.connection_status}
-                    {/* button for completely ignoring this fool */}
+                    {/* button for ignore */}
                     <button
                       className="profileButton"
                       onClick={() =>
                         this.deleteFriend(connection.connection_id)
                       }
                     >
-                      Hide
+                      Ignore
                     </button>
                   </div>
                 ))}
               </ul>
             </div>
-            {/* </div> */}
-          </div>
-
-          <div className="split left">
-            {/* <div className="centered"></div> */}
-            <h1>Pending Invitations:</h1>
-            <ul>
-              {pendingConnections.map((connection) => (
-                <div key={connection.connection_id} className="userlist">
-                  <img className="friendImg" alt="friendIcon" src={friend} />
-                  {"UserName: " + connection.name} -
-                  {"Status: " + connection.connection_status}
-                  {/* button for viewing profile */}
-                  <button
-                    className="profileButton"
-                    onClick={() => this.viewProfile(connection.connect_user_id)}
-                  >
-                    View
-                  </button>
-                  {/* button for accept */}
-                  <button
-                    className="profileButton"
-                    onClick={() =>
-                      this.acceptInvitation(
-                        connection.name,
-                        connection.connection_id,
-                        connection.connect_user_id
-                      )
-                    }
-                  >
-                    Accept
-                  </button>
-                  {/* button for ignore */}
-                  <button
-                    className="profileButton"
-                    onClick={() => this.deleteFriend(connection.connection_id)}
-                  >
-                    Ignore
-                  </button>
-                </div>
-              ))}
-            </ul>
-          </div>
-        </body>
+          </body>
+        </div>
       );
     }
   }

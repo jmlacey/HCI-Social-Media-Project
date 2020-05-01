@@ -184,13 +184,12 @@ export default class Buddy extends React.Component {
           this.IDToUserName();
           this.getwakeTimeMinutes();
 
-          //Embedded getcompleteusers call!
           fetch(
             "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
             {
               method: "post",
               body: JSON.stringify({
-                action: "getCompleteUsers",
+                action: "getUsers",
                 userid: this.state.buddyID,
               }),
             }
@@ -198,28 +197,56 @@ export default class Buddy extends React.Component {
             .then((res) => res.json())
             .then(
               (result) => {
-                let buddywakeTime = "";
-                let buddywakeTimeId = "";
-                result.users[0]["user_prefs"].forEach(function (pref100) {
-                  if (pref100.pref_name === "WakeTime") {
-                    buddywakeTime = pref100.pref_value;
-                    buddywakeTimeId = pref100.pref_id;
-                  }
-                });
+                if (result.users) {
+                  this.setState({ buddyName: result.users[0].name });
+                } else {
+                  alert("No user found!");
+                }
 
-                let buddyWakeTimeActivated = "";
-                let buddyWakeTimeActivatedID = "";
-                result.users[0]["user_prefs"].forEach(function (pref1001) {
-                  if (pref1001.pref_name === "SleepCycleActivated") {
-                    buddyWakeTimeActivated = pref1001.pref_value;
-                    buddyWakeTimeActivatedID = pref1001.pref_id;
+                //Embedded getcompleteusers call!
+                fetch(
+                  "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+                  {
+                    method: "post",
+                    body: JSON.stringify({
+                      action: "getCompleteUsers",
+                      userid: this.state.buddyID,
+                    }),
                   }
-                });
+                )
+                  .then((res) => res.json())
+                  .then(
+                    (result) => {
+                      let buddywakeTime = "";
+                      let buddywakeTimeId = "";
+                      result.users[0]["user_prefs"].forEach(function (pref100) {
+                        if (pref100.pref_name === "WakeTime") {
+                          buddywakeTime = pref100.pref_value;
+                          buddywakeTimeId = pref100.pref_id;
+                        }
+                      });
 
-                this.setState({
-                  theirWakeTimeID: buddywakeTimeId || "",
-                  theirSleepCycleActivatedID: buddyWakeTimeActivatedID || "",
-                });
+                      let buddyWakeTimeActivated = "";
+                      let buddyWakeTimeActivatedID = "";
+                      result.users[0]["user_prefs"].forEach(function (
+                        pref1001
+                      ) {
+                        if (pref1001.pref_name === "SleepCycleActivated") {
+                          buddyWakeTimeActivated = pref1001.pref_value;
+                          buddyWakeTimeActivatedID = pref1001.pref_id;
+                        }
+                      });
+
+                      this.setState({
+                        theirWakeTimeID: buddywakeTimeId || "",
+                        theirSleepCycleActivatedID:
+                          buddyWakeTimeActivatedID || "",
+                      });
+                    },
+                    (error) => {
+                      alert("error!");
+                    }
+                  );
               },
               (error) => {
                 alert("error!");

@@ -337,12 +337,14 @@ Profile Page
 .viewProfileText {
   width: 100%;
   float: left;
-  text-align: center;
+  text-align: left;
+  margin-left: 30px;
 }
 
 .leftCol1 {
   width: 15%;
   float: left;
+  margin-left: 30px;
 }
 
 .leftColFriendsList {

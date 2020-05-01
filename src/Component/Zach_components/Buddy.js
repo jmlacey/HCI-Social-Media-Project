@@ -460,8 +460,8 @@ export default class Buddy extends React.Component {
         <div>
           <p>YOU WOKE UP! You are woke.</p>
           <p>
-            If you press this button, you and your sleep buddy will get 10
-            points!
+            If you press this button, you and your sleep buddy will get 1 more
+            sleepy status!
           </p>
           <input
             type="submit"
@@ -740,12 +740,12 @@ export default class Buddy extends React.Component {
 
         <input
           type="text"
-          placeholder="Test add buddy by id"
+          placeholder="Type in a username to pair up as sleep buddies!"
           onChange={this.testBuddyChangeHandler}
         ></input>
         <input
           type="submit"
-          value="Do it!"
+          value="Assign Sleep Buddies"
           onClick={this.testAssignBuddy}
         ></input>
       </div>
@@ -756,15 +756,31 @@ export default class Buddy extends React.Component {
     return (
       <div>
         <div class="firstcolumn">
-          <p>Some text..</p>
+          <h1>Welcome to the sleep buddy page!</h1>
+          <p>
+            To assign a sleep buddy, type in a username and hit the "Assign
+            Sleep Buddies" button.
+          </p>
+          <p>
+            Once you have a sleep buddy, enter in a wake up time to determine
+            when you want to wake up.
+          </p>
+          <p>When that is done, hit the "Activate!" button.</p>
+          <p>
+            Once your sleep cycle is activated, you have 10 minutes after your
+            wake up time to hit the magical button that adds 1 to your SLEEPY
+            STATUS!
+          </p>
+          <p>
+            It also adds 1 to your sleep buddy's sleepy status, so don't let
+            them down!
+          </p>
         </div>
         <div class="secondcolumn">
-          <p>Some text..</p>
+          {this.state.hasSleepBuddy
+            ? this.renderSleepBuddyExists()
+            : this.renderSleepBuddyDoesNotExist()}
         </div>
-        yeeeeeeeeee
-        {this.state.hasSleepBuddy
-          ? this.renderSleepBuddyExists()
-          : this.renderSleepBuddyDoesNotExist()}
       </div>
     );
   }

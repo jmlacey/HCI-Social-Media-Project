@@ -165,32 +165,6 @@ export default class MyFriendList extends React.Component {
           submitMessage: response.Status,
         });
       });
-
-    fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
-      {
-        method: "post",
-        body: JSON.stringify({
-          action: "deleteConnections",
-          user_id: idForDelete,
-          session_token: sessionStorage.getItem("token"),
-          connectionid: sessionStorage.getItem("user"),
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        alert(
-          "Deleted " +
-            this.state.userid +
-            " AKA " +
-            idForDelete +
-            " from your friends list! Hooray!"
-        );
-        this.setState({
-          submitMessage: response.Status,
-        });
-      });
   };
 
   blockFriend = (name, connectionid, connectuserid) => {

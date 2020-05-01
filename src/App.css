@@ -290,7 +290,6 @@ Profile Page
   width: 50%;
   margin-top: 5%;
 }
-
 .profileBox {
   height: 500px;
   width: 500px;
@@ -371,7 +370,7 @@ Profile Page
     width: 100%;
     margin-top: 5%;
   }
-  
+
   .profileBox {
     height: 0x;
     width: 0px;
@@ -387,23 +386,26 @@ Buddy Page
 ----------------*/
 .firstcolumn {
   float: left;
-  width: 50%;
+  width: 34%;
   padding: 10px;
- /* height: 300px; /* Should be removed. Only for demonstration */
- background-color: purple;
+  /* height: 300px; /* Should be removed. Only for demonstration */
+  background-color: purple;
+  border-style: solid;
+  min-height: 100%;
+  margin: 100px 0 0;
+  color: white;
 }
 
 .secondcolumn {
+  min-height: 100%;
   float: left;
-  width: 50%;
+  width: 66%;
   padding: 10px;
- /* height: 300px; /* Should be removed. Only for demonstration */
- background-color: grey;
+  /* height: 300px; /* Should be removed. Only for demonstration */
+  background-color: white;
+  border-style: solid;
+  margin: 100px 0 0;
 }
-
-
-
-
 
 .buddyPage {
   width: 100%;
@@ -708,6 +710,3 @@ input[type="button"]:hover {
   overflow-x: hidden;
   right: 0;
 }
-
-
-

@@ -139,7 +139,6 @@ export default class MyFriendList extends React.Component {
   }
 
   deleteFriend = (idForDelete) => {
-    alert("delete friend called, deleting: " + idForDelete);
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/connectioncontroller.php",
       {
@@ -155,11 +154,7 @@ export default class MyFriendList extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         alert(
-          "Deleted " +
-            this.state.userid +
-            " AKA " +
-            idForDelete +
-            " from your friends list! Hooray!"
+          "Deleted friend from your friends list! Hooray!"
         );
         this.setState({
           submitMessage: response.Status,
@@ -187,12 +182,7 @@ export default class MyFriendList extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         alert(
-          "Blocked: " +
-            name +
-            ", connectionid is: " +
-            connectionid +
-            ", connectuserid is: " +
-            connectuserid
+          "Blocked friend from friend list"
         );
         this.setState({
           submitMessage: response.Status,
@@ -220,11 +210,7 @@ export default class MyFriendList extends React.Component {
       .then((response) => {
         alert(
           "Added " +
-            name +
-            ", connectionid is: " +
-            connectionid +
-            ", connectuserid is: " +
-            connectuserid
+            name 
         );
         this.setState({
           submitMessage: response.Status,

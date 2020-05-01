@@ -68,6 +68,20 @@ export default class Post extends React.Component {
     }
   }
 
+  deleteDisplay() {
+    // if() {
+
+    // }else{
+      return(
+        <div className="comment-block">
+          <div className="comment-indicator">
+              <input type="button" className="deleteButton" value="Delete Post"></input>
+          </div>
+        </div>
+      );
+    // }
+  }
+
   render() {
     return (
       <div
@@ -77,6 +91,7 @@ export default class Post extends React.Component {
         {this.props.post.name} {this.props.post.timestamp} <br />{" "}
         {this.props.post.post_text}
         {this.conditionalDisplay()}
+        {this.deleteDisplay()}
       </div>
     );
   }

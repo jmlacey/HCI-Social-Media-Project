@@ -77,10 +77,10 @@ class Header extends Component {
         (result) => {
           console.log(this.state);
           if (result.user) {
+            this.props.toggleLogin();
             sessionStorage.setItem("token", result.user.session_token);
             sessionStorage.setItem("user", result.user.user_id);
             sessionStorage.setItem("email", result.user.username);
-            this.props.toggleLogin();
             alert("logging in: " + sessionStorage.getItem("user"));
             if (
               result.user.status === null ||

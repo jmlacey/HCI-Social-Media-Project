@@ -709,4 +709,5 @@ input[type="button"]:hover {
   position: absolute;
   overflow-x: hidden;
   right: 0;
+  border-left: solid;
 }

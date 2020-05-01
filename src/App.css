@@ -275,31 +275,16 @@ Profile Page
   clear: both;
 }
 
-.profilePage{
-  width: 100%;
-}
-
 .profileFormDiv {
   float: left;
-  width: 50%;
+  width: 75%;
   margin-top: 10%;
 }
 
 .profilePicture {
   float: left;
-  width: 50%;
+  width: 25%;
   margin-top: 5%;
-  padding-left: 300px;
-}
-.profileBox {
-  height: 500px;
-  width: 500px;
-  display: block;
-  margin-left: 100px;
-}
-
-.profileLabel{
-  padding-top: 10px;
 }
 
 
@@ -321,6 +306,9 @@ Profile Page
   border-color: black;
 }
 
+.profileLabel {
+  margin-top: 100px;
+}
 
 .leftCol {
   width: 49%;

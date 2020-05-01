@@ -295,7 +295,7 @@ Profile Page
   clear: both;
 }
 
-.profilePage{
+.profilePage {
   width: 100%;
 }
 
@@ -319,10 +319,9 @@ Profile Page
   margin-left: 100px;
 }
 
-.profileLabel{
+.profileLabel {
   padding-top: 10px;
 }
-
 
 .profileButton {
   background-color: blueviolet;
@@ -334,7 +333,7 @@ Profile Page
   color: white;
 }
 
-.profilePicture img{
+.profilePicture img {
   height: 300px;
   width: 300px;
   border-radius: 50%;
@@ -591,11 +590,8 @@ IDK about any of the shit beneath this :(
   border-radius: 10px;
   padding: 20px;
   margin: 5px;
-  width: 60%;
   display: inline-flex;
 }
-
-
 
 .hide {
   display: none;
@@ -608,8 +604,6 @@ IDK about any of the shit beneath this :(
   justify-content: center;
   flex-grow: 1;
 }
-
-
 
 .sidenav {
   /* need to specify some position other than static, so height can apply.
@@ -642,8 +636,6 @@ IDK about any of the shit beneath this :(
 
   margin-bottom: 15px;
 }
-
-
 
 .hide {
   display: none;
@@ -691,17 +683,18 @@ IDK about any of the shit beneath this :(
 
 .left {
   height: 100%;
-  width: 40%;
-  background-color: lightgray;
+  width: 30%;
+  /* background-color: lightgray; */
   position: absolute;
   overflow-x: hidden;
   left: 0;
+  text-align: center;
 }
 
 .right {
   height: 100%;
-  width: 60%;
-  background-color: grey;
+  width: 70%;
+  /* background-color: grey; */
   position: absolute;
   overflow-x: hidden;
   right: 0;

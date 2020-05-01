@@ -390,6 +390,17 @@ select {
   box-sizing: border-box;
 }
 
+input[type="password"],
+select {
+  width: 100%;
+  padding: 15px;
+  margin-top: 0px;
+  display: inline-block;
+  border: 1px solid purple;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
 input[type="submit"] {
   width: 500px;
   background-color: purple;

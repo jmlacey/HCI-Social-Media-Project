@@ -8,6 +8,7 @@ export default class Buddy extends React.Component {
       //326 is Wagz1 user id, for testing
       lastHitButton: "",
       lastHitButtonID: "",
+      hasSleepBuddy: true,
 
       buddyID: "",
       buddyName: "",
@@ -35,10 +36,35 @@ export default class Buddy extends React.Component {
     this.activateIt = this.activateIt.bind(this);
     this.deactivateIt = this.deactivateIt.bind(this);
     this.buttonSubmit = this.buttonSubmit.bind(this);
+    this.removeSleepBuddy = this.removeSleepBuddy.bind(this);
   }
 
   componentDidMount() {
-    this.loadInfo();
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          //API FIELDS
+          action: "getUsers",
+          userid: sessionStorage.getItem("user"),
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          //DO WHATEVER YOU WANT WITH THE JSON HERE
+          if (result.users[0].user_role !== "nobody") {
+            this.loadInfo();
+          } else {
+            this.setState({ hasSleepBuddy: false });
+          }
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
 
     this.setState({ time: new Date() });
 
@@ -249,6 +275,10 @@ export default class Buddy extends React.Component {
 
   testAssignBuddy = () => {
     alert("Doing it!");
+    alert(this.state.buddyID);
+    alert(sessionStorage.getItem("user"));
+    alert(sessionStorage.getItem("token"));
+
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
       {
@@ -287,6 +317,59 @@ export default class Buddy extends React.Component {
       buddyID: event.target.value,
     });
   };
+
+  removeSleepBuddy() {
+    fetch(
+      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+      {
+        method: "post",
+        body: JSON.stringify({
+          //API FIELDS
+          action: "addOrEditUsers",
+          user_id: sessionStorage.getItem("user"),
+          userid: sessionStorage.getItem("user"),
+          session_token: sessionStorage.getItem("token"),
+          userrole: "nobody",
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert(this.state.buddyID);
+          fetch(
+            "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+            {
+              method: "post",
+              body: JSON.stringify({
+                //API FIELDS
+                action: "addOrEditUsers",
+                user_id: sessionStorage.getItem("user"),
+                session_token: sessionStorage.getItem("token"),
+                userid: this.state.buddyID,
+                userrole: "nobody",
+              }),
+            }
+          )
+            .then((res) => res.json())
+            .then(
+              (result) => {
+                //DO WHATEVER YOU WANT WITH THE JSON HERE
+                this.setState({
+                  //buddyID: "",
+                  hasSleepBuddy: false,
+                });
+              },
+              (error) => {
+                alert("error!");
+              }
+            );
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
+  }
 
   //THE RENDER METHODS
   renderNotActivated() {
@@ -605,7 +688,7 @@ export default class Buddy extends React.Component {
     );
   }
 
-  render() {
+  renderSleepBuddyExists() {
     return (
       <div>
         <p>Your sleep buddy is {this.state.buddyName}</p>
@@ -613,6 +696,43 @@ export default class Buddy extends React.Component {
         {this.state.activated !== "true"
           ? this.renderNotActivated()
           : this.renderActivated()}
+
+        <input
+          type="submit"
+          value="Abandon Sleep Buddy"
+          onClick={this.removeSleepBuddy}
+        ></input>
+      </div>
+    );
+  }
+
+  renderSleepBuddyDoesNotExist() {
+    return (
+      <div>
+        <p>You dont have a sleep buddy!</p>
+        <p>Type in a user here to assign sleep buddies:</p>
+
+        <input
+          type="text"
+          placeholder="Test add buddy by id"
+          onChange={this.testBuddyChangeHandler}
+          value={this.state.email}
+        ></input>
+        <input
+          type="submit"
+          value="Do it!"
+          onClick={this.testAssignBuddy}
+        ></input>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.state.hasSleepBuddy
+          ? this.renderSleepBuddyExists()
+          : this.renderSleepBuddyDoesNotExist()}
       </div>
     );
   }

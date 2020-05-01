@@ -275,46 +275,73 @@ export default class Buddy extends React.Component {
 
   testAssignBuddy = () => {
     alert("Doing it!");
-    alert(this.state.buddyID);
-    alert(sessionStorage.getItem("user"));
-    alert(sessionStorage.getItem("token"));
+    // alert(this.state.buddyID);
+    // alert(sessionStorage.getItem("user"));
+    // alert(sessionStorage.getItem("token"));
 
     fetch(
       "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
       {
-        method: "post",
+        method: "POST",
         body: JSON.stringify({
-          //API FIELDS
-          action: "addOrEditUsers",
-          user_id: sessionStorage.getItem("user"),
-          userid: sessionStorage.getItem("user"),
-          session_token: sessionStorage.getItem("token"),
-          userrole: this.state.buddyID,
+          action: "getUsers",
+          username: this.state.buddyName,
         }),
       }
-    );
+    )
+      .then((response) => response.json())
+      .then(
+        (response) => {
+          this.setState({
+            buddyID: response.users.length > 0 ? response.users[0].user_id : "",
+          });
+          alert(this.state.buddyID);
 
-    fetch(
-      "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
-      {
-        method: "post",
-        body: JSON.stringify({
-          //API FIELDS
-          action: "addOrEditUsers",
-          user_id: sessionStorage.getItem("user"),
-          userid: this.state.buddyID,
-          session_token: sessionStorage.getItem("token"),
-          userrole: sessionStorage.getItem("user"),
-        }),
-      }
-    );
-    this.IDToUserName();
-    alert("Did it!");
+          if (this.state.connectionID === "") {
+            alert("Not a valid user!");
+          } else {
+            fetch(
+              "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+              {
+                method: "post",
+                body: JSON.stringify({
+                  //API FIELDS
+                  action: "addOrEditUsers",
+                  user_id: sessionStorage.getItem("user"),
+                  userid: sessionStorage.getItem("user"),
+                  session_token: sessionStorage.getItem("token"),
+                  userrole: this.state.buddyID,
+                }),
+              }
+            );
+
+            fetch(
+              "http://stark.cse.buffalo.edu/cse410/reactioneers/api/usercontroller.php",
+              {
+                method: "post",
+                body: JSON.stringify({
+                  //API FIELDS
+                  action: "addOrEditUsers",
+                  user_id: sessionStorage.getItem("user"),
+                  userid: this.state.buddyID,
+                  session_token: sessionStorage.getItem("token"),
+                  userrole: sessionStorage.getItem("user"),
+                }),
+              }
+            );
+            // this.IDToUserName();
+            alert("Did it!");
+          }
+        },
+        (error) => {
+          alert("error!");
+        }
+      );
   };
 
   testBuddyChangeHandler = (event) => {
     this.setState({
-      buddyID: event.target.value,
+      buddyName: event.target.value,
     });
   };
 
@@ -692,16 +719,15 @@ export default class Buddy extends React.Component {
     return (
       <div>
         <p>Your sleep buddy is {this.state.buddyName}</p>
-
-        {this.state.activated !== "true"
-          ? this.renderNotActivated()
-          : this.renderActivated()}
-
         <input
           type="submit"
           value="Abandon Sleep Buddy"
           onClick={this.removeSleepBuddy}
         ></input>
+
+        {this.state.activated !== "true"
+          ? this.renderNotActivated()
+          : this.renderActivated()}
       </div>
     );
   }
@@ -716,7 +742,6 @@ export default class Buddy extends React.Component {
           type="text"
           placeholder="Test add buddy by id"
           onChange={this.testBuddyChangeHandler}
-          value={this.state.email}
         ></input>
         <input
           type="submit"
